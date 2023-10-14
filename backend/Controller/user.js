@@ -2,7 +2,7 @@
 var UserSchema=require('../Model/UserSchema')
 var jwt=require('jsonwebtoken')
 var bcrypt=require('bcrypt')
-var jwt
+
 module.exports={
     register: async (req,res)=>{
         const {username,email,password}=req.body
