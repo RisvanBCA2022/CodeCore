@@ -1,8 +1,7 @@
-import React from 'react'
+import React from "react"
 
 const WidgetTags = () => {
     const tags =['c','css','express','firebase','html','java','javascript','mongoDB','Reactjs','Nextjs']
-    console.log(tags);
   return (
     <div className='widget-tags'>
         <h3>Watched Tags</h3>

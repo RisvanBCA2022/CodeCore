@@ -13,10 +13,10 @@ const Authprofilemenu = () => {
 
   return (<>
   
-    <Link href='/signup' className='nav-item nav-links' >
+    {/* <Link href='/signup' className='nav-item nav-links' >
       Sign Up
     </Link> 
-    
+     */}
   
     <Link href='/login' className='nav-item nav-links'>
       Log In

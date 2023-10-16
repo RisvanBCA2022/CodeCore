@@ -13,9 +13,7 @@ export default function RootLayout({children,}) {
   return (
     <html lang="en">
     <body>
-      <div><Navbar /></div>
-      <Home />
-          
+      <div><Navbar /></div>          
           <main className="my-0 py-16">{children}</main>
       
     </body>
