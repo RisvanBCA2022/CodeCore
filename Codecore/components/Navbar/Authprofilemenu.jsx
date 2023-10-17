@@ -4,11 +4,11 @@ import Link from 'next/link'
 import './Navbar.css'
 
 const Authprofilemenu = () => {
-    const isAuth=false;
+    const isAuth=true;
     if(isAuth)
     return(
 <p>
-    <button>logout</button>
+    <button className='nav-item nav-links'>logout</button>
 </p>)
 
   return (<>
