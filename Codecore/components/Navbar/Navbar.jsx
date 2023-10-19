@@ -1,15 +1,19 @@
+'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { useReducer } from 'react'
 import search from '../../public/search.svg'
 import Authprofilemenu from './Authprofilemenu'
 import Avatar from '../Avatar/Avatar'
 import './Navbar.css'
 import Logo from '../../public/Logo.png'
 import Button from '../Button/Button'
+import { useDispatch,useSelector } from 'react-redux'
 
 const Navbar = () => {
-  var User=null
+  const User =null
+  const auth=useSelector(state=>state.authReducer.value)
+  console.log(auth);
   return (
    <nav className='main-nav'>
     <div className='navbar'>

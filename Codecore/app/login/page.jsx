@@ -1,68 +1,137 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import Image from 'next/image'
 import icon from '../../public/Logo.png'
 import './login.css'
 import AboutAuth from './aboutAuth'
+import { useDispatch } from 'react-redux'
+import {logIn,logOut} from "@/redux/features/auth-slice"
+import { useSelector } from 'react-redux'
 
 const Page = () => {
 	const [isSignup,setIsSignup]=useState(false)
+	const [username, setUserName]=useState('')
+	const [email,setEmail]=useState('')
+	const [password,setPassword]=useState('')
+	const auth = useSelector((state)=> state.authReducer.value)
+	// console.log(auth);
+	
+	const dispatch=useDispatch()
 
 
 	const router=useRouter()
 
 	const handleSwitch = ()=>{
 		setIsSignup(!isSignup)
+		console.log(isSignup);
+
 	}
 	
-	const Handleclick=async (event)=>{
-try {
+// 	const Handleclick=async (event)=>{
+// try {
 	
-		event.preventDefault()
-		const username=event.target.username.value
-		const password=event.target.password.value
-		const response =	await axios
-	.post('http://127.0.0.1:4001/users/login',{
-		"username":username,
-		"password":password
-	})
-	if(response.data.status=="success"){
-		router.push('/')
-		alert('Successfully logined')
-	}else{
-		alert(response.data.message)
+// 		event.preventDefault()
+// 		const username=event.target.username.value
+// 		const password=event.target.password.value
+// 		const response =	await axios
+// 	.post('http://127.0.0.1:4001/users/login',{
+// 		"username":username,
+// 		"password":password
+// 	})
+// 	if(response.data.status=="success"){
+// 		router.push('/')
+// 		alert('Successfully logined')
+// 	}else{
+// 		alert(response.data.message)
+// 	}
+	
+// } catch (error) {
+// 	alert(error.message)
+// }}
+
+const HandleSubmit= async (e)=>{
+	e.preventDefault()
+	console.log(e.target.email);
+		const password=e.target.password.value
+		console.log(password);
+	
+	
+	if(isSignup == true){
+		if(!username){
+			alert("Enter a name to continue")
+		}
+		try {
+			const response = await axios
+		.post('http://127.0.0.1:4001/users/register',{
+			"username":username,
+			"email":email,
+			"password":password
+		})
+		
+
+		if(response.data.status=="success"){
+			dispatch(logIn(response.data.status))
+			router.push('/')
+			alert('Successfully registered')
+		}else{
+			alert(response.data.message)
+		}		
+		
+	} catch (error) {
+		alert(error.message)
+	}
+	}else {
+		try {	
+			const response = await axios
+		.post('http://127.0.0.1:4001/users/login',{
+			"email":email,
+			"password":password
+		})
+		if(response.data.status=="success"){
+			dispatch(logIn(response))
+			router.push('/login')
+			alert('Successfully login')
+			router.push('/')
+		}else{
+			console.log(response.data);
+			alert(response.data.message)
+			
+		}
+		
+	} catch (error) {
+		alert(error.message)
+	}}
 	}
 	
-} catch (error) {
-	alert(error.message)
-}}
+
+
 
   return (
 	<section className='auth-section'>
 		{isSignup && <AboutAuth />}
 		<div className='auth-container-2'>
 			{!isSignup && <Image src={icon} alt='codecore' className='login-logo' />}
-			<form action="" onSubmit={Handleclick}>
+			<form action="" onSubmit={HandleSubmit}>
 				{
 					isSignup && (
 						 <label htmlFor="name">
 							<h4>Display Name</h4>
-							<input type='text' id='name' name='name' />
+							<input type='text' id='name' name='name' required onChange={(e)=>{setUserName(e.target.value)}} />
 						 </label>
 					)
 				}
 				<label htmlFor="email">
 					<h4>Email</h4>
-					<input type="email" id="email" name='email' />
+					<input type="email" id="email" name='email' onChange={(e)=>{setEmail(e.target.value)}} />
 				</label>
 				<label htmlFor="password">
 					<div style={{display:'flex',justifyContent:'space-between'}}>
 					<h4>Password</h4>
 					{!isSignup &&<p style={{color:"#007ac6",fontSize:'13px'}}>forgot password</p> }	
 					</div>
-					<input type="password" id="password" name='password' />
+					<input type="password" id="password" name='password' onChange={(e)=>{setPassword(e.target.value)}} />
 					{isSignup && <p style={{color:"#666767",fontSize:"13px"}}> Passwords must contain at least eight<br></br> characters,including at least 1 letter and 1 number</p>}
 				</label>
 				{
@@ -76,7 +145,7 @@ try {
 				<button type='submit' className='auth-btn'>{isSignup?'Sign up':'Log in'}</button>
 				{isSignup && (
 					<p style={{color:"#666767",fontSize:"13px"}}>
-						By clicking “Sign up”, you agree to our <span style={{color:"#007"}}>terms of service</span > and acknowledge that you have read and understand our <span style={{color:"#007"}}>privacy policy</span> and <span style={{color:"#007"}}>code of conduct.</span>
+						By clicking “Sign up”, you agree to our <span style={{color:"#007"}}>terms of service</span> and acknowledge that you have read and understand our <span style={{color:"#007"}}>privacy policy</span> and <span style={{color:"#007"}}>code of conduct.</span>
 					</p>
 				)}
 			</form>

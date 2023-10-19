@@ -7,6 +7,7 @@ const Page = () => {
 	const router=useRouter()
 	
 	const Handleclick=async (event)=>{
+		
 try {
 	
 		event.preventDefault()

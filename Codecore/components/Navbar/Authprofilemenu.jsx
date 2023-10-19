@@ -2,13 +2,18 @@
 import React from 'react'
 import Link from 'next/link'
 import './Navbar.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { logOut } from '@/redux/features/auth-slice'
 
 const Authprofilemenu = () => {
-    const isAuth=true;
-    if(isAuth)
+  const auth = useSelector((state)=> state.authReducer.value)
+  const dispatch = useDispatch()
+  console.log(auth);
+
+    if(auth.isAuth==true)
     return(
 <p>
-    <button className='nav-item nav-links'>logout</button>
+    <button className='nav-item nav-links' onClick={()=>dispatch(logOut())} >logout</button>
 </p>)
 
   return (<>

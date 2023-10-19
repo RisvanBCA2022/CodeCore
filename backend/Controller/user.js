@@ -7,11 +7,10 @@ module.exports={
     register: async (req,res)=>{
         const {username,email,password}=req.body
 
-        
-            const finduser = await UserSchema.find({username:username})
-
+            const finduser = await UserSchema.find({email:email})
+            console.log(finduser);
             if(finduser.length>0){
-                return res.status(401).json({status:false,message:'Already registered'})
+                return res.json({status:false,message:'Already registered'})
             }
             else{
                 bcrypt.hash(password,10,async function(err,hash){
@@ -20,16 +19,18 @@ module.exports={
                         email:email,
                         password:hash
                     })
+                    
                 }) //hashed the password from user and stored the hashed password in database
        
         res.status(200).json({
             status:"success",
-            message:"successfully register"
+            message:"successfully register",
+            data:{username,email}
         })
     }},
     login:async (req,res)=>{
-        const {username,password}=req.body
-        const user = await UserSchema.find({username:username})
+        const {email,password}=req.body
+        const user = await UserSchema.find({email:email})
         if(!user){
             return res.status(401).json({
                 auth:false,
@@ -51,7 +52,7 @@ module.exports={
                 let token=jwt.sign(rep,process.env.ACCESS_TOKEN_SECRET)
                 res.status(200).json({
                     status:"success",
-                    data:user,
+                    data:{username,email},
                     auth:true,
                     token:token,
                 })      

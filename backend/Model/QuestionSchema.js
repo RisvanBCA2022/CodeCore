@@ -1,6 +1,6 @@
 const mongoose=require('mongoose')
 
-const UserSchema = new mongoose.Schema({
+const QuestionList = new mongoose.Schema({
     username:String,
     email:String,
     password:String,
@@ -10,4 +10,4 @@ const UserSchema = new mongoose.Schema({
     joinedOn:Date,
 })
 
-module.exports = mongoose.model("userlist",UserSchema)
+module.exports = mongoose.model("questionlist",QuestionList)
