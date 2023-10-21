@@ -1,4 +1,5 @@
-import {createSlice,PayloadAction} from '@reduxjs/toolkit'
+import {createSlice,PayloadAction,createAsyncThunk} from '@reduxjs/toolkit'
+import axios from 'axios'
 
 const initialState = {
     value:{
@@ -6,6 +7,10 @@ const initialState = {
         userdetails:{}
     },
 }
+
+// const getUser=createAsyncThunk('userdetails',async (req,res)=>{
+    
+// })
 
 
 export const auth = createSlice({
@@ -20,7 +25,8 @@ export const auth = createSlice({
                 value:{
                     isAuth:true,
                     status:action.payload,
-                    userdetails:{action}
+                    currentuser:action.payload.data,
+
                 }
                 
             }
@@ -28,9 +34,6 @@ export const auth = createSlice({
     }
 })
 
-// export const user = createSlice({
-    
-// })
 
 
 

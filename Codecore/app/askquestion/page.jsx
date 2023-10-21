@@ -1,37 +1,56 @@
 'use client'
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import Link, { usePathname, useRouter } from 'next/navigation'
 import './AskQuestion.css'
+import { useDispatch,useSelector } from 'react-redux'
+import axios from 'axios'
+import { fetchUser } from '@/redux/features/question'
 
 
 const AskQuestion = () => {
-  const currentRoute = usePathname();
+
+  // const question=useSelector((state)=>state.data)
+  // console.log(question);
+  const dispatch=useDispatch()
   const router=useRouter()
 const user=null
+
+
+const handleSubmit = (e)=>{
+  e.preventDefault()
+  const questionTitle=e.target.askquestitle?.value
+  const questionBody=e.target.askquesbody?.value
+  const questionTags=e.target.askquestags?.value.split('\n')
+  // const postQuestionData={questionTitle,questionBody,questionTags}
+  // axios.post('localhost:4001/questions/ask')
+  // console.log({questionTitle,questionBody,questionTags})
+}
   
   
   return (
     <div className='ask-questions'>
       <div className='ask-ques-container'>
       <h1>Ask a Public Question</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className='ask-form-container'>
-        <label htmlFor="ask-ques-title">
+        <label htmlFor="askquestitle">
           <h4>Title</h4>
           <p>Be specific and imagine you’re asking a question to another person.
 </p>
-<input type="text" name='questionTitle' id='ask-ques-title' placeholder='e.g Is there an R function for finding the index of an element in a vector' />
+<input type="text" name='questionTitle' id='askquestitle' placeholder='e.g Is there an R function for finding the index of an element in a vector' />
         </label>
         <label htmlFor="ask-ques-body">
           <h4>What are the details of your problem?</h4>
           <p>Introduce the problem and expand on what you put in the title. Minimum 20 characters.</p>
-<input type="text" name='questionTitle' id='ask-ques-body' />
+          <textarea name="questionTitle" id="askquesbody" cols="30" rows="10"  ></textarea>
+
         </label>
         <label htmlFor="ask-ques-tags">
           <h4>Tags</h4>
           <p>Add up to 5 tags to describe what your question is about. Start typing to see suggestions.
 </p>
-<textarea name="questionTitle" id="ask-ques-tags" cols="30" rows="10"></textarea>
+<input type="text" name='questionTitle' id='askquesbody' />
+
         </label>
 
 

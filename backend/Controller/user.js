@@ -8,7 +8,6 @@ module.exports={
         const {username,email,password}=req.body
 
             const finduser = await UserSchema.find({email:email})
-            console.log(finduser);
             if(finduser.length>0){
                 return res.json({status:false,message:'Already registered'})
             }
@@ -29,8 +28,9 @@ module.exports={
         })
     }},
     login:async (req,res)=>{
-        const {email,password}=req.body
+        const {userrname,email,password}=req.body
         const user = await UserSchema.find({email:email})
+        var username = await user[0]?.username
         if(!user){
             return res.status(401).json({
                 auth:false,
@@ -52,7 +52,7 @@ module.exports={
                 let token=jwt.sign(rep,process.env.ACCESS_TOKEN_SECRET)
                 res.status(200).json({
                     status:"success",
-                    data:{username,email},
+                    data:{email,username},
                     auth:true,
                     token:token,
                 })      

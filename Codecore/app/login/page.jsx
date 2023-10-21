@@ -9,6 +9,8 @@ import AboutAuth from './aboutAuth'
 import { useDispatch } from 'react-redux'
 import {logIn,logOut} from "@/redux/features/auth-slice"
 import { useSelector } from 'react-redux'
+import { setCookie } from 'cookies-next'
+
 
 const Page = () => {
 	const [isSignup,setIsSignup]=useState(false)
@@ -53,9 +55,8 @@ const Page = () => {
 
 const HandleSubmit= async (e)=>{
 	e.preventDefault()
-	console.log(e.target.email);
 		const password=e.target.password.value
-		console.log(password);
+		// console.log(password);
 	
 	
 	if(isSignup == true){
@@ -72,9 +73,10 @@ const HandleSubmit= async (e)=>{
 		
 
 		if(response.data.status=="success"){
-			dispatch(logIn(response.data.status))
-			router.push('/')
+			dispatch(logIn(response.data))
+			
 			alert('Successfully registered')
+			router.push('/')
 		}else{
 			alert(response.data.message)
 		}		
@@ -90,7 +92,9 @@ const HandleSubmit= async (e)=>{
 			"password":password
 		})
 		if(response.data.status=="success"){
-			dispatch(logIn(response))
+			dispatch(logIn(response.data))
+			console.log(response.data);
+			setCookie('jwt',response.data.token)
 			router.push('/login')
 			alert('Successfully login')
 			router.push('/')

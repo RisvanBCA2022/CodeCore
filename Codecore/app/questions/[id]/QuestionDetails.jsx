@@ -107,7 +107,7 @@ const QuestionDetails = () => {
         }
     ];  
     const filtered=questionList.filter(question=>question._id == id)
-    console.log(filtered);
+    // console.log(filtered);
 
   return (
     

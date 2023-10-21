@@ -9,11 +9,22 @@ import './Navbar.css'
 import Logo from '../../public/Logo.png'
 import Button from '../Button/Button'
 import { useDispatch,useSelector } from 'react-redux'
+import { logOut } from '@/redux/features/auth-slice'
+import { useRouter } from 'next/navigation'
 
 const Navbar = () => {
-  const User =null
-  const auth=useSelector(state=>state.authReducer.value)
-  console.log(auth);
+
+  const router=useRouter()
+
+  const auth = useSelector((state)=> state.authReducer.value)
+  const dispatch = useDispatch()
+ const logout=()=>{
+  dispatch(logOut())
+  localStorage.removeItem('Profile')
+  router.push('/login')
+  
+ }
+
   return (
    <nav className='main-nav'>
     <div className='navbar'>
@@ -27,9 +38,9 @@ const Navbar = () => {
         <input type="text" placeholder='Search...' />
         <Image src={search} alt="search" width='18' className='search-icon'/>
         </form>
-        {User === null?
+        {auth.isAuth === false?
         <Authprofilemenu />:
-       <> <Avatar backgroundColor='#009dff' px="10px" py="7px" borderRadius="50%" color='white'><Link href='/user' style={{color:'white',textDecoration:'none'}}>M</Link></Avatar><button className='nav-item nav-links'>Log out</button></>
+       <> <Avatar backgroundColor='#009dff' px="10px" py="7px" borderRadius="50%" color='white'><Link href='/profile' style={{color:'white',textDecoration:'none'}}>M</Link></Avatar><button className='nav-item nav-links' onClick={logout}>Log out</button></>
         }
       
     </div>

@@ -7,7 +7,7 @@ const UserSchema = new mongoose.Schema({
     profilepicture:String,
     bio:String,
     reputation:Number,
-    joinedOn:Date,
+    joinedOn:{type:Date, default:Date.now},
 })
 
 module.exports = mongoose.model("userlist",UserSchema)
