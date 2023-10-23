@@ -16,11 +16,21 @@ const AskQuestion = () => {
 const user=null
 
 
-const handleSubmit = (e)=>{
+const handleSubmit = async(e)=>{
   e.preventDefault()
   const questionTitle=e.target.askquestitle?.value
   const questionBody=e.target.askquesbody?.value
-  const questionTags=e.target.askquestags?.value.split('\n')
+  const questionTags=[...e.target.askquestags?.value.split(' ')]
+  
+
+  await axios.post('http://localhost:4001/questions/ask/',{
+    questionTitle:questionTitle,
+    questionBody:questionBody,
+    questionTags:questionTags,
+  }
+  )
+  alert('Question Added successfully')
+  
   // const postQuestionData={questionTitle,questionBody,questionTags}
   // axios.post('localhost:4001/questions/ask')
   // console.log({questionTitle,questionBody,questionTags})
@@ -49,7 +59,7 @@ const handleSubmit = (e)=>{
           <h4>Tags</h4>
           <p>Add up to 5 tags to describe what your question is about. Start typing to see suggestions.
 </p>
-<input type="text" name='questionTitle' id='askquesbody' />
+<input type="text" name='questionTitle' id='askquestags' />
 
         </label>
 
