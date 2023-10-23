@@ -5,7 +5,11 @@ var bcrypt=require('bcrypt')
 
 module.exports={
     askquestion:async (req,res)=>{
-        const postQuestionsData = req.body
+        const {questionTitle,questionBody,questionTags} = req.body
+        console.log(req.body);
+        const postQuestionsData={questionTitle,questionBody,questionTags}
+        
+
         const postQuestion = new QuestionSchema({...postQuestionsData,userId:req.userId})
         try {
 
