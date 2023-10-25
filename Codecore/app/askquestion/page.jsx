@@ -5,19 +5,22 @@ import './AskQuestion.css'
 import { useDispatch,useSelector } from 'react-redux'
 import axios from 'axios'
 import { fetchUser } from '@/redux/features/question'
+import { getCookie } from 'cookies-next'
 
 
 const AskQuestion = () => {
 
-  // const question=useSelector((state)=>state.data)
-  // console.log(question);
+  const cookie = getCookie('jwt')
+  console.log(cookie);
   const dispatch=useDispatch()
   const router=useRouter()
 const user=null
 
 
+
 const handleSubmit = async(e)=>{
   e.preventDefault()
+  console.log("rerender");
   const questionTitle=e.target.askquestitle?.value
   const questionBody=e.target.askquesbody?.value
   const questionTags=[...e.target.askquestags?.value.split(' ')]
@@ -27,6 +30,10 @@ const handleSubmit = async(e)=>{
     questionTitle:questionTitle,
     questionBody:questionBody,
     questionTags:questionTags,
+  },{
+    headers:{
+      Authorization:`Bearer ${cookie}`
+    }
   }
   )
   alert('Question Added successfully')

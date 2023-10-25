@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useReducer } from 'react'
+import React, { useEffect, useReducer } from 'react'
 import search from '../../public/search.svg'
 import Authprofilemenu from './Authprofilemenu'
 import Avatar from '../Avatar/Avatar'
@@ -9,18 +9,25 @@ import './Navbar.css'
 import Logo from '../../public/Logo.png'
 import Button from '../Button/Button'
 import { useDispatch,useSelector } from 'react-redux'
-import { logOut } from '@/redux/features/auth-slice'
+import { logIn, logOut } from '@/redux/features/auth-slice'
 import { useRouter } from 'next/navigation'
+import { getCookie,deleteCookie } from 'cookies-next'
+import jwtDecode from 'jwt-decode'
 
 const Navbar = () => {
+  
 
   const router=useRouter()
-
   const auth = useSelector((state)=> state.authReducer.value)
   const dispatch = useDispatch()
+
+
+  const token = getCookie('jwt')
+
+
  const logout=()=>{
   dispatch(logOut())
-  localStorage.removeItem('Profile')
+  deleteCookie('jwt') 
   router.push('/login')
   
  }
@@ -38,9 +45,10 @@ const Navbar = () => {
         <input type="text" placeholder='Search...' />
         <Image src={search} alt="search" width='18' className='search-icon'/>
         </form>
-        {auth.isAuth === false?
-        <Authprofilemenu />:
-       <> <Avatar backgroundColor='#009dff' px="10px" py="7px" borderRadius="50%" color='white'><Link href='/profile' style={{color:'white',textDecoration:'none'}}>M</Link></Avatar><button className='nav-item nav-links' onClick={logout}>Log out</button></>
+        {auth.isAuth == true?
+          <> <Avatar backgroundColor='#009dff' px="10px" py="7px" borderRadius="50%" color='white'><Link href='/profile' style={{color:'white',textDecoration:'none'}}>M</Link></Avatar><button className='nav-item nav-links' onClick={logout}>Log out</button></>
+:
+        <Authprofilemenu />
         }
       
     </div>

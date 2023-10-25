@@ -9,7 +9,6 @@ module.exports = (req,res,next) =>{
         }
 
         let token =authheader.split(" ")[1];
-        console.log(ACCESS_TOKEN_SECRET);
        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET,function(err,decoded){
             if(err){
                 res.status(500).send({error:"authentication failed"})

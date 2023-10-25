@@ -27,7 +27,7 @@ const Page = () => {
 
 	const handleSwitch = ()=>{
 		setIsSignup(!isSignup)
-		console.log(isSignup);
+		// console.log(isSignup);
 
 	}
 	
@@ -93,7 +93,7 @@ const HandleSubmit= async (e)=>{
 		})
 		if(response.data.status=="success"){
 			dispatch(logIn(response.data))
-			console.log(response.data);
+			// console.log(response.data);
 			setCookie('jwt',response.data.token)
 			router.push('/login')
 			alert('Successfully login')
