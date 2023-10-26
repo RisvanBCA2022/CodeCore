@@ -9,13 +9,18 @@ module.exports = (req,res,next) =>{
         }
 
         let token =authheader.split(" ")[1];
-       jwt.verify(token, process.env.ACCESS_TOKEN_SECRET,function(err,decoded){
-            if(err){
-                res.status(500).send({error:"authentication failed"})
-            }else{
-                next();
+        if(token){
+            const verify=  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+            console.log(verify);
+            if(verify){
+                res.token=verify
+                next()
             }
-        })
+
+        }else{
+            res.status(401)
+        }
+      
         
     } catch (error) {
         res.status(400).send("invalid token")

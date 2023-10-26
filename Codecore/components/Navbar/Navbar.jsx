@@ -19,6 +19,7 @@ const Navbar = () => {
 
   const router=useRouter()
   const auth = useSelector((state)=> state.authReducer.value)
+console.log(auth);
   const dispatch = useDispatch()
 
 
@@ -46,7 +47,7 @@ const Navbar = () => {
         <Image src={search} alt="search" width='18' className='search-icon'/>
         </form>
         {auth.isAuth == true?
-          <> <Avatar backgroundColor='#009dff' px="10px" py="7px" borderRadius="50%" color='white'><Link href='/profile' style={{color:'white',textDecoration:'none'}}>M</Link></Avatar><button className='nav-item nav-links' onClick={logout}>Log out</button></>
+          <> <Avatar backgroundColor='#009dff' px="10px" py="7px" borderRadius="50%" color='white'><Link href='/profile' style={{color:'white',textDecoration:'none'}}>{auth.currentuser.username.charAt(0).toUpperCase()}</Link></Avatar><button className='nav-item nav-links' onClick={logout}>Log out</button></>
 :
         <Authprofilemenu />
         }

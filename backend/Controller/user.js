@@ -28,11 +28,11 @@ module.exports={
         })
     }},
     login:async (req,res)=>{
-        const {userrname,email,password}=req.body
+        const {email,password}=req.body
         const user = await UserSchema.find({email:email})
         var username = await user[0]?.username
-        if(!user){
-            return res.status(401).json({
+        if(user.length==0){
+            return res.json({
                 auth:false,
                 message:"invalid username or password"
                 
@@ -47,7 +47,7 @@ module.exports={
                 })
             }else{
                 let rep={
-                    id:user.id,
+                    id:user[0]._id,
                 }
                 let token=jwt.sign(rep,process.env.ACCESS_TOKEN_SECRET)
                 res.status(200).json({
@@ -60,4 +60,14 @@ module.exports={
         }
         
     },
+    profile:async (req,res)=>{
+        const userprofile = await UserSchema.findById(res.token.id)
+        if(userprofile){
+            res.status(200).json({
+                message:"success",
+                data:userprofile
+            })
+        }
+        }
 }
+

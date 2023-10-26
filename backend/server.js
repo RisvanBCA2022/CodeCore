@@ -1,10 +1,11 @@
 const express=require('express')
 const cors=require('cors')
-const { default: mongoose, connect } = require('mongoose')
+const mongoose=require('mongoose')
 const userroutes = require('./Routes/UserRoutes')
 const app=express()
 const questionroutes=require('./Routes/Question')
 const answerroutes = require('./Routes/AnswerRoutes')
+const { connect } = require('mongoose')
 require('dotenv').config()
 
 const PORT=process.env.PORT || 4001
