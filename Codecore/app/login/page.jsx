@@ -74,6 +74,8 @@ const HandleSubmit= async (e)=>{
 
 		if(response.data.status=="success"){
 			dispatch(logIn(response.data))
+
+
 			
 			alert('Successfully registered')
 			router.push('/')
@@ -93,11 +95,11 @@ const HandleSubmit= async (e)=>{
 		})
 		if(response.data.status=="success"){
 			dispatch(logIn(response.data))
-			// console.log(response.data);
 			setCookie('jwt',response.data.token)
 			router.push('/login')
 			alert('Successfully login')
 			router.push('/')
+			localStorage.setItem('user',JSON.stringify(response.data))
 		}else{
 			console.log(response.data);
 			alert(response.data.message)

@@ -50,9 +50,10 @@ module.exports={
                     id:user[0]._id,
                 }
                 let token=jwt.sign(rep,process.env.ACCESS_TOKEN_SECRET)
+                ID=user[0]._id
                 res.status(200).json({
                     status:"success",
-                    data:{email,username},
+                    data:{email,username,ID},
                     auth:true,
                     token:token,
                 })      

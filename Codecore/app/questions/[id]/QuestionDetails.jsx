@@ -15,11 +15,11 @@ import { useRouter } from 'next/navigation';
 const QuestionDetails = () => {
     const {id} = useParams()
     const router=useRouter()
-    
+    const user=JSON.parse(localStorage.getItem('user'))
+
     const dispatch=useDispatch()
     const questionList=useSelector((state)=>state?.questionslice.allQuestions)
     const auth = useSelector((state)=> state?.authReducer.value)
-    // console.log(questionList);
 
     // const submit=(e)=>{
     //   e.preventDefault()
@@ -27,12 +27,15 @@ const QuestionDetails = () => {
     // }
     const add=(e,answerlength)=>{
       e.preventDefault()
-      const useranswer=e.target.useranswer.value
-
-      if(useranswer==''){
+      const answerBody=e.target.useranswer.value
+      console.log(auth);
+      const userId=user.data.ID
+      const userAnswered=auth.currentuser?.username
+      if(answerBody==''){
         alert('Enter an answer before submitting')
       }else{
-        dispatch(postAnswer({id,answerlength}))
+        dispatch(postAnswer({id,answerlength,answerBody,userId,userAnswered}))
+        dispatch(getQuestions())
       }
 
     }
@@ -40,8 +43,7 @@ const QuestionDetails = () => {
 
   
     const filtered=questionList.filter(question=>question._id == id)
-    // console.log(filtered);
-
+    
   return (
     
     <div className="question-details-page">

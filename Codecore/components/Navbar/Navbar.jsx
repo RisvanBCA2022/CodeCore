@@ -13,13 +13,15 @@ import { logIn, logOut } from '@/redux/features/auth-slice'
 import { useRouter } from 'next/navigation'
 import { getCookie,deleteCookie } from 'cookies-next'
 import jwtDecode from 'jwt-decode'
+import { data } from 'autoprefixer'
 
 const Navbar = () => {
   
 
   const router=useRouter()
   const auth = useSelector((state)=> state.authReducer.value)
-console.log(auth);
+  const user=JSON.parse(localStorage.getItem('user'))
+  console.log(user);
   const dispatch = useDispatch()
 
 
@@ -46,10 +48,10 @@ console.log(auth);
         <input type="text" placeholder='Search...' />
         <Image src={search} alt="search" width='18' className='search-icon'/>
         </form>
-        {auth.isAuth == true?
-          <> <Avatar backgroundColor='#009dff' px="10px" py="7px" borderRadius="50%" color='white'><Link href='/profile' style={{color:'white',textDecoration:'none'}}>{auth.currentuser.username.charAt(0).toUpperCase()}</Link></Avatar><button className='nav-item nav-links' onClick={logout}>Log out</button></>
-:
-        <Authprofilemenu />
+        {user?.auth == null?
+          <Authprofilemenu />:
+          <> <Avatar backgroundColor='#009dff' px="10px" py="7px" borderRadius="50%" color='white'><Link href='/profile' style={{color:'white',textDecoration:'none'}}>{user.data.username.charAt(0).toUpperCase()}</Link></Avatar><button className='nav-item nav-links' onClick={logout}>Log out</button></>
+
         }
       
     </div>

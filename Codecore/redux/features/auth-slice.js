@@ -16,6 +16,7 @@ export const auth = createSlice({
     initialState,
     reducers: {
         logOut: () => {
+            localStorage.removeItem("user");
             deleteCookie('jwt')
             return {
                 value: {
@@ -27,6 +28,7 @@ export const auth = createSlice({
         },
         logIn: (state, action) => {
             if (action.payload.auth == true) {
+
                 return {
                     value: {
                         isAuth: true,
@@ -69,9 +71,9 @@ const slice = createSlice({
             .addCase(postAnswer.pending, (state) => {
                 state.answerStatus = "loading"
             })
-            .addCase(postAnswer.fulfilled, (state) => {
+            .addCase(postAnswer.fulfilled, (state,action) => {
                 state.answerStatus = 'succeeded',
-                    state.answer = action.payload
+                    state.answer = action.payload?.data
             })
             .addCase(postAnswer.rejected, (state) => {
                 state.answerStatus = "failed"

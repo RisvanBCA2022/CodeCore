@@ -19,7 +19,7 @@ const DisplayAnswer = ({question}) => {
                 <div>
                     <p>answer {ans.answeredOn}</p>
                     <Link href={`/user/${question.userId}`} className='user-link' style={{color:'#006d8'}} >
-                                    <Avatar backgroundColor="green" px='8' py='5px'>{ans.userAnswered.charAt(0).toUpperCase()}</Avatar>
+                                    <Avatar backgroundColor="green" px='8' py='5px'>{ans.userAnswered?.charAt(0).toUpperCase()}</Avatar>
                                     <div>
                                         {ans.userAnswered}
                                     </div>
