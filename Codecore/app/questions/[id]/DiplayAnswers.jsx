@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import Avatar from '@/components/Avatar/Avatar'
+import moment from 'moment'
 
 const DisplayAnswer = ({question}) => {
     
@@ -17,7 +18,7 @@ const DisplayAnswer = ({question}) => {
 
                 </div>
                 <div>
-                    <p>answer {ans.answeredOn}</p>
+                    <p>answer {moment(ans.answeredOn).fromNow()}</p>
                     <Link href={`/user/${question.userId}`} className='user-link' style={{color:'#006d8'}} >
                                     <Avatar backgroundColor="green" px='8' py='5px'>{ans.userAnswered?.charAt(0).toUpperCase()}</Avatar>
                                     <div>

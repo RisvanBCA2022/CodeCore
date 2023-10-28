@@ -103,7 +103,7 @@ const HandleSubmit= async (e)=>{
 					isSignup && (
 						 <label htmlFor="name">
 							<h4>Display Name</h4>
-							<input type='text' id='name' name='name' required onChange={(e)=>{setUserName(e.target.value)}} />
+							<input type='text' id='name' name='name'  onChange={(e)=>{setUserName(e.target.value)}} />
 						 </label>
 					)
 				}

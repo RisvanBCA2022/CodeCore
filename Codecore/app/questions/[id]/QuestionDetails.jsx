@@ -11,24 +11,20 @@ import DisplayAnswer from './DiplayAnswers';
 import { useDispatch, useSelector } from 'react-redux';
 import { getQuestions, postAnswer } from '@/redux/axios';
 import { useRouter } from 'next/navigation';
+import moment from 'moment';
+import copy from 'copy-to-clipboard';
 
 const QuestionDetails = () => {
     const {id} = useParams()
     const router=useRouter()
     const user=JSON.parse(localStorage.getItem('user'))
-
     const dispatch=useDispatch()
     const questionList=useSelector((state)=>state?.questionslice.allQuestions)
     const auth = useSelector((state)=> state?.authReducer.value)
-
-    // const submit=(e)=>{
-    //   e.preventDefault()
-
-    // }
+    console.log()
     const add=(e,noOfAnswers)=>{
       e.preventDefault()
       const answerBody=e.target.useranswer.value
-      console.log(auth);
       const userId=user.data.ID
       const userAnswered=auth.currentuser?.username
       if(answerBody==''){
@@ -39,11 +35,17 @@ const QuestionDetails = () => {
       }
 
     }
-    
-
-  
     const filtered=questionList.filter(question=>question._id == id)
-    console.log(filtered);
+
+    const handleshare = ()=>{
+      
+      copy(url)
+    }
+    const pathname = router.pathname;
+  const query = router.query;
+  const asPath = router.asPath;
+  console.log(pathname,query,asPath);
+
   return (
     
     <div className="question-details-page">
@@ -82,7 +84,7 @@ const QuestionDetails = () => {
                       </div>
                       <div className="question-actions-user">
                         <div>
-                          <button type="button" >
+                          <button type="button" onClick={handleshare}>
                             Share
                           </button>
                        
@@ -92,7 +94,7 @@ const QuestionDetails = () => {
             
                         </div>
                         <div>
-                          <p>asked {question.askedOn}</p>
+                          <p>asked {moment(question.askedOn).fromNow()}</p>
                           <Link
                             href={`/users/${question.userId}`}
                             className="user-link"

@@ -8,8 +8,7 @@ module.exports={
 
         var _id=id
         // const {noOfAnswers,answerBody,userAnswered} = req.body
-        console.log(req.body)
-
+        
         if(!mongoose.Types.ObjectId.isValid(_id)){
             return res.send("question unavailabe")
         }

@@ -14,15 +14,25 @@ import { useRouter } from 'next/navigation'
 import { getCookie,deleteCookie } from 'cookies-next'
 import jwtDecode from 'jwt-decode'
 import { data } from 'autoprefixer'
+import { useState } from 'react'
 
 const Navbar = () => {
+  // const [user, setUser] = useState(null);
+
+  // useEffect(() => {
+  //   if (typeof window !== 'undefined') {
+  //     const userData = localStorage.getItem('user');
+  //     if (userData) {
+  //       setUser(JSON.parse(userData));
+  //     }
+  //   }
+  // }, []);
   
 
   const router=useRouter()
   const auth = useSelector((state)=> state.authReducer.value)
-  const user=JSON.parse(localStorage.getItem('user'))
-  console.log(user);
-  console.log(user);
+   const user=JSON?.parse(localStorage.getItem('user'))
+
   const dispatch = useDispatch()
 
 
