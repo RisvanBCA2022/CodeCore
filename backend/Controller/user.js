@@ -30,7 +30,7 @@ module.exports={
     login:async (req,res)=>{
         const {email,password}=req.body
         const user = await UserSchema.find({email:email})
-        var username = await user[0]?.username
+        var username = user[0]?.username
         if(user.length==0){
             return res.json({
                 auth:false,

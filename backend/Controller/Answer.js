@@ -4,15 +4,16 @@ const mongoose=require('mongoose')
 
 module.exports={
     postAnswer: async(req,res)=>{
-        const {id,answerBody,userId,userAnswered} = req.body;
+        const {id,noOfAnswers,answerBody,userId,userAnswered} = req.body;
+
         var _id=id
         // const {noOfAnswers,answerBody,userAnswered} = req.body
         console.log(req.body)
 
         if(!mongoose.Types.ObjectId.isValid(_id)){
-            return res.status(404).send("question unavailabe")
+            return res.send("question unavailabe")
         }
-        // updateNoOfQuestions(_id,noOfAnswers)
+        updateNoOfQuestions(_id,noOfAnswers)
         try {
 
             const questionupdate= await QuestionSchema.findByIdAndUpdate(_id, {$addToSet:{answer:[{answerBody,userId,userAnswered}]}})
@@ -20,16 +21,16 @@ module.exports={
             res.status(200).json(questionupdate)
             
         } catch (error) {
-            res.status(400).json(error)
+            res.json(error)
         }
 
     }
 }
 
-// const updateNoOfQuestions = async (_id,noOfAnswers)=>{
-//     try {
-//         await QuestionSchema.findByIdAndUpdate(_id,{$set:{'noOfAnswers':noOfAnswers}})
-//     } catch (error) {
+const updateNoOfQuestions = async (_id,noOfAnswers)=>{
+    try {
+        await QuestionSchema.findByIdAndUpdate(_id,{$set:{'noOfAnswers':noOfAnswers}})
+    } catch (error) {
         
-//     }
-// }
+    }
+}

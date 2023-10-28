@@ -25,7 +25,7 @@ const QuestionDetails = () => {
     //   e.preventDefault()
 
     // }
-    const add=(e,answerlength)=>{
+    const add=(e,noOfAnswers)=>{
       e.preventDefault()
       const answerBody=e.target.useranswer.value
       console.log(auth);
@@ -34,7 +34,7 @@ const QuestionDetails = () => {
       if(answerBody==''){
         alert('Enter an answer before submitting')
       }else{
-        dispatch(postAnswer({id,answerlength,answerBody,userId,userAnswered}))
+        dispatch(postAnswer({id,noOfAnswers,answerBody,userId,userAnswered}))
         dispatch(getQuestions())
       }
 
@@ -43,7 +43,7 @@ const QuestionDetails = () => {
 
   
     const filtered=questionList.filter(question=>question._id == id)
-    
+    console.log(filtered);
   return (
     
     <div className="question-details-page">

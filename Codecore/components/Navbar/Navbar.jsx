@@ -22,6 +22,7 @@ const Navbar = () => {
   const auth = useSelector((state)=> state.authReducer.value)
   const user=JSON.parse(localStorage.getItem('user'))
   console.log(user);
+  console.log(user);
   const dispatch = useDispatch()
 
 

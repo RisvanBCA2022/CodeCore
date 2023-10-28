@@ -31,27 +31,6 @@ const Page = () => {
 
 	}
 	
-// 	const Handleclick=async (event)=>{
-// try {
-	
-// 		event.preventDefault()
-// 		const username=event.target.username.value
-// 		const password=event.target.password.value
-// 		const response =	await axios
-// 	.post('http://127.0.0.1:4001/users/login',{
-// 		"username":username,
-// 		"password":password
-// 	})
-// 	if(response.data.status=="success"){
-// 		router.push('/')
-// 		alert('Successfully logined')
-// 	}else{
-// 		alert(response.data.message)
-// 	}
-	
-// } catch (error) {
-// 	alert(error.message)
-// }}
 
 const HandleSubmit= async (e)=>{
 	e.preventDefault()

@@ -15,10 +15,10 @@ export const getQuestions = createAsyncThunk(
 export const postAnswer = createAsyncThunk(
     'post/postAnswers',
     async (answerData) =>{
-        const {id,answerlength,answerBody,userId,userAnswered}=answerData
+        const {id,noOfAnswers,answerBody,userId,userAnswered}=answerData
         
         console.log({id,answerBody,userId,userAnswered});
-        const response= await axios.patch(`http://127.0.0.1:4001/answer/postanswer/${id}`,{id,answerBody,userId,userAnswered}
+        const response= await axios.patch(`http://127.0.0.1:4001/answer/postanswer/${id}`,{id,noOfAnswers,answerBody,userId,userAnswered}
         )
         return response
     }
