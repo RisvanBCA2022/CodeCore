@@ -2,8 +2,12 @@
 import React from "react";
 import Link from "next/link";
 import moment from "moment";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getQuestions } from "@/redux/axios";
 
 const Questions = ({ question }) => {
+
   return (
     <div className="display-question-container">
       <div className="display-votes-ans">

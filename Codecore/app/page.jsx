@@ -1,19 +1,22 @@
 "use client"
 import { Home } from '@/components'
 import Image from 'next/image'
-import Login from './log-in'
+// import Login from './log-in'
 import { useEffect } from 'react'
 import { getQuestions } from '@/redux/axios'
 import { useDispatch } from 'react-redux'
+import { usePathname } from 'next/navigation'
 // import { useSelector } from 'react-redux'
 
 const page = () => {
-
+ const path=usePathname()
+ console.log('http://localhost:3000'+path);
   const dispatch=useDispatch()
 
   useEffect(()=>{
     dispatch(getQuestions())
   },[dispatch])
+  console.log(location)
   
 
   // const username =useSelector((state)=>state.authReducer.value.username)

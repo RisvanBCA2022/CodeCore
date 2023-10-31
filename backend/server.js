@@ -24,9 +24,9 @@ mongoose.connect('mongodb://127.0.0.1:27017/project')
 app.use('/users',userroutes)
 app.use('/questions',questionroutes)
 app.use('/answer',answerroutes)
-app.get("/api",(req,res)=>{
-    res.send({names:["alex","solaman","jacob"]})
-})
+// app.get("/api",(req,res)=>{
+//     res.send({names:["alex","solaman","jacob"]})
+// })
 app.listen(PORT,()=>{
     console.log(`Server listening on port ${PORT}`);
 })

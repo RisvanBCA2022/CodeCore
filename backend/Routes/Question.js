@@ -7,4 +7,5 @@ var questionroutes = express.Router()
 questionroutes.post('/ask',jwtuser,controller.askquestion)
 questionroutes.get('/fetchquestion',controller.questionlist)
 
+
 module.exports=questionroutes

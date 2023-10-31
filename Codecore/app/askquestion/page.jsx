@@ -24,11 +24,13 @@ const handleSubmit = async(e)=>{
   const questionBody=e.target.askquesbody?.value
   const questionTags=[...e.target.askquestags?.value.split(' ')]
   
+  
 
   await axios.post('http://localhost:4001/questions/ask/',{
     questionTitle:questionTitle,
     questionBody:questionBody,
     questionTags:questionTags,
+    
   },{
     headers:{
       Authorization:`Bearer ${cookie}`
@@ -53,12 +55,12 @@ const handleSubmit = async(e)=>{
           <h4>Title</h4>
           <p>Be specific and imagine you’re asking a question to another person.
 </p>
-<input type="text" name='questionTitle' id='askquestitle' placeholder='e.g Is there an R function for finding the index of an element in a vector' />
+<input type="text" name='questionTitle' id='askquestitle' placeholder='e.g Is there an R function for finding the index of an element in a vector' required/>
         </label>
         <label htmlFor="ask-ques-body">
           <h4>What are the details of your problem?</h4>
           <p>Introduce the problem and expand on what you put in the title. Minimum 20 characters.</p>
-          <textarea name="questionTitle" id="askquesbody" cols="30" rows="10"  ></textarea>
+          <textarea name="questionTitle" id="askquesbody" cols="30" rows="10" required ></textarea>
 
         </label>
         <label htmlFor="ask-ques-tags">
@@ -71,7 +73,7 @@ const handleSubmit = async(e)=>{
 
 
         </div>
-        <input type="submit" value='Review your question' className='question-add-button'/>
+        <input type="submit" value='Review your question' className='question-add-button' required />
       </form>
 
       </div>

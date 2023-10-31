@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux'
 import {logIn,logOut} from "@/redux/features/auth-slice"
 import { useSelector } from 'react-redux'
 import { setCookie } from 'cookies-next'
+import { getUser } from '@/redux/axios'
 
 
 const Page = () => {
@@ -35,6 +36,8 @@ const Page = () => {
 const HandleSubmit= async (e)=>{
 	e.preventDefault()
 		const password=e.target.password.value
+		const email=e.target.email.value
+		
 		// console.log(password);
 	
 	
@@ -53,9 +56,6 @@ const HandleSubmit= async (e)=>{
 
 		if(response.data.status=="success"){
 			dispatch(logIn(response.data))
-
-
-			
 			alert('Successfully registered')
 			router.push('/')
 		}else{
@@ -74,6 +74,7 @@ const HandleSubmit= async (e)=>{
 		})
 		if(response.data.status=="success"){
 			dispatch(logIn(response.data))
+			// dispatch(getUser())
 			setCookie('jwt',response.data.token)
 			router.push('/login')
 			alert('Successfully login')

@@ -11,7 +11,6 @@ module.exports = (req,res,next) =>{
         let token =authheader.split(" ")[1];
         if(token){
             const verify=  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
-            console.log(verify);
             if(verify){
                 res.token=verify
                 next()

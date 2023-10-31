@@ -15,33 +15,31 @@ import { getCookie,deleteCookie } from 'cookies-next'
 import jwtDecode from 'jwt-decode'
 import { data } from 'autoprefixer'
 import { useState } from 'react'
+import { getUser } from '@/redux/axios'
 
 const Navbar = () => {
-  // const [user, setUser] = useState(null);
-
-  // useEffect(() => {
-  //   if (typeof window !== 'undefined') {
-  //     const userData = localStorage.getItem('user');
-  //     if (userData) {
-  //       setUser(JSON.parse(userData));
-  //     }
-  //   }
-  // }, []);
-  
-
-  const router=useRouter()
-  const auth = useSelector((state)=> state.authReducer.value)
-   const user=JSON?.parse(localStorage.getItem('user'))
-
   const dispatch = useDispatch()
 
 
+  useEffect(() => {
+    console.log('working')
+    dispatch(getUser())
+  }, []);
+  
+  const userdetails=useSelector(state => state.questionslice.userdetails)
+  // console.log(userdetails);
+
+
+  const router=useRouter()
+  const auth = useSelector((state)=> state.authReducer.value)
+  console.log(auth);
+  // const user=null
+  //  const user=JSON?.parse(localStorage.getItem('user'))
   const token = getCookie('jwt')
 
-
  const logout=()=>{
-  dispatch(logOut())
   deleteCookie('jwt') 
+  dispatch(logOut())
   router.push('/login')
   
  }
@@ -59,9 +57,10 @@ const Navbar = () => {
         <input type="text" placeholder='Search...' />
         <Image src={search} alt="search" width='18' className='search-icon'/>
         </form>
-        {user?.auth == null?
-          <Authprofilemenu />:
-          <> <Avatar backgroundColor='#009dff' px="10px" py="7px" borderRadius="50%" color='white'><Link href='/profile' style={{color:'white',textDecoration:'none'}}>{user.data.username.charAt(0).toUpperCase()}</Link></Avatar><button className='nav-item nav-links' onClick={logout}>Log out</button></>
+        {auth?.isAuth==true?
+          <> <Avatar backgroundColor='#009dff' px="10px" py="7px" borderRadius="50%" color='white'><Link href='/profile' style={{color:'white',textDecoration:'none'}}>{auth?.currentuser?.username?.charAt(0).toUpperCase()}</Link></Avatar><button className='nav-item nav-links' onClick={logout}>Log out</button></>
+          :
+          <Authprofilemenu />
 
         }
       

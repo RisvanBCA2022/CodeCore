@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { deleteCookie } from 'cookies-next'
-import { getQuestions, postAnswer } from '../axios'
+import { getQuestions, getUser, postAnswer } from '../axios'
 
 const initialState = {
     value: {
@@ -51,11 +51,16 @@ const slice = createSlice({
         status: 'standby',
         answerStatus: 'standby',
         allQuestions: [],
-        answer: []
+        answer: [],
+        userstatus:'standby',
+        userdetails:[]
     },
     reducers: {
-
+        logout:(state,action)=>{
+          localStorage.removeItem("user")
+        }
     },
+  
     extraReducers: (builder) => {
         builder
             .addCase(getQuestions.pending, (state) => {
@@ -77,6 +82,16 @@ const slice = createSlice({
             })
             .addCase(postAnswer.rejected, (state) => {
                 state.answerStatus = "failed"
+            })
+            .addCase(getUser.pending, (state)=>{
+                state.userstatus = 'loading'
+            })
+            .addCase(getUser.fulfilled, (state,action)=>{
+                state.userstatus = 'succeeded',
+                state.userdetails = action.payload.data
+            })
+            .addCase(getUser.rejected, (state)=>{
+                state.userstatus = 'failed'
             })
     }
 })

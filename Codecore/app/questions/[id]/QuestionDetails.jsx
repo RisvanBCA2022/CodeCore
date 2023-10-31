@@ -13,15 +13,26 @@ import { getQuestions, postAnswer } from '@/redux/axios';
 import { useRouter } from 'next/navigation';
 import moment from 'moment';
 import copy from 'copy-to-clipboard';
+import { getCookie } from 'cookies-next';
 
 const QuestionDetails = () => {
+
+
+
     const {id} = useParams()
     const router=useRouter()
-    const user=JSON.parse(localStorage.getItem('user'))
+    // const user=JSON.parse(localStorage.getItem('user'))
     const dispatch=useDispatch()
+
+
+useEffect(()=>{
+  dispatch(getQuestions())
+},[dispatch])
+
+
     const questionList=useSelector((state)=>state?.questionslice.allQuestions)
     const auth = useSelector((state)=> state?.authReducer.value)
-    console.log()
+    const token = getCookie('jwt')
     const add=(e,noOfAnswers)=>{
       e.preventDefault()
       const answerBody=e.target.useranswer.value
@@ -41,10 +52,10 @@ const QuestionDetails = () => {
       
       copy(url)
     }
-    const pathname = router.pathname;
-  const query = router.query;
-  const asPath = router.asPath;
-  console.log(pathname,query,asPath);
+  //   const pathname = router.pathname;
+  // const query = router.query;
+  // const asPath = router.asPath;
+  // console.log(pathname,query,asPath);
 
   return (
     

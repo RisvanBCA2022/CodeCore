@@ -68,6 +68,10 @@ module.exports={
                 message:"success",
                 data:userprofile
             })
+        }else{
+            res.json({
+                data:userprofile
+            })
         }
         }
 }
