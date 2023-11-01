@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { deleteCookie } from 'cookies-next'
-import { getQuestions, getUser, postAnswer } from '../axios'
+import { deletequestion, getQuestions, getUser, postAnswer } from '../axios'
 
 const initialState = {
     value: {
@@ -53,7 +53,8 @@ const slice = createSlice({
         allQuestions: [],
         answer: [],
         userstatus:'standby',
-        userdetails:[]
+        userdetails:[],
+        deleteStatus:'standby'
     },
     reducers: {
         logout:(state,action)=>{
@@ -78,7 +79,8 @@ const slice = createSlice({
             })
             .addCase(postAnswer.fulfilled, (state,action) => {
                 state.answerStatus = 'succeeded',
-                    state.answer = action.payload?.data
+                state.answer = action.payload?.data
+                // getQuestions()     
             })
             .addCase(postAnswer.rejected, (state) => {
                 state.answerStatus = "failed"
@@ -92,6 +94,17 @@ const slice = createSlice({
             })
             .addCase(getUser.rejected, (state)=>{
                 state.userstatus = 'failed'
+            })
+            .addCase(deletequestion.pending, (state)=>{
+                state.deleteStatus = 'loading'
+            })
+            .addCase(deletequestion.fulfilled, (state,action)=>{
+                state.deleteStatus = 'succeeded'
+                console.log(action.payload.data);
+                // state.userdetails = action.payload.data
+            })
+            .addCase(deletequestion.rejected, (state)=>{
+                state.deleteStatus = 'failed'
             })
     }
 })

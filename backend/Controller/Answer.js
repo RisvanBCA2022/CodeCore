@@ -23,6 +23,27 @@ module.exports={
             res.json(error)
         }
 
+    },
+    deleteAnswer: async (req,res)=>{
+        const {id:_id}=req.params
+        const {userId,noOfAnswers}=req.body
+        if (!mongoose.Types.ObjectId.isValid(_id)) {
+            return res.status(404).send("Question unavailable...");
+          }
+          if (!mongoose.Types.ObjectId.isValid(userId)) {
+            return res.status(404).send("Answer unavailable...");
+          }
+          updateNoOfQuestions(_id,noOfAnswers)
+          try {
+            await QuestionSchema.updateOne(
+                {_id},
+                {$pull:{answer:{userId:userId}}}
+            )
+            res.json("successfully deleted")
+          } catch (error) {
+            
+          }
+
     }
 }
 
@@ -33,3 +54,4 @@ const updateNoOfQuestions = async (_id,noOfAnswers)=>{
         
     }
 }
+

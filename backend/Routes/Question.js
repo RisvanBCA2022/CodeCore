@@ -6,6 +6,7 @@ var questionroutes = express.Router()
 
 questionroutes.post('/ask',jwtuser,controller.askquestion)
 questionroutes.get('/fetchquestion',controller.questionlist)
+questionroutes.delete('/delete/:id',jwtuser,controller.deletequestion)
 
 
 module.exports=questionroutes

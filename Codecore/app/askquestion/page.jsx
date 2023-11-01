@@ -14,9 +14,10 @@ const AskQuestion = () => {
   console.log(cookie);
   const dispatch=useDispatch()
   const router=useRouter()
-const user=null
 
-
+  const user=JSON.parse(localStorage.getItem('user'))
+  const userposted=user.data.username
+  console.log(userposted);
 
 const handleSubmit = async(e)=>{
   e.preventDefault()
@@ -30,7 +31,7 @@ const handleSubmit = async(e)=>{
     questionTitle:questionTitle,
     questionBody:questionBody,
     questionTags:questionTags,
-    
+    userPosted:userposted,
   },{
     headers:{
       Authorization:`Bearer ${cookie}`
@@ -38,6 +39,8 @@ const handleSubmit = async(e)=>{
   }
   )
   alert('Question Added successfully')
+  router.push('/')
+
   
   // const postQuestionData={questionTitle,questionBody,questionTags}
   // axios.post('localhost:4001/questions/ask')

@@ -10,13 +10,12 @@ import { usePathname } from 'next/navigation'
 
 const page = () => {
  const path=usePathname()
- console.log('http://localhost:3000'+path);
+//  console.log('http://localhost:3000'+path);
   const dispatch=useDispatch()
 
   useEffect(()=>{
     dispatch(getQuestions())
   },[dispatch])
-  console.log(location)
   
 
   // const username =useSelector((state)=>state.authReducer.value.username)

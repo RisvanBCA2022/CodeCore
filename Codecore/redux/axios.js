@@ -9,6 +9,7 @@ export const getQuestions = createAsyncThunk(
     'get/getQuestions',
     async ()=>{
         const res = await axios.get("http://127.0.0.1:4001/questions/fetchquestion")
+        console.log(res);
         return res.data
     }
 )
@@ -34,7 +35,19 @@ export const getUser = createAsyncThunk(
               Authorization: `Bearer ${jwt}`,
             },
         })
-        return resp
+        return resp.data
     }
 )
 
+export const deletequestion = createAsyncThunk(
+    'delete/question',
+    async (id)=>{
+        const jwt=getCookie('jwt')
+        const resp = await axios.delete(`http://127.0.0.1:4001/questions/delete/${id}`,{
+            headers: {
+              Authorization: `Bearer ${jwt}`,
+            },
+        })
+        return resp
+    }
+)

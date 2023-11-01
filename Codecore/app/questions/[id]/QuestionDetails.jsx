@@ -14,6 +14,7 @@ import { useRouter } from 'next/navigation';
 import moment from 'moment';
 import copy from 'copy-to-clipboard';
 import { getCookie } from 'cookies-next';
+import { deletequestion } from '@/redux/axios';
 
 const QuestionDetails = () => {
 
@@ -29,6 +30,8 @@ useEffect(()=>{
   dispatch(getQuestions())
 },[dispatch])
 
+    const user=JSON.parse(localStorage.getItem("user"))
+    // console.log(user);
 
     const questionList=useSelector((state)=>state?.questionslice.allQuestions)
     const auth = useSelector((state)=> state?.authReducer.value)
@@ -43,6 +46,7 @@ useEffect(()=>{
       }else{
         dispatch(postAnswer({id,noOfAnswers,answerBody,userId,userAnswered}))
         dispatch(getQuestions())
+        router.push('/')
       }
 
     }
@@ -56,6 +60,12 @@ useEffect(()=>{
   // const query = router.query;
   // const asPath = router.asPath;
   // console.log(pathname,query,asPath);
+
+  const deleteQuestionhandler=(id)=>{
+    console.log(id);
+    dispatch(deletequestion(id))
+    router.push('/')
+  }
 
   return (
     
@@ -99,7 +109,7 @@ useEffect(()=>{
                             Share
                           </button>
                        
-                            <button type="button" >
+                            <button type="button" onClick={() => deleteQuestionhandler(question._id)}>
                               Delete
                             </button>
             
@@ -128,7 +138,7 @@ useEffect(()=>{
                 </div>
                 {question.noOfAnswers !== 0 && (
                   <div>
-                    <h3>{question.noOfAnswers} Answers</h3>
+                    <h3>{question.answer.length} Answers</h3>
                     <DisplayAnswer
                       key={question._id}
                       question={question}

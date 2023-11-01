@@ -13,9 +13,8 @@ import RightSideBar from "@/components/Home/RightSideBar/RightSideBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBirthdayCake,faPen } from "@fortawesome/free-solid-svg-icons";
 const page = () => {
-
+  
   const userdetails=useSelector(state => state.questionslice.userdetails)
-  console.log(userdetails);
 
 
   return (
