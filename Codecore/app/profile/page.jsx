@@ -15,6 +15,7 @@ import { faBirthdayCake,faPen } from "@fortawesome/free-solid-svg-icons";
 const page = () => {
   
   const userdetails=useSelector(state => state.questionslice.userdetails)
+  console.log(userdetails);
 
 
   return (
@@ -31,10 +32,10 @@ const page = () => {
                 px="40px"
                 py="30px"
               >
-                {userdetails?.data?.username.charAt(0).toUpperCase()}
+                {userdetails?.username?.charAt(0).toUpperCase()}
               </Avatar>
               <div className="user-name">
-                <h1>{userdetails?.data?.username}</h1>
+                <h1>{userdetails?.username}</h1>
                 <p>
                   <FontAwesomeIcon icon={faBirthdayCake} /> Joined{" "}
                   {moment(userdetails.data?.joinedOn).fromNow()}
