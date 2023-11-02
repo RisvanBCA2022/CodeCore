@@ -15,8 +15,9 @@ import { faBirthdayCake,faPen } from "@fortawesome/free-solid-svg-icons";
 import { getUser } from "@/redux/axios";
 const page = () => {
   
-  const userdetails=useSelector(state => state.questionslice.userdetails)
- 
+  const userdetails=JSON.parse(localStorage.getItem('user'))
+  console.log(userdetails);
+
 
   return (
     <div className="home-container-1">
@@ -32,10 +33,10 @@ const page = () => {
                 px="40px"
                 py="30px"
               >
-                {userdetails?.username?.charAt(0).toUpperCase()}
+                {userdetails?.data.username?.charAt(0).toUpperCase()}
               </Avatar>
               <div className="user-name">
-                <h1>{userdetails?.username}</h1>
+                <h1>{userdetails?.data.username}</h1>
                 <p>
                   <FontAwesomeIcon icon={faBirthdayCake} /> Joined{" "}
                   {moment(userdetails.data?.joinedOn).fromNow()}

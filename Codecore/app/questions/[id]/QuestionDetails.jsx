@@ -46,8 +46,9 @@ useEffect(()=>{
       }else{
         dispatch(postAnswer({id,noOfAnswers,answerBody,userId,userAnswered}))
         dispatch(getQuestions())
-        router.push('/')
+        dispatch(getQuestions())
       }
+      e.target.reset()
 
     }
     const filtered=questionList.filter(question=>question._id == id)

@@ -61,11 +61,22 @@ export const deletequestion = createAsyncThunk(
 export const deleteanswer = createAsyncThunk(
     'delete/answer',
     async (data)=>{
+        const {userId,Id,questionId}=data
         const jwt=getCookie('jwt')
-        const resp = await axios.patch(`http://127.0.0.1:4001/answer/deleteanswer/${id}`,
+        console.log(userId,Id,questionId);
+        const resp = await axios.patch(`http://127.0.0.1:4001/answer/deleteanswer/${questionId}`,
         {
-            
+            userId:userId,
+            Id:Id,
+            questionId:questionId
+        },
+        {
+            headers: {
+              Authorization: `Bearer ${jwt}`,
+            },
         })
+        console.log(resp)
+        return resp
 
     }
 )

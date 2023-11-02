@@ -26,18 +26,19 @@ module.exports={
     },
     deleteAnswer: async (req,res)=>{
         const {id:_id}=req.params
-        const {userId,noOfAnswers}=req.body
+        const {userId,Id,questionId,}=req.body
+        console.log(req.body);
         if (!mongoose.Types.ObjectId.isValid(_id)) {
             return res.status(404).send("Question unavailable...");
           }
           if (!mongoose.Types.ObjectId.isValid(userId)) {
             return res.status(404).send("Answer unavailable...");
           }
-          updateNoOfQuestions(_id,noOfAnswers)
+        //   updateNoOfQuestions(_id,noOfAnswers)
           try {
             await QuestionSchema.updateOne(
                 {_id},
-                {$pull:{answer:{userId:userId}}}
+                {$pull:{answer:{_id:Id}}}
             )
             res.json("successfully deleted")
           } catch (error) {

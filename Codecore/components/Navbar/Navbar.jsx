@@ -19,17 +19,17 @@ import { getUser } from '@/redux/axios'
 
 const Navbar = () => {
   const dispatch = useDispatch()
-  const [user,setUser]=useState(null)
+  // const [user,setUser]=useState(null)
 
 
-  useEffect(() => {
-    dispatch(getUser())
-    const userdata=localStorage.getItem('user')
-    if(userdata){
-      setUser(JSON.parse(userdata))
-    }
+  // useEffect(() => {
+  //   dispatch(getUser())
+    const user=JSON.parse(localStorage.getItem('user'))
+  //   if(userdata){
+  //     setUser(JSON.parse(userdata))
+  //   }
 
-  }, [dispatch]);
+  // }, [dispatch]);
   
   const userdetails=useSelector(state => state.questionslice.userdetails)
   // console.log(userdetails);

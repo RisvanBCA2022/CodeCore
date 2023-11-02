@@ -2,16 +2,40 @@ import Link from 'next/link'
 import React, { useEffect } from 'react'
 import Avatar from '@/components/Avatar/Avatar'
 import moment from 'moment'
-import { getQuestions } from '@/redux/axios'
-import { useDispatch } from 'react-redux'
+import { deleteanswer, getQuestions } from '@/redux/axios'
+import { useDispatch, useSelector } from 'react-redux'
 
 const DisplayAnswer = ({question}) => {
     const dispatch=useDispatch()
-    console.log(question);
+    const userdetails=useSelector(state => state.questionslice.userdetails)
+
+    // console.log(question);
+    console.log(userdetails);
+    const user=JSON.parse(localStorage.getItem('user'))
+
     
     useEffect(()=>{
         dispatch(getQuestions())
       },[dispatch])
+
+      const deleteAnswer=(answerId,userId)=>{
+        // console.log(answerId,question._id);
+        // console.log(userId);
+        const currentuserId=user.data.ID
+        const Id=answerId
+        const questionId=question._id
+        const data={userId,Id,questionId}
+        if(currentuserId===userId){
+            dispatch(deleteanswer(data))
+            dispatch(getQuestions())
+            dispatch(getQuestions())
+        }else{
+            alert('access denied')
+
+        }
+        
+
+      }
     
   return (
     <>
@@ -22,7 +46,7 @@ const DisplayAnswer = ({question}) => {
             <div className="question-actions-user">
                 <div>
                     <button type='button'>Shares</button>
-                    <button type='button'>Delete</button>
+                    <button type='button' onClick={()=>deleteAnswer(ans._id,ans.userId)}>Delete</button>
 
                 </div>
                 <div>
