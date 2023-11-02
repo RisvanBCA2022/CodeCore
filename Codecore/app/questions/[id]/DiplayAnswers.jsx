@@ -1,9 +1,17 @@
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Avatar from '@/components/Avatar/Avatar'
 import moment from 'moment'
+import { getQuestions } from '@/redux/axios'
+import { useDispatch } from 'react-redux'
 
 const DisplayAnswer = ({question}) => {
+    const dispatch=useDispatch()
+    console.log(question);
+    
+    useEffect(()=>{
+        dispatch(getQuestions())
+      },[dispatch])
     
   return (
     <>

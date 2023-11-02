@@ -19,12 +19,17 @@ import { getUser } from '@/redux/axios'
 
 const Navbar = () => {
   const dispatch = useDispatch()
+  const [user,setUser]=useState(null)
 
 
   useEffect(() => {
-    console.log('working')
     dispatch(getUser())
-  }, []);
+    const userdata=localStorage.getItem('user')
+    if(userdata){
+      setUser(JSON.parse(userdata))
+    }
+
+  }, [dispatch]);
   
   const userdetails=useSelector(state => state.questionslice.userdetails)
   // console.log(userdetails);
@@ -32,9 +37,9 @@ const Navbar = () => {
 
   const router=useRouter()
   const auth = useSelector((state)=> state.authReducer.value)
-  console.log(auth);
+  // console.log(auth);
   // const user=null
-  //  const user=JSON?.parse(localStorage.getItem('user'))
+  //  console.log(user);
   const token = getCookie('jwt')
 
  const logout=()=>{
@@ -43,7 +48,9 @@ const Navbar = () => {
   router.push('/login')
   
  }
-
+ if (typeof window !== 'undefined') {
+  const item = localStorage.getItem('user')
+}
   return (
    <nav className='main-nav'>
     <div className='navbar'>
@@ -57,8 +64,8 @@ const Navbar = () => {
         <input type="text" placeholder='Search...' />
         <Image src={search} alt="search" width='18' className='search-icon'/>
         </form>
-        {auth?.isAuth==true?
-          <> <Avatar backgroundColor='#009dff' px="10px" py="7px" borderRadius="50%" color='white'><Link href='/profile' style={{color:'white',textDecoration:'none'}}>{auth?.currentuser?.username?.charAt(0).toUpperCase()}</Link></Avatar><button className='nav-item nav-links' onClick={logout}>Log out</button></>
+        {user?.auth==true?
+          <> <Avatar backgroundColor='#009dff' px="10px" py="7px" borderRadius="50%" color='white'><Link href='/profile' style={{color:'white',textDecoration:'none'}}>{user?.data?.username?.charAt(0).toUpperCase()}</Link></Avatar><button className='nav-item nav-links' onClick={logout}>Log out</button></>
           :
           <Authprofilemenu />
 

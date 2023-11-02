@@ -7,9 +7,9 @@ const QuestionDisplay = () => {
   return (
     <div className='home-container-1'>
         <LeftSideBar />
-       
-        <div className='home-container-2'>
         <QuestionDetails />
+
+        <div className='home-container-2'>
 
         <RightSideBar />
         </div>

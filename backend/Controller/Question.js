@@ -1,4 +1,5 @@
 const QuestionSchema=require('../Model/QuestionSchema') 
+const userSchema=require('../Model/UserSchema')
 var jwt=require('jsonwebtoken')
 var bcrypt=require('bcrypt')
 
@@ -14,6 +15,9 @@ module.exports={
         try {
 
             await postQuestion.save();
+            const question = await QuestionSchema.findOne({questionTitle:questionTitle})
+
+            const user = await userSchema.findByIdAndUpdate(question.userId,{$addToSet:{questions:[question._id]}})
             res.status(200).json("Posted a question successfully")
             
         } catch (error) {

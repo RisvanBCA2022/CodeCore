@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import moment from "moment";
 
 
@@ -12,11 +12,11 @@ import { useSelector } from "react-redux";
 import RightSideBar from "@/components/Home/RightSideBar/RightSideBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBirthdayCake,faPen } from "@fortawesome/free-solid-svg-icons";
+import { getUser } from "@/redux/axios";
 const page = () => {
   
   const userdetails=useSelector(state => state.questionslice.userdetails)
-  console.log(userdetails);
-
+ 
 
   return (
     <div className="home-container-1">

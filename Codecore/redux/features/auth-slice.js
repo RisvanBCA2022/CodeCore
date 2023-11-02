@@ -80,7 +80,6 @@ const slice = createSlice({
             .addCase(postAnswer.fulfilled, (state,action) => {
                 state.answerStatus = 'succeeded',
                 state.answer = action.payload?.data
-                // getQuestions()     
             })
             .addCase(postAnswer.rejected, (state) => {
                 state.answerStatus = "failed"

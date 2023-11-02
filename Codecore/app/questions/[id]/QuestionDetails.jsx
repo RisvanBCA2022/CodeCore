@@ -40,7 +40,7 @@ useEffect(()=>{
       e.preventDefault()
       const answerBody=e.target.useranswer.value
       const userId=user.data.ID
-      const userAnswered=auth.currentuser?.username
+      const userAnswered=user.data.username
       if(answerBody==''){
         alert('Enter an answer before submitting')
       }else{
@@ -136,7 +136,7 @@ useEffect(()=>{
                     </div>
                   </div>
                 </div>
-                {question.noOfAnswers !== 0 && (
+                {question.answer.length !== 0 && (
                   <div>
                     <h3>{question.answer.length} Answers</h3>
                     <DisplayAnswer
