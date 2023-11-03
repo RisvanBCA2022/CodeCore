@@ -37,7 +37,7 @@ module.exports={
     },
     deletequestion:async (req,res)=>{
         const {id:_id}=req.params
-        console.log(req.params);
+        // console.log(req.params);
         try {
             await QuestionSchema.findByIdAndDelete(_id)
            const question = await QuestionSchema.find()

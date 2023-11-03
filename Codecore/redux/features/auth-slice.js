@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { deleteCookie } from 'cookies-next'
-import { deleteanswer, deletequestion, getQuestions, getUser, postAnswer } from '../axios'
+import { deleteanswer, deletequestion, getQuestions, getUser, getanswers, postAnswer } from '../axios'
 
 const initialState = {
     value: {
@@ -55,7 +55,11 @@ const slice = createSlice({
         userstatus:'standby',
         userdetails:[],
         deleteStatus:'standby',
-        answerdeletestatus:'standby'
+        answerdeletestatus:'standby',
+        answerfetchstatus:'stanby',
+        allAnswers:[]
+
+        
     },
     reducers: {
         logout:(state,action)=>{
@@ -79,8 +83,7 @@ const slice = createSlice({
                 state.answerStatus = "loading"
             })
             .addCase(postAnswer.fulfilled, (state,action) => {
-                state.answerStatus = 'succeeded',
-                state.answer = action.payload?.data
+                state.answerStatus = 'succeeded'
             })
             .addCase(postAnswer.rejected, (state) => {
                 state.answerStatus = "failed"
@@ -90,7 +93,7 @@ const slice = createSlice({
             })
             .addCase(getUser.fulfilled, (state,action)=>{
                 state.userstatus = 'succeeded',
-                console.log(action.payload);
+                console.log(action.payload.data);
                 state.userdetails = action.payload.data
             })
             .addCase(getUser.rejected, (state)=>{
@@ -116,6 +119,16 @@ const slice = createSlice({
             })
             .addCase(deleteanswer.rejected, (state)=>{
                 state.answerdeletestatus = 'failed'
+            })
+            .addCase(getanswers.pending,(state)=>{
+                state.answerfetchstatus="loading"    
+            })
+            .addCase(getanswers.fulfilled, (state,action)=>{
+                state.answerfetchstatus="successfull"    
+                state.allAnswers=action.payload.data  
+            })
+            .addCase(getanswers.rejected, (state)=>{
+                state.answerfetchstatus='failed'
             })
             
     }

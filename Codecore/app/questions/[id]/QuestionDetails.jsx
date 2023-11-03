@@ -9,7 +9,7 @@ import Link from 'next/link';
 import Avatar from '@/components/Avatar/Avatar';
 import DisplayAnswer from './DiplayAnswers';
 import { useDispatch, useSelector } from 'react-redux';
-import { getQuestions, postAnswer } from '@/redux/axios';
+import { getQuestions, getanswers, postAnswer } from '@/redux/axios';
 import { useRouter } from 'next/navigation';
 import moment from 'moment';
 import copy from 'copy-to-clipboard';
@@ -28,15 +28,20 @@ const QuestionDetails = () => {
 
 useEffect(()=>{
   dispatch(getQuestions())
+  // dispatch(getanswers())
+  
 },[dispatch])
 
     const user=JSON.parse(localStorage.getItem("user"))
     // console.log(user);
 
     const questionList=useSelector((state)=>state?.questionslice.allQuestions)
+    const allAnswers=useSelector((state)=>state.questionslice.allAnswers)
+    // console.log(allAnswers)
     const auth = useSelector((state)=> state?.authReducer.value)
     const token = getCookie('jwt')
-    const add=(e,noOfAnswers)=>{
+    const add=(e,noOfAnswers,questionId)=>{
+      // console.log(questionId);
       e.preventDefault()
       const answerBody=e.target.useranswer.value
       const userId=user.data.ID
@@ -44,14 +49,19 @@ useEffect(()=>{
       if(answerBody==''){
         alert('Enter an answer before submitting')
       }else{
-        dispatch(postAnswer({id,noOfAnswers,answerBody,userId,userAnswered}))
+        dispatch(postAnswer({questionId,id,noOfAnswers,answerBody,userId,userAnswered}))
         dispatch(getQuestions())
         dispatch(getQuestions())
+        dispatch(getanswers())  
+        dispatch(getanswers()) 
       }
       e.target.reset()
 
     }
     const filtered=questionList.filter(question=>question._id == id)
+    console.log(filtered);
+    const filteredAnswer=allAnswers.filter(answer=>answer.questionId==id)
+    console.log(filteredAnswer);
 
     const handleshare = ()=>{
       
@@ -63,7 +73,7 @@ useEffect(()=>{
   // console.log(pathname,query,asPath);
 
   const deleteQuestionhandler=(id)=>{
-    console.log(id);
+    // console.log(id);
     dispatch(deletequestion(id))
     router.push('/')
   }
@@ -142,14 +152,14 @@ useEffect(()=>{
                     <h3>{question.answer.length} Answers</h3>
                     <DisplayAnswer
                       key={question._id}
-                      question={question}
+                      filteredAnswer={filteredAnswer}
                     />
                   </div>
                 )}
                 <div className="post-ans-container">
                   <h3>Your Answer</h3>
                   <form
-                    onSubmit={(e)=>{add(e,question.answer.length)}}
+                    onSubmit={(e)=>{add(e,question.answer.length,question._id)}}
                   >
                     <textarea
                       name=""

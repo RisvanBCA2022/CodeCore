@@ -7,15 +7,10 @@ const QuestionSchema = new mongoose.Schema({
     noOfAnswers:{type:Number, default:0},
     upVote:{type:[String], default:[]},
     downVote:{type:[String], default:[]},
-    userPosted:{type:String,},
+    userPosted:{type:String},
     userId:{type:String},
     postedOn:{type:Date,default:Date.now},
-    answer: [{
-        answerBody:String,
-        userAnswered:String,
-        userId:String,
-        answeredOn:{type:Date,default:Date.now},
-    }]
+    answer: []
 })
 
 module.exports = mongoose.model("Question",QuestionSchema)

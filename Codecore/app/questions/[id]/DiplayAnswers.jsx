@@ -2,20 +2,20 @@ import Link from 'next/link'
 import React, { useEffect } from 'react'
 import Avatar from '@/components/Avatar/Avatar'
 import moment from 'moment'
-import { deleteanswer, getQuestions } from '@/redux/axios'
+import { deleteanswer, getQuestions, getanswers } from '@/redux/axios'
 import { useDispatch, useSelector } from 'react-redux'
 
-const DisplayAnswer = ({question}) => {
+const DisplayAnswer = ({filteredAnswer}) => {
     const dispatch=useDispatch()
     const userdetails=useSelector(state => state.questionslice.userdetails)
 
-    // console.log(question);
-    console.log(userdetails);
     const user=JSON.parse(localStorage.getItem('user'))
 
+    console.log(filteredAnswer);
     
     useEffect(()=>{
         dispatch(getQuestions())
+        dispatch(getanswers())
       },[dispatch])
 
       const deleteAnswer=(answerId,userId)=>{
@@ -23,12 +23,19 @@ const DisplayAnswer = ({question}) => {
         // console.log(userId);
         const currentuserId=user.data.ID
         const Id=answerId
-        const questionId=question._id
+        const questionId=filteredAnswer[0].questionId
         const data={userId,Id,questionId}
+        console.log(data);
         if(currentuserId===userId){
             dispatch(deleteanswer(data))
             dispatch(getQuestions())
             dispatch(getQuestions())
+            dispatch(getanswers())
+            dispatch(getanswers())
+
+         
+            
+
         }else{
             alert('access denied')
 
@@ -40,7 +47,7 @@ const DisplayAnswer = ({question}) => {
   return (
     <>
     {
-        question.answer.map((ans,i)=>(
+        filteredAnswer.map((ans,i)=>(
             <div className='display-ans' key={i}> 
             <p>{ans.answerBody}</p>
             <div className="question-actions-user">
@@ -51,7 +58,7 @@ const DisplayAnswer = ({question}) => {
                 </div>
                 <div>
                     <p>answer {moment(ans.answeredOn).fromNow()}</p>
-                    <Link href={`/user/${question.userId}`} className='user-link' style={{color:'#006d8'}} >
+                    <Link href={`/user/${ans.userId}`} className='user-link' style={{color:'#006d8'}} >
                                     <Avatar backgroundColor="green" px='8' py='5px'>{ans.userAnswered?.charAt(0).toUpperCase()}</Avatar>
                                     <div>
                                         {ans.userAnswered}

@@ -17,11 +17,11 @@ export const getQuestions = createAsyncThunk(
 export const postAnswer = createAsyncThunk(
     'post/postAnswers',
     async (answerData) =>{
-        const {id,noOfAnswers,answerBody,userId,userAnswered}=answerData
+        const {questionId,id,noOfAnswers,answerBody,userId,userAnswered}=answerData
         const jwt=getCookie('jwt')
         
-        console.log({id,answerBody,userId,userAnswered});
-        const response= await axios.patch(`http://127.0.0.1:4001/answer/postanswer/${id}`,{id,noOfAnswers,answerBody,userId,userAnswered},
+        // console.log({id,answerBody,userId,userAnswered});
+        const response= await axios.post(`http://127.0.0.1:4001/answer/postanswer/${id}`,{id,noOfAnswers,answerBody,userId,userAnswered},
         {
             headers: {
                 Authorization: `Bearer ${jwt}`,
@@ -31,6 +31,23 @@ export const postAnswer = createAsyncThunk(
         return response
     }
 )
+
+export const getanswers = createAsyncThunk(
+    'get/getanswers',
+    async ()=>{
+        const jwt=getCookie('jwt')
+        const response= await axios.get(`http://127.0.0.1:4001/answer/fetchanswers`,
+        {
+            headers: {
+                Authorization: `Bearer ${jwt}`,
+              }
+        }
+        )
+        // console.log(response);
+        return response
+    }
+)
+
 
 export const getUser = createAsyncThunk(
     'get/userdetails',
