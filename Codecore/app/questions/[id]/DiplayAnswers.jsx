@@ -28,14 +28,14 @@ const DisplayAnswer = ({filteredAnswer}) => {
         console.log(data);
         if(currentuserId===userId){
             dispatch(deleteanswer(data))
-            dispatch(getQuestions())
-            dispatch(getQuestions())
+            dispatch(getanswers())
+            dispatch(getanswers())
+            dispatch(getanswers())
+            dispatch(getanswers())
             dispatch(getanswers())
             dispatch(getanswers())
 
-         
-            
-
+            dispatch(getQuestions())
         }else{
             alert('access denied')
 

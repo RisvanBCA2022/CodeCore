@@ -21,7 +21,7 @@ module.exports={
             })
 
             const savedAnswer = await answer.save()
-            console.log(savedAnswer);
+            // console.log(savedAnswer);
             const answerId=savedAnswer._id
             const question = await QuestionSchema.updateOne(
                 {_id},
@@ -65,14 +65,27 @@ module.exports={
         //   }
         //   updateNoOfQuestions(_id,noOfAnswers)
           try {
-            const result = await QuestionSchema.findByIdAndUpdate(
-                questionId,
-                { $pull: { answer: Id } }
-            );
             await AnswerSchema.deleteOne({_id:Id})
 
+            const question = await QuestionSchema.findById(
+                questionId
+            )
+            if (question) {
+                // Assuming the array in the QuestionSchema is called 'answers'
+                const index = question.answer.indexOf(Id);
+                if (index > -1) {
+                  question.answer.splice(index, 1);
+                  await question.save();
+                //   console.log(`Successfully removed answer with ID ${answerId} from the question.`);
+                } else {
+                //   console.log(`Answer with ID ${Id} not found in the question's answers array.`);
+                }
+              } else {
+                // console.log(`Question with ID ${questionId} not found.`);
+              }
+
            
-         console.log(result);
+        //  console.log(result);
             res.json("successfully deleted")
           } catch (error) {
             

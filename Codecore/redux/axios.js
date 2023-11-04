@@ -66,6 +66,7 @@ export const deletequestion = createAsyncThunk(
     'delete/question',
     async (id)=>{
         const jwt=getCookie('jwt')
+        
         const resp = await axios.delete(`http://127.0.0.1:4001/questions/delete/${id}`,{
             headers: {
               Authorization: `Bearer ${jwt}`,

@@ -18,68 +18,78 @@ import { deletequestion } from '@/redux/axios';
 
 const QuestionDetails = () => {
 
+  const { id } = useParams()
+  const router = useRouter()
+  // const user=JSON.parse(localStorage.getItem('user'))
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getQuestions())
+
+    dispatch(getanswers())
+
+  }, [dispatch])
+
+  const user = JSON.parse(localStorage.getItem("user"))
+  // console.log(user);
+
+  const questionList = useSelector((state) => state?.questionslice.allQuestions)
+  const allAnswers = useSelector((state) => state.questionslice.allAnswers)
+  // console.log(allAnswers)
+  const auth = useSelector((state) => state?.authReducer.value)
+  const token = getCookie('jwt')
+  const add = (e, noOfAnswers, questionId) => {
+    // console.log(questionId);
+    e.preventDefault()
+    const answerBody = e.target.useranswer.value
+    const userId = user.data.ID
+    const userAnswered = user.data.username
+    if (answerBody == '') {
+      alert('Enter an answer before submitting')
+    } else {
+      dispatch(postAnswer({ questionId, id, noOfAnswers, answerBody, userId, userAnswered }))
+      dispatch(getQuestions())
+      dispatch(getanswers())
+      dispatch(getanswers())
+      dispatch(getanswers())
+      dispatch(getanswers())
+      dispatch(getanswers())
+      dispatch(getanswers())
 
 
-    const {id} = useParams()
-    const router=useRouter()
-    // const user=JSON.parse(localStorage.getItem('user'))
-    const dispatch=useDispatch()
+
+      dispatch(getQuestions())
 
 
-useEffect(()=>{
-  dispatch(getQuestions())
-  // dispatch(getanswers())
-  
-},[dispatch])
-
-    const user=JSON.parse(localStorage.getItem("user"))
-    // console.log(user);
-
-    const questionList=useSelector((state)=>state?.questionslice.allQuestions)
-    const allAnswers=useSelector((state)=>state.questionslice.allAnswers)
-    // console.log(allAnswers)
-    const auth = useSelector((state)=> state?.authReducer.value)
-    const token = getCookie('jwt')
-    const add=(e,noOfAnswers,questionId)=>{
-      // console.log(questionId);
-      e.preventDefault()
-      const answerBody=e.target.useranswer.value
-      const userId=user.data.ID
-      const userAnswered=user.data.username
-      if(answerBody==''){
-        alert('Enter an answer before submitting')
-      }else{
-        dispatch(postAnswer({questionId,id,noOfAnswers,answerBody,userId,userAnswered}))
-        dispatch(getQuestions())
-        dispatch(getQuestions())
-        dispatch(getanswers())  
-        dispatch(getanswers()) 
-      }
-      e.target.reset()
 
     }
-    const filtered=questionList.filter(question=>question._id == id)
-    console.log(filtered);
-    const filteredAnswer=allAnswers.filter(answer=>answer.questionId==id)
-    console.log(filteredAnswer);
+    e.target.reset()
 
-    const handleshare = ()=>{
-      
-      copy(url)
-    }
+  }
+  const filtered = questionList.filter(question => question._id == id)
+  console.log(filtered);
+  const filteredAnswer = allAnswers.filter(answer => answer.questionId == id)
+  console.log(filteredAnswer);
+
+  const handleshare = () => {
+    const userId = user.data.ID
+
+
+    copy(url)
+  }
   //   const pathname = router.pathname;
   // const query = router.query;
   // const asPath = router.asPath;
   // console.log(pathname,query,asPath);
 
-  const deleteQuestionhandler=(id)=>{
+  const deleteQuestionhandler = (id) => {
     // console.log(id);
     dispatch(deletequestion(id))
     router.push('/')
   }
 
   return (
-    
+
     <div className="question-details-page">
       {questionList === null ? (
         <h1>Loading...</h1>
@@ -97,7 +107,7 @@ useEffect(()=>{
                         alt=""
                         width="18"
                         className="votes-icon"
-                        
+
                       />
                       <p>{question.upVote.length - question.downVote.length}</p>
                       <Image
@@ -119,11 +129,11 @@ useEffect(()=>{
                           <button type="button" onClick={handleshare}>
                             Share
                           </button>
-                       
-                            <button type="button" onClick={() => deleteQuestionhandler(question._id)}>
-                              Delete
-                            </button>
-            
+
+                          <button type="button" onClick={() => deleteQuestionhandler(question._id)}>
+                            Delete
+                          </button>
+
                         </div>
                         <div>
                           <p>asked {moment(question.askedOn).fromNow()}</p>
@@ -147,7 +157,7 @@ useEffect(()=>{
                     </div>
                   </div>
                 </div>
-                {question.answer.length !== 0 && (
+                {filteredAnswer.length !== 0 && (
                   <div>
                     <h3>{question.answer.length} Answers</h3>
                     <DisplayAnswer
@@ -159,7 +169,7 @@ useEffect(()=>{
                 <div className="post-ans-container">
                   <h3>Your Answer</h3>
                   <form
-                    onSubmit={(e)=>{add(e,question.answer.length,question._id)}}
+                    onSubmit={(e) => { add(e, question.answer.length, question._id) }}
                   >
                     <textarea
                       name=""
@@ -172,7 +182,7 @@ useEffect(()=>{
                       type="submit"
                       className="post-ans-btn"
                       value="Post Your Answer"
-                      // onClick={()=>submit()}
+                    // onClick={()=>submit()}
                     />
                   </form>
                   <p>

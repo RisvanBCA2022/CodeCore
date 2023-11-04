@@ -1,4 +1,5 @@
 const mongoose=require('mongoose')
+const AnswerSchema = require('./AnswerSchema')
 
 const QuestionSchema = new mongoose.Schema({
     questionTitle:{type:String, required:"question must have a title"},
