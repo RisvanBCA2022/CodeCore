@@ -47,6 +47,71 @@ module.exports={
             res.status(404).json({message: error.message})
             
         }
-    }
+    },
+    vote:async (req,res)=>{
+        const questionId=req.params.questionId
+        const {userId,voteType}=req.body
+        // console.log(req.body);
+
+        try{
+            const question = await QuestionSchema.findById(questionId)
+            if(!question){
+                return res.json({message:"Question not available"})
+            }
+
+            if(voteType==='upvote'){
+                if(!question.upVote.includes(userId)){
+                    const index = question.downVote.indexOf(userId)
+                    if(index > -1){
+                        question.downVote.splice(index, 1)
+                    }
+                    question.upVote.push(userId)
+                    await question.save()
+                }
+            }else if(voteType === 'downvote'){
+                if(!question.downVote.includes(userId)){
+                    const index = question.upVote.indexOf(userId)
+                    if(index > -1){
+                        question.upVote.splice(index,1)
+                    }
+                    question.downVote.push(userId)
+                    await question.save()
+                }
+            }
+            else{
+               return res.json({message:'Invalid vote type'})
+            }
+            res.json(question)
+        }catch(error){
+            console.log(error);
+            res.json({message:'Internal Server Error'})
+        }
+
+        },
+        // downVote:async (req,res)=>{
+        //     const questionId=req.params.questionId
+        //     const {userId}=req.body
+    
+        //     try{
+        //         const question = await QuestionSchema.findById(questionId)
+        //         if(!question){
+        //             return res.json({message:"Question not available"})
+        //         }
+    
+        //         if(!question.downVote.includes(userId)){
+        //             question.downVote.push(userId)
+        //             await question.save()
+        //         }
+        //         else{
+        //             question.downVote.pull(userId)
+        //             await question.save()
+        //         }
+        //         res.json(question)
+        //     }catch(error){
+        //         console.log(error);
+        //         res.json({message:'Internal Server Error'})
+        //     }
+    
+        //     }
     
 }

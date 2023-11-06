@@ -9,12 +9,13 @@ import Link from 'next/link';
 import Avatar from '@/components/Avatar/Avatar';
 import DisplayAnswer from './DiplayAnswers';
 import { useDispatch, useSelector } from 'react-redux';
-import { getQuestions, getanswers, postAnswer } from '@/redux/axios';
+import { getQuestions, getanswers, postAnswer, vote } from '@/redux/axios';
 import { useRouter } from 'next/navigation';
 import moment from 'moment';
 import copy from 'copy-to-clipboard';
 import { getCookie } from 'cookies-next';
 import { deletequestion } from '@/redux/axios';
+import axios from 'axios';
 
 const QuestionDetails = () => {
 
@@ -88,6 +89,22 @@ const QuestionDetails = () => {
     router.push('/')
   }
 
+  const upvotehandler = async (e,questionId)=>{
+    console.log(questionId);
+    dispatch(vote({questionId:questionId,userId:user.data.ID,voteType:'upvote'}))
+    dispatch(getQuestions())
+    dispatch(getQuestions())
+    dispatch(getQuestions())
+  }
+
+  const downvotehandler = async (e,questionId)=>{
+    dispatch(vote({questionId:questionId,userId:user.data.ID,voteType:'downvote'}))
+    dispatch(getQuestions())
+    dispatch(getQuestions())
+    dispatch(getQuestions())
+    dispatch(getQuestions())
+    
+  }
   return (
 
     <div className="question-details-page">
@@ -107,14 +124,14 @@ const QuestionDetails = () => {
                         alt=""
                         width="18"
                         className="votes-icon"
-
-                      />
+                        onClick={(e) => upvotehandler(e, question._id)}                      />
                       <p>{question.upVote.length - question.downVote.length}</p>
                       <Image
                         src={downVote}
                         alt=""
                         width="18"
                         className="votes-icon"
+                        onClick={(e)=>downvotehandler(e,question._id)}
                       />
                     </div>
                     <div style={{ width: "100%" }}>

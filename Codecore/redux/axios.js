@@ -98,3 +98,22 @@ export const deleteanswer = createAsyncThunk(
 
     }
 )
+
+export const vote = createAsyncThunk(
+    'patch/vote',
+    async ({questionId,userId,voteType})=>{
+        // console.log(questionId,userId,voteType);
+        try {
+            const response = await axios.patch(`http://127.0.0.1:4001/questions/${questionId}/vote`,
+            {
+                userId:userId,
+                voteType:voteType
+            })
+            return response.data
+            
+
+        } catch (error) {
+            throw Error(error)
+        }
+    }
+)

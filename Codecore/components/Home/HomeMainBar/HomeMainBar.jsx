@@ -24,6 +24,10 @@ const HomeMainBar = () => {
             router.push('/askquestion')
         }
     }
+useEffect(()=>{
+  dispatch(getQuestions())
+})
+
   return (
     <div className="main-bar">
       <div className="main-bar-header">
