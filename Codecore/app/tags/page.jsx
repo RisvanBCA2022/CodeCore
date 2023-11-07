@@ -1,10 +1,11 @@
+
 import React from "react";
 import LeftSideBar from "@/components/Home/LeftsideBar/LeftSideBar";
 import './Tags.css'
 import { tagsList } from "./taglist";
-import TagsList from "./Taglist";
+import TagsList from './Taglist.jsx';
 
-const Tags = ({ slideIn, handleSlideIn }) => {
+const Tags = () => {
     return (
       <div className="home-container-1">
         <LeftSideBar />

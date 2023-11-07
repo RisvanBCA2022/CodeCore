@@ -8,16 +8,31 @@ import Avatar from "../../components/Avatar/Avatar";
 import EditProfileForm from "./EditProfileForm";
 import ProfileBio from "./ProfileBio";
 import "./userprofile.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import RightSideBar from "@/components/Home/RightSideBar/RightSideBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBirthdayCake,faPen } from "@fortawesome/free-solid-svg-icons";
-import { getUser } from "@/redux/axios";
+import { fetchAllUser, getUser } from "@/redux/axios";
 const page = () => {
+  const dispatch=useDispatch()
+  const [switchEdit,setSwitchEdit]=useState(false)
+
+
+  useEffect(()=>{
+    dispatch(fetchAllUser())
+  },[])
   
   const userdetails=JSON.parse(localStorage.getItem('user'))
-  console.log(userdetails);
+  const users=useSelector((state)=>state.userslice.usersdata)
+  const currentUser=users.find((user)=>user._id===userdetails.data.ID)
 
+  const handleEditprofile = ()=>{
+    setSwitchEdit(true)
+  }
+
+  const handleCancelEdit = () => {
+    setSwitchEdit(false);
+  };
 
   return (
     <div className="home-container-1">
@@ -45,7 +60,20 @@ const page = () => {
             </div>
             
           </div>
+          
+          <button onClick={handleEditprofile}>
+            <FontAwesomeIcon icon={faPen} />Edit Profile
+          </button>
           <>
+           {switchEdit ? (
+              <EditProfileForm
+                userdetails={userdetails}
+                onCancel={handleCancelEdit}
+              />
+             ) : (
+              <ProfileBio currentUser={currentUser} />
+            )} 
+
            
           </>
         </div>

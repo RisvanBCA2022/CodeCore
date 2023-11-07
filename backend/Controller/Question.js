@@ -14,7 +14,7 @@ module.exports={
         const postQuestion = new QuestionSchema({...postQuestionsData,userId:res.token.id})
         try {
 
-            await postQuestion.save();
+            const newquestion=await postQuestion.save();
             const question = await QuestionSchema.findOne({questionTitle:questionTitle})
 
             const user = await userSchema.findByIdAndUpdate(question.userId,{$addToSet:{questions:[question._id]}})

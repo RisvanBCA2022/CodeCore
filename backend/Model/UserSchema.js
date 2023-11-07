@@ -7,7 +7,7 @@ const UserSchema = new mongoose.Schema({
     profilepicture:String,
     bio:String,
     reputation:{type:Number,default:0},
-    questions:[],
+    questions:[{type: mongoose.Schema.Types.ObjectId,ref:'Question'}],
     answers:[],
     joinedOn:{type:Date, default:Date.now},
     updatedAt:{

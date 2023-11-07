@@ -3,7 +3,7 @@ import { Home } from '@/components'
 import Image from 'next/image'
 // import Login from './log-in'
 import { useEffect } from 'react'
-import { getQuestions } from '@/redux/axios'
+import { fetchAllUser, getQuestions, getanswers } from '@/redux/axios'
 import { useDispatch } from 'react-redux'
 import { usePathname } from 'next/navigation'
 // import { useSelector } from 'react-redux'
@@ -15,6 +15,7 @@ const page = () => {
 
   useEffect(()=>{
     dispatch(getQuestions())
+    dispatch(getanswers())
   },[dispatch])
   
 

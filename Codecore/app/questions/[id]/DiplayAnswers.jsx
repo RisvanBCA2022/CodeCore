@@ -30,12 +30,6 @@ const DisplayAnswer = ({filteredAnswer}) => {
             dispatch(deleteanswer(data))
             dispatch(getanswers())
             dispatch(getanswers())
-            dispatch(getanswers())
-            dispatch(getanswers())
-            dispatch(getanswers())
-            dispatch(getanswers())
-
-            dispatch(getQuestions())
         }else{
             alert('access denied')
 

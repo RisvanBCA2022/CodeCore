@@ -73,6 +73,17 @@ module.exports={
                 data:userprofile
             })
         }
+        },
+    fetchAllusers:async (req,res)=>{
+        const allusers = await UserSchema.find()
+        if(allusers){
+            res.status(200).json({
+                message:"success",
+                data:allusers
+            })
+        }else{
+            res.json("No user found")
         }
+    }
 }
 

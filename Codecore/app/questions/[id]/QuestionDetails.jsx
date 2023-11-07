@@ -26,7 +26,6 @@ const QuestionDetails = () => {
 
   useEffect(() => {
     dispatch(getQuestions())
-
     dispatch(getanswers())
 
   }, [dispatch])
@@ -36,7 +35,7 @@ const QuestionDetails = () => {
 
   const questionList = useSelector((state) => state?.questionslice.allQuestions)
   const allAnswers = useSelector((state) => state.questionslice.allAnswers)
-  // console.log(allAnswers)
+  console.log(allAnswers)
   const auth = useSelector((state) => state?.authReducer.value)
   const token = getCookie('jwt')
   const add = (e, noOfAnswers, questionId) => {
@@ -49,20 +48,7 @@ const QuestionDetails = () => {
       alert('Enter an answer before submitting')
     } else {
       dispatch(postAnswer({ questionId, id, noOfAnswers, answerBody, userId, userAnswered }))
-      dispatch(getQuestions())
-      dispatch(getanswers())
-      dispatch(getanswers())
-      dispatch(getanswers())
-      dispatch(getanswers())
-      dispatch(getanswers())
-      dispatch(getanswers())
-
-
-
-      dispatch(getQuestions())
-
-
-
+      dispatch(getanswers())    
     }
     e.target.reset()
 
@@ -86,24 +72,17 @@ const QuestionDetails = () => {
   const deleteQuestionhandler = (id) => {
     // console.log(id);
     dispatch(deletequestion(id))
+
     router.push('/')
   }
 
   const upvotehandler = async (e,questionId)=>{
     console.log(questionId);
     dispatch(vote({questionId:questionId,userId:user.data.ID,voteType:'upvote'}))
-    dispatch(getQuestions())
-    dispatch(getQuestions())
-    dispatch(getQuestions())
   }
 
   const downvotehandler = async (e,questionId)=>{
-    dispatch(vote({questionId:questionId,userId:user.data.ID,voteType:'downvote'}))
-    dispatch(getQuestions())
-    dispatch(getQuestions())
-    dispatch(getQuestions())
-    dispatch(getQuestions())
-    
+    dispatch(vote({questionId:questionId,userId:user.data.ID,voteType:'downvote'}))  
   }
   return (
 
@@ -158,6 +137,7 @@ const QuestionDetails = () => {
                             href={`/users/${question.userId}`}
                             className="user-link"
                             style={{ color: "#0086d8" }}
+                            onClick={()=>{dispatch(getanswers())}}
                           >
                             <Avatar
                               backgroundColor="orange"

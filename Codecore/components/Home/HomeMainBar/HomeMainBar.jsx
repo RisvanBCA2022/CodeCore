@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import './HomeMainBar.css'
 import QuestionList from './QuestionList';
 import { useDispatch, useSelector } from 'react-redux';
-import { getQuestions } from '@/redux/axios';
+import { getQuestions, getanswers } from '@/redux/axios';
 import { usePathname } from 'next/navigation';
 
 const HomeMainBar = () => {
@@ -14,6 +14,7 @@ const HomeMainBar = () => {
     const pathname=usePathname()
     const dispatch=useDispatch()
     const questionList=useSelector(state => state.questionslice.allQuestions)
+    console.log(questionList)
     const status=useSelector(state=>state.questionslice.status)
     
     const checkAuth=()=>{
@@ -26,7 +27,8 @@ const HomeMainBar = () => {
     }
 useEffect(()=>{
   dispatch(getQuestions())
-})
+  dispatch(getanswers())
+},[dispatch])
 
   return (
     <div className="main-bar">

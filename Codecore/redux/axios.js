@@ -9,7 +9,6 @@ export const getQuestions = createAsyncThunk(
     'get/getQuestions',
     async ()=>{
         const res = await axios.get("http://127.0.0.1:4001/questions/fetchquestion")
-        // console.log(res);
         return res.data
     }
 )
@@ -28,6 +27,8 @@ export const postAnswer = createAsyncThunk(
               }
         }
         )
+       
+
         return response
     }
 )
@@ -112,6 +113,18 @@ export const vote = createAsyncThunk(
             return response.data
             
 
+        } catch (error) {
+            throw Error(error)
+        }
+    }
+)
+
+export const fetchAllUser = createAsyncThunk(
+    'get/allusers',
+    async ()=>{
+        try {
+            const response = await axios.get(`http://127.0.0.1:4001/users/fetchallusers`)
+            return response
         } catch (error) {
             throw Error(error)
         }

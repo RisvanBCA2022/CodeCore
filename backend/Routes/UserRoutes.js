@@ -6,5 +6,6 @@ const jwtuser = require('../Middleware/jwtuser')
 userroutes.post('/register',controller.register)
 userroutes.post('/login',controller.login)
 userroutes.get('/fetchuser',jwtuser,controller.profile)
+userroutes.get('/fetchallusers',controller.fetchAllusers)
 
 module.exports=userroutes
