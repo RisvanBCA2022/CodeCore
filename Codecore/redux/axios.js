@@ -37,12 +37,7 @@ export const getanswers = createAsyncThunk(
     'get/getanswers',
     async ()=>{
         const jwt=getCookie('jwt')
-        const response= await axios.get(`http://127.0.0.1:4001/answer/fetchanswers`,
-        {
-            headers: {
-                Authorization: `Bearer ${jwt}`,
-              }
-        }
+        const response= await axios.get(`http://127.0.0.1:4001/answer/fetchanswers`
         )
         // console.log(response);
         return response
@@ -59,6 +54,7 @@ export const getUser = createAsyncThunk(
               Authorization: `Bearer ${jwt}`,
             },
         })
+        
         return resp.data
     }
 )
@@ -110,6 +106,7 @@ export const vote = createAsyncThunk(
                 userId:userId,
                 voteType:voteType
             })
+            // console.log(response);
             return response.data
             
 

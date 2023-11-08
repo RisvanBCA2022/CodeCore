@@ -11,6 +11,9 @@ import {logIn,logOut} from "@/redux/features/auth-slice"
 import { useSelector } from 'react-redux'
 import { setCookie } from 'cookies-next'
 import { getUser } from '@/redux/axios'
+import { toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify';
+
 
 
 const Page = () => {
@@ -56,8 +59,8 @@ const HandleSubmit= async (e)=>{
 
 		if(response.data.status=="success"){
 			dispatch(logIn(response.data))
-			alert('Successfully registered')
-			router.push('/login')
+			toast.success('Successfully login')
+			router.push('/user/login')
 		}else{
 			alert(response.data.message)
 		}		
@@ -65,6 +68,8 @@ const HandleSubmit= async (e)=>{
 	} catch (error) {
 		alert(error.message)
 	}
+	setIsSignup(!isSignup)
+
 	}else {
 		try {	
 			const response = await axios
@@ -77,19 +82,22 @@ const HandleSubmit= async (e)=>{
 			// dispatch(getUser())s
 			setCookie('jwt',response.data.token)
 			// router.push('/login')
-			alert('Successfully login')
+			// alert('Successfully login')
+			toast.success('Successfully login')
+
 			if(response.data.message=="admin"){
 				router.push('/admin')
 				localStorage.setItem('admin',JSON.stringify(response.data))
 
 			}else{
 				router.push('/')
+				toast.error(response.data.message)
 			localStorage.setItem('user',JSON.stringify(response.data))
 
 			}
 			
 		}else{
-			console.log(response.data);
+			// console.log(response.data);
 			alert(response.data.message)
 			
 		}

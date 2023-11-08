@@ -7,6 +7,8 @@ import QuestionDetails from './QuestionDetails'
 
 const QuestionDisplay = () => {
  
+ 
+ 
   return (
     <div className='home-container-1'>
         <LeftSideBar />

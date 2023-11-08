@@ -3,6 +3,7 @@ import AdminLeftbar from '@/components/AdminHome/AdminLeftbar'
 import { getQuestions } from '@/redux/axios'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import AdminQuestionlist from './AdminQuestionList'
 
 const AdminQuestionList = () => {
     const dispatch=useDispatch()
@@ -10,9 +11,10 @@ const AdminQuestionList = () => {
     useEffect(()=>{
         dispatch(getQuestions())
 
-    })
-    const users = useSelector((state) => state.questionslice.allQuestions);
-    console.log(users);
+    },[dispatch])
+    const questionList = useSelector((state) => state.questionslice.allQuestions);
+    console.log(questionList);
+    
 
 
   return (
@@ -22,6 +24,7 @@ const AdminQuestionList = () => {
     <AdminLeftbar />
     <div className="main-bar">
       <div className="main-bar-header">
+      <AdminQuestionlist questionList={questionList}/>
         
       </div>
       </div>

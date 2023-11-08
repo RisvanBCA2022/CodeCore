@@ -47,7 +47,9 @@ const DisplayAnswer = ({filteredAnswer}) => {
             <div className="question-actions-user">
                 <div>
                     <button type='button'>Shares</button>
-                    <button type='button' onClick={()=>deleteAnswer(ans._id,ans.userId)}>Delete</button>
+                    {ans.userId===userdetails._id?
+                        <button type='button' onClick={()=>deleteAnswer(ans._id,ans.userId)}>Delete</button>
+:<></>}
 
                 </div>
                 <div>

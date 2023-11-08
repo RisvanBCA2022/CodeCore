@@ -9,7 +9,7 @@ import Link from 'next/link';
 import Avatar from '@/components/Avatar/Avatar';
 import DisplayAnswer from './DiplayAnswers';
 import { useDispatch, useSelector } from 'react-redux';
-import { getQuestions, getanswers, postAnswer, vote } from '@/redux/axios';
+import { getQuestions, getUser, getanswers, postAnswer, vote } from '@/redux/axios';
 import { useRouter } from 'next/navigation';
 import moment from 'moment';
 import copy from 'copy-to-clipboard';
@@ -27,7 +27,7 @@ const QuestionDetails = () => {
   useEffect(() => {
     dispatch(getQuestions())
     dispatch(getanswers())
-
+    dispatch(getUser())
   }, [dispatch])
 
   const user = JSON.parse(localStorage.getItem("user"))
@@ -35,26 +35,29 @@ const QuestionDetails = () => {
 
   const questionList = useSelector((state) => state?.questionslice.allQuestions)
   const allAnswers = useSelector((state) => state.questionslice.allAnswers)
-  console.log(allAnswers)
+  const userdetails = useSelector((state) => state.questionslice.userdetails)
+  console.log(allAnswers);
+
+  // console.log(allAnswers)
   const auth = useSelector((state) => state?.authReducer.value)
   const token = getCookie('jwt')
   const add = (e, noOfAnswers, questionId) => {
     // console.log(questionId);
     e.preventDefault()
     const answerBody = e.target.useranswer.value
-    const userId = user.data.ID
+    const userId = userdetails._id
     const userAnswered = user.data.username
     if (answerBody == '') {
       alert('Enter an answer before submitting')
     } else {
       dispatch(postAnswer({ questionId, id, noOfAnswers, answerBody, userId, userAnswered }))
-      dispatch(getanswers())    
+      dispatch(getanswers())
     }
     e.target.reset()
 
   }
   const filtered = questionList.filter(question => question._id == id)
-  console.log(filtered);
+  // console.log(filtered);
   const filteredAnswer = allAnswers.filter(answer => answer.questionId == id)
   console.log(filteredAnswer);
 
@@ -76,13 +79,13 @@ const QuestionDetails = () => {
     router.push('/')
   }
 
-  const upvotehandler = async (e,questionId)=>{
-    console.log(questionId);
-    dispatch(vote({questionId:questionId,userId:user.data.ID,voteType:'upvote'}))
+  const upvotehandler = async (e, questionId) => {
+    // console.log(questionId);
+    dispatch(vote({ questionId: questionId, userId: user.data.ID, voteType: 'upvote' }))
   }
 
-  const downvotehandler = async (e,questionId)=>{
-    dispatch(vote({questionId:questionId,userId:user.data.ID,voteType:'downvote'}))  
+  const downvotehandler = async (e, questionId) => {
+    dispatch(vote({ questionId: questionId, userId: user.data.ID, voteType: 'downvote' }))
   }
   return (
 
@@ -103,14 +106,14 @@ const QuestionDetails = () => {
                         alt=""
                         width="18"
                         className="votes-icon"
-                        onClick={(e) => upvotehandler(e, question._id)}                      />
+                        onClick={(e) => upvotehandler(e, question._id)} />
                       <p>{question.upVote.length - question.downVote.length}</p>
                       <Image
                         src={downVote}
                         alt=""
                         width="18"
                         className="votes-icon"
-                        onClick={(e)=>downvotehandler(e,question._id)}
+                        onClick={(e) => downvotehandler(e, question._id)}
                       />
                     </div>
                     <div style={{ width: "100%" }}>
@@ -125,10 +128,15 @@ const QuestionDetails = () => {
                           <button type="button" onClick={handleshare}>
                             Share
                           </button>
+                          {question.userId===userdetails._id ? (
+                            <button type="button" onClick={() => deleteQuestionhandler(question._id)}>
+                              Delete
+                            </button>
+                          ) : (
+                            <></>
+                          )}
 
-                          <button type="button" onClick={() => deleteQuestionhandler(question._id)}>
-                            Delete
-                          </button>
+
 
                         </div>
                         <div>
@@ -137,7 +145,7 @@ const QuestionDetails = () => {
                             href={`/users/${question.userId}`}
                             className="user-link"
                             style={{ color: "#0086d8" }}
-                            onClick={()=>{dispatch(getanswers())}}
+                            onClick={() => { dispatch(getanswers()) }}
                           >
                             <Avatar
                               backgroundColor="orange"

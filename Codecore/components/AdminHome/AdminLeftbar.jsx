@@ -18,10 +18,10 @@ const AdminLeftbar = () => {
             <Link href='/admin/userlists' className='side-nav-links'  style={{paddingLeft:"40px"}}>
               <p className={ currentRoute === "/admin/user" ? "active" : ''} >Users</p>
             </Link>
-            <Link href='/users' className='side-nav-links'  style={{paddingLeft:"40px"}}>
+            <Link href='/admin/questionlist' className='side-nav-links'  style={{paddingLeft:"40px"}}>
               <p className={ currentRoute === "/admin/question" ? "active" : ''} >Question</p>
             </Link>
-            <Link href='/users' className='side-nav-links'  style={{paddingLeft:"40px"}}>
+            <Link href='/answers/users' className='side-nav-links'  style={{paddingLeft:"40px"}}>
               <p className={ currentRoute === "/admin/answer" ? "active" : ''} >Answers</p>
             </Link>
          

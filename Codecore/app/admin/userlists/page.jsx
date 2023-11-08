@@ -13,7 +13,7 @@ useEffect(()=>{
 
   const users = useSelector((state) => state.userslice.usersdata);
     
-    console.log(users);
+    // console.log(users);
 
   return (
     <div>
@@ -32,7 +32,7 @@ useEffect(()=>{
           <table class="table manage-candidates-top mb-0">
             <thead>
               <tr>
-                <th>Candidate Name</th>
+                <th>UserName</th>
                 <th class="text-center">Status</th>
                 <th class="action text-right">Action</th>
               </tr>

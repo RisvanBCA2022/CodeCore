@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import './HomeMainBar.css'
 import QuestionList from './QuestionList';
 import { useDispatch, useSelector } from 'react-redux';
-import { getQuestions, getanswers } from '@/redux/axios';
+import { getQuestions, getUser, getanswers } from '@/redux/axios';
 import { usePathname } from 'next/navigation';
 
 const HomeMainBar = () => {
@@ -28,6 +28,7 @@ const HomeMainBar = () => {
 useEffect(()=>{
   dispatch(getQuestions())
   dispatch(getanswers())
+  dispatch(getUser())
   if (!window.location.hash) {
     window.location = window.location + "#loaded";
     location.reload(false);
