@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import moment from "moment";
 
 
-import LeftSidebar from '../../components/Home/LeftsideBar/LeftSideBar'
-import Avatar from "../../components/Avatar/Avatar";
+import LeftSidebar from '../../../components/Home/LeftsideBar/LeftSideBar'
+import Avatar from "../../../components/Avatar/Avatar";
 import EditProfileForm from "./EditProfileForm";
 import ProfileBio from "./ProfileBio";
 import "./userprofile.css";
@@ -13,9 +13,11 @@ import RightSideBar from "@/components/Home/RightSideBar/RightSideBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBirthdayCake,faPen } from "@fortawesome/free-solid-svg-icons";
 import { fetchAllUser, getUser } from "@/redux/axios";
+import { useRouter } from "next/navigation";
 const page = () => {
   const dispatch=useDispatch()
   const [switchEdit,setSwitchEdit]=useState(false)
+  const router=useRouter()
 
 
   useEffect(()=>{
@@ -28,6 +30,7 @@ const page = () => {
 
   const handleEditprofile = ()=>{
     setSwitchEdit(true)
+    router.push('/user/profile/editprofile')
   }
 
   const handleCancelEdit = () => {
@@ -64,7 +67,7 @@ const page = () => {
           <button onClick={handleEditprofile}>
             <FontAwesomeIcon icon={faPen} />Edit Profile
           </button>
-          <>
+          {/* <>
            {switchEdit ? (
               <EditProfileForm
                 userdetails={userdetails}
@@ -75,7 +78,7 @@ const page = () => {
             )} 
 
            
-          </>
+          </> */}
         </div>
       </div>
       {/* <RightSideBar /> */}

@@ -1,5 +1,5 @@
 import Navbar from '@/components/Navbar/Navbar'
-import './globals.css'
+// import './globals.css'
 import { Home } from '@/components'
 import { ReduxProvider } from '@/redux/Provider'
 // import { Inter } from 'next/font/google'
@@ -12,16 +12,12 @@ export const metadata = {
 
 export default function RootLayout({children,}) {
   return (
-    <ReduxProvider>  
-    <html lang="en">
-    
-    <body>
-    
-      {/* <Navbar />           */}
+  
+    <>
+      <Navbar />          
           <main className="my-0 py-16">{children}</main>
-    </body>
-  </html>
-  </ReduxProvider> 
-
+          </>
+          
+   
   )
 }

@@ -16,15 +16,15 @@ const LeftSideBar = () => {
         </Link>
         <div className='side-nav-div'>
           <div><p>PUBLIC</p> </div>
-            <Link href='/questions' className={currentRoute === '/questions'?'active side-nav-links':'side-nav-links'}  style={{paddingLeft:"40px"}}>
+            <Link href='/user/questions' className={currentRoute === '/questions'?'active side-nav-links':'side-nav-links'}  style={{paddingLeft:"40px"}}>
              <Image src={Globe} alt='Globe' ></Image>
              <p style={{paddingLeft:"10px"}}  >Questions</p>
             </Link>
             <Link href='/tags' className='side-nav-links'  style={{paddingLeft:"40px"}}>
-              <p className={ currentRoute === "/tags" ? "active" : ''} >Tags</p>
+              <p className={ currentRoute === "/user/tags" ? "active" : ''} >Tags</p>
             </Link>
             <Link href='/users' className='side-nav-links'  style={{paddingLeft:"40px"}}>
-              <p className={ currentRoute === "/users" ? "active" : ''} >Users</p>
+              <p className={ currentRoute === "/user/users" ? "active" : ''} >Users</p>
             </Link>
          
         </div>

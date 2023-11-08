@@ -1,8 +1,8 @@
 'use client'
 import React, { useEffect } from 'react'
 import { useParams } from 'next/navigation';
-import upVote from '../../../public/upvote.svg'
-import downVote from '../../../public/downvote.svg'
+import upVote from '../../../../public/upvote.svg'
+import downVote from '../../../../public/downvote.svg'
 import Image from 'next/image';
 import './Questions.css'
 import Link from 'next/link';

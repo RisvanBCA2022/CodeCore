@@ -27,7 +27,7 @@ const Authprofilemenu = () => {
     </Link> 
      */}
   
-    <Link href='/login' className='nav-item nav-links'>
+    <Link href='/user/login' className='nav-item nav-links'>
       Log In
     </Link>
     </>

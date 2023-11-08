@@ -20,14 +20,18 @@ const HomeMainBar = () => {
     const checkAuth=()=>{
         if(user===null){
             alert("login or signup to ask a question")
-            router.push('/login')
+            router.push('/user/login')
         }else{
-            router.push('/askquestion')
+            router.push('user/askquestion')
         }
     }
 useEffect(()=>{
   dispatch(getQuestions())
   dispatch(getanswers())
+  if (!window.location.hash) {
+    window.location = window.location + "#loaded";
+    location.reload(false);
+  }
 },[dispatch])
 
   return (

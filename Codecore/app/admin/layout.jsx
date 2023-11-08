@@ -1,7 +1,9 @@
-import Navbar from '@/components/Navbar/Navbar'
-import './globals.css'
+// import './globals.css'
 import { Home } from '@/components'
+import AdminNavbar from '@/components/Navbar/adminNavbar'
 import { ReduxProvider } from '@/redux/Provider'
+import LeftSideBar from '@/components/AdminHome/AdminLeftbar'
+import AdminLeftbar from '@/components/AdminHome/AdminLeftbar'
 // import { Inter } from 'next/font/google'
 // const inter = Inter({ subsets: ['latin'] })
 
@@ -12,16 +14,14 @@ export const metadata = {
 
 export default function RootLayout({children,}) {
   return (
-    <ReduxProvider>  
-    <html lang="en">
     
-    <body>
+    <ReduxProvider>
     
-      {/* <Navbar />           */}
+    <AdminNavbar />
           <main className="my-0 py-16">{children}</main>
-    </body>
-  </html>
-  </ReduxProvider> 
-
+          </ReduxProvider>
+          
+          
+    
   )
 }

@@ -17,7 +17,7 @@ import { data } from 'autoprefixer'
 import { useState } from 'react'
 import { getUser } from '@/redux/axios'
 
-const Navbar = () => {
+const AdminNavbar = () => {
   const dispatch = useDispatch()
   // const [user,setUser]=useState(null)
 
@@ -28,6 +28,9 @@ const Navbar = () => {
   //   if(userdata){
   //     setUser(JSON.parse(userdata))
   //   }
+  const admin=JSON.parse(localStorage.getItem('admin'))
+  console.log(admin);
+
 
   // }, [dispatch]);
   
@@ -46,7 +49,6 @@ const Navbar = () => {
   deleteCookie('jwt') 
   dispatch(logOut())
   router.push('/user/login')
-  
  }
  if (typeof window !== 'undefined') {
   const item = localStorage.getItem('user')
@@ -54,26 +56,35 @@ const Navbar = () => {
   return (
    <nav className='main-nav'>
     <div className='navbar'>
-      <Link href='/' className='nav-item nav-btn'>
+      <Link href='/' className=' '>
       <Image src={Logo} alt='logo' height='50'/>
       </Link>
-      <Link href='/' className='nav-item nav-btn'>About</Link>
-      <Link href='/' className='nav-item nav-btn'>Products</Link>
-      <Link href='/' className='nav-item nav-btn'>For Teams</Link>
-      <form action="">
+      <Link href='/' className='nav-item nav-btn'>Users</Link>
+      <Link href='/' className='nav-item nav-btn'>Question Management</Link>
+      <Link href='/' className='nav-item nav-btn'>Answer Management</Link>
+      {/* <form action="">
         <input type="text" placeholder='Search...' />
         <Image src={search} alt="search" width='18' className='search-icon'/>
-        </form>
-        {user?.auth==true?
+        </form> */}
+        {/* {user?.auth==true?
           <> <Avatar backgroundColor='#009dff' px="10px" py="7px" borderRadius="50%" color='white'><Link href='/user/profile' style={{color:'white',textDecoration:'none'}}>{user?.data?.username?.charAt(0).toUpperCase()}</Link></Avatar><button className='nav-item nav-links' onClick={logout}>Log out</button></>
-          :
-          <Authprofilemenu />
+          : */}
+          {/* <Authprofilemenu /> */}
+
+        {/* } */}
+        {admin?.message=='admin'?
+        <> <Avatar backgroundColor='#009dff' px="10px" py="7px" borderRadius="50%" color='white'><Link href='/admin' style={{color:'white',textDecoration:'none'}}>{admin?.message?.charAt(0).toUpperCase()}</Link></Avatar><button className='nav-item nav-links' onClick={logout}>Log out</button></>:
+        <Link href='/user/login' className='nav-item nav-links'>
+      Log In
+    </Link>
 
         }
+        
+     
       
     </div>
    </nav>
   )
 }
 
-export default Navbar
+export default AdminNavbar

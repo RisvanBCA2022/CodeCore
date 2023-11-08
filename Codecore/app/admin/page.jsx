@@ -3,10 +3,9 @@ import { Home } from '@/components'
 import Image from 'next/image'
 // import Login from './log-in'
 // import { useEffect } from 'react'
-import { fetchAllUser, getQuestions, getanswers } from '@/redux/axios'
-import { useDispatch } from 'react-redux'
-import { usePathname } from 'next/navigation'
+
 import Navbar from '@/components/Navbar/Navbar'
+import AdminLeftbar from '@/components/AdminHome/AdminLeftbar'
 // import { useSelector } from 'react-redux'
 
 const page = () => {
@@ -24,9 +23,10 @@ const page = () => {
   // const username =useSelector((state)=>state.authReducer.value.username)
   return (
     <main className='overflow-hidden'>
-    <Navbar />
-    <Home />
-    {/* <Login /> */}
+    <div className='home-container-1'>
+    <AdminLeftbar />
+    </div>
+  
     
         </main>
   )

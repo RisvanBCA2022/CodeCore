@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import Image from 'next/image'
-import icon from '../../public/Logo.png'
+import icon from '../../../public/Logo.png'
 import './login.css'
 import AboutAuth from './aboutAuth'
 import { useDispatch } from 'react-redux'
@@ -57,7 +57,7 @@ const HandleSubmit= async (e)=>{
 		if(response.data.status=="success"){
 			dispatch(logIn(response.data))
 			alert('Successfully registered')
-			router.push('/')
+			router.push('/login')
 		}else{
 			alert(response.data.message)
 		}		
@@ -74,12 +74,20 @@ const HandleSubmit= async (e)=>{
 		})
 		if(response.data.status=="success"){
 			dispatch(logIn(response.data))
-			// dispatch(getUser())
+			// dispatch(getUser())s
 			setCookie('jwt',response.data.token)
-			router.push('/login')
+			// router.push('/login')
 			alert('Successfully login')
-			router.push('/')
+			if(response.data.message=="admin"){
+				router.push('/admin')
+				localStorage.setItem('admin',JSON.stringify(response.data))
+
+			}else{
+				router.push('/')
 			localStorage.setItem('user',JSON.stringify(response.data))
+
+			}
+			
 		}else{
 			console.log(response.data);
 			alert(response.data.message)
