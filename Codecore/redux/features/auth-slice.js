@@ -93,7 +93,6 @@ const slice = createSlice({
             })
             .addCase(getUser.fulfilled, (state,action)=>{
                 state.userstatus = 'succeeded',
-                console.log(action.payload.data);
                 state.userdetails = action.payload.data
             })
             .addCase(getUser.rejected, (state)=>{

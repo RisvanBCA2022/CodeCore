@@ -23,7 +23,7 @@ const LeftSideBar = () => {
             <Link href='/tags' className='side-nav-links'  style={{paddingLeft:"40px"}}>
               <p className={ currentRoute === "/user/tags" ? "active" : ''} >Tags</p>
             </Link>
-            <Link href='/users' className='side-nav-links'  style={{paddingLeft:"40px"}}>
+            <Link href='/user/users' className='side-nav-links'  style={{paddingLeft:"40px"}}>
               <p className={ currentRoute === "/user/users" ? "active" : ''} >Users</p>
             </Link>
          

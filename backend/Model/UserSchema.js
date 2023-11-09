@@ -13,7 +13,12 @@ const UserSchema = new mongoose.Schema({
     updatedAt:{
         type:Date,
         default:Date.now
-    }
+    },
+    isBlocked: {
+        type: Boolean,
+        default: false,
+      },
+    
 })
 
 module.exports = mongoose.model("userlist",UserSchema)

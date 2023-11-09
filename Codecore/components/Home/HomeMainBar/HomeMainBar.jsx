@@ -29,10 +29,10 @@ useEffect(()=>{
   dispatch(getQuestions())
   dispatch(getanswers())
   dispatch(getUser())
-  if (!window.location.hash) {
-    window.location = window.location + "#loaded";
-    location.reload(false);
-  }
+  // if (!window.location.hash) {
+  //   window.location = window.location + "#loaded";
+  //   location.reload(false);
+  // }
 },[dispatch])
 
   return (

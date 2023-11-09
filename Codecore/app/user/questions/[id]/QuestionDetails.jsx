@@ -28,6 +28,7 @@ const QuestionDetails = () => {
     dispatch(getQuestions())
     dispatch(getanswers())
     dispatch(getUser())
+    
   }, [dispatch])
 
   const user = JSON.parse(localStorage.getItem("user"))
@@ -35,6 +36,7 @@ const QuestionDetails = () => {
 
   const questionList = useSelector((state) => state?.questionslice.allQuestions)
   const allAnswers = useSelector((state) => state.questionslice.allAnswers)
+  console.log(allAnswers);
   const userdetails = useSelector((state) => state.questionslice.userdetails)
   console.log(allAnswers);
 
@@ -67,10 +69,7 @@ const QuestionDetails = () => {
 
     copy(url)
   }
-  //   const pathname = router.pathname;
-  // const query = router.query;
-  // const asPath = router.asPath;
-  // console.log(pathname,query,asPath);
+ 
 
   const deleteQuestionhandler = (id) => {
     // console.log(id);
@@ -87,6 +86,8 @@ const QuestionDetails = () => {
   const downvotehandler = async (e, questionId) => {
     dispatch(vote({ questionId: questionId, userId: user.data.ID, voteType: 'downvote' }))
   }
+
+  
   return (
 
     <div className="question-details-page">
@@ -142,7 +143,7 @@ const QuestionDetails = () => {
                         <div>
                           <p>asked {moment(question.askedOn).fromNow()}</p>
                           <Link
-                            href={`/users/${question.userId}`}
+                            href={`/user/userprofiles/${question.userId}`}
                             className="user-link"
                             style={{ color: "#0086d8" }}
                             onClick={() => { dispatch(getanswers()) }}

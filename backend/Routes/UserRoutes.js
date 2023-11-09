@@ -7,5 +7,7 @@ userroutes.post('/register',controller.register)
 userroutes.post('/login',controller.login)
 userroutes.get('/fetchuser',jwtuser,controller.profile)
 userroutes.get('/fetchallusers',controller.fetchAllusers)
+userroutes.get('/fetchuser/:id',controller.fetchuserById)
+userroutes.put('/:id/block',controller.blockuser)
 
 module.exports=userroutes

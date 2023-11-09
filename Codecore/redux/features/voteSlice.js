@@ -6,7 +6,9 @@ const voteSlice = createSlice({
     name:'vote',
     initialState:{
         status:'idle',
-        error:null
+        error:null,
+        state:[]
+        
     },
     extraReducers:(builder)=>{
         builder
@@ -15,7 +17,8 @@ const voteSlice = createSlice({
         })
         .addCase(vote.fulfilled,(state,action)=>{
             state.status='success'
-            // console.log(action.payload);
+            console.log(action.payload);
+            state.state=action.payload
         })
         .addCase(vote.rejected,(state,action)=>{
             state.status = 'failed',

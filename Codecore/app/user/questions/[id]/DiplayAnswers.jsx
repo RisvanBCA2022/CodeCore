@@ -54,7 +54,7 @@ const DisplayAnswer = ({filteredAnswer}) => {
                 </div>
                 <div>
                     <p>answer {moment(ans.answeredOn).fromNow()}</p>
-                    <Link href={`/user/${ans.userId}`} className='user-link' style={{color:'#006d8'}} >
+                    <Link href={`/user/userprofiles/${ans.userId}`} className='user-link' style={{color:'#006d8'}} >
                                     <Avatar backgroundColor="green" px='8' py='5px'>{ans.userAnswered?.charAt(0).toUpperCase()}</Avatar>
                                     <div>
                                         {ans.userAnswered}

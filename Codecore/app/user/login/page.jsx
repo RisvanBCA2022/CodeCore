@@ -21,8 +21,10 @@ const Page = () => {
 	const [username, setUserName]=useState('')
 	const [email,setEmail]=useState('')
 	const [password,setPassword]=useState('')
-	const auth = useSelector((state)=> state.authReducer.value)
-	// console.log(auth);
+	// const auth = useSelector((state)=> state.authReducer.value)
+	// // console.log(auth);
+	// const loggeduser=useSelector((state)=>state.authReducer.value.userdetails)
+	// console.log(loggeduser);
 	
 	const dispatch=useDispatch()
 
@@ -77,10 +79,15 @@ const HandleSubmit= async (e)=>{
 			"email":email,
 			"password":password
 		})
+		console.log(response.data.data.blocked);
+	if(response.data.data.blocked === true){
+		alert('You Have been banned  by Admin')
+	}else{
 		if(response.data.status=="success"){
 			dispatch(logIn(response.data))
 			// dispatch(getUser())s
 			setCookie('jwt',response.data.token)
+			
 			// router.push('/login')
 			// alert('Successfully login')
 			toast.success('Successfully login')
@@ -101,6 +108,8 @@ const HandleSubmit= async (e)=>{
 			alert(response.data.message)
 			
 		}
+	}
+		
 		
 	} catch (error) {
 		alert(error.message)

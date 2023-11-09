@@ -127,3 +127,33 @@ export const fetchAllUser = createAsyncThunk(
         }
     }
 )
+
+export const fetchuserbyid = createAsyncThunk(
+    'get/userById',
+    async(id)=>{
+        try {
+            const response = await axios.get(`http://127.0.0.1:4001/users/fetchuser/${id}`)
+        return response
+
+        } catch (error) {
+            throw Error(error)
+        }
+        
+    }
+)
+
+export const blockUser = createAsyncThunk(
+    'users/blockUser',
+    async (data) => {
+      try {
+        const {type,id}=data
+        console.log(type,id);
+        const response = await axios.put(`http://127.0.0.1:4001/users/${id}/block`,{
+            type:type
+        });
+        return response.data;
+      } catch (error) {
+        throw Error('Error blocking user');
+      }
+    }
+  );

@@ -5,7 +5,7 @@ const jwtuser = require('../Middleware/jwtuser')
 var answerroutes = express.Router()
 
 answerroutes.post('/postanswer/:id',jwtuser,controller.postAnswer)
-answerroutes.get('/fetchanswers',jwtuser,controller.fetchanswers)
+answerroutes.get('/fetchanswers',controller.fetchanswers)
 answerroutes.patch('/deleteanswer/:id',controller.deleteAnswer)
 
 
