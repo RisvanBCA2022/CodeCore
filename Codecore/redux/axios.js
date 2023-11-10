@@ -148,7 +148,7 @@ export const blockUser = createAsyncThunk(
       try {
         const {type,id}=data
         console.log(type,id);
-        const response = await axios.put(`http://127.0.0.1:4001/users/${id}/block`,{
+        const response = await axios.put(`http://127.0.0.1:4001/admin/${id}/block`,{
             type:type
         });
         return response.data;

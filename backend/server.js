@@ -6,6 +6,7 @@ const app=express()
 const questionroutes=require('./Routes/Question')
 const answerroutes = require('./Routes/AnswerRoutes')
 const { connect } = require('mongoose')
+const adminroutes = require('./Routes/AdminRoutes')
 require('dotenv').config()
 
 const PORT=process.env.PORT || 4001
@@ -24,6 +25,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/project')
 app.use('/users',userroutes)
 app.use('/questions',questionroutes)
 app.use('/answer',answerroutes)
+app.use('/admin',adminroutes)
 // app.get("/api",(req,res)=>{
 //     res.send({names:["alex","solaman","jacob"]})
 // })
