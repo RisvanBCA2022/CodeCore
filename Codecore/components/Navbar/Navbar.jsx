@@ -19,32 +19,22 @@ import { getUser } from '@/redux/axios'
 
 const Navbar = () => {
   const dispatch = useDispatch()
-  // const [user,setUser]=useState(null)
 
 
-  // useEffect(() => {
-  //   dispatch(getUser())
+
     const user=JSON.parse(localStorage.getItem('user'))
-  //   if(userdata){
-  //     setUser(JSON.parse(userdata))
-  //   }
 
-  // }, [dispatch]);
   
   const userdetails=useSelector(state => state.questionslice.userdetails)
-  // console.log(userdetails);
+
 
 
   const router=useRouter()
-  const auth = useSelector((state)=> state.authReducer.value)
-  // console.log(auth);
-  // const user=null
-  //  console.log(user);
-  const token = getCookie('jwt')
+
 
  const logout=()=>{
-  deleteCookie('jwt') 
-  dispatch(logOut())
+  localStorage.removeItem("user");
+  deleteCookie('jwt')
   router.push('/user/login')
   
  }

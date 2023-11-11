@@ -1,4 +1,5 @@
 import { blockUser, fetchAllUser } from '@/redux/axios'
+import Link from 'next/link'
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
@@ -56,7 +57,7 @@ const Userscollection = ({currentuser}) => {
                     <div className="candidate-list-info">
                       <div className="candidate-list-title">
                       
-                        <h5 className="mb-0"><a href="#">{user.username}</a></h5>
+                        <h5 className="mb-0"><Link href={`/user/userprofiles/${user?._id}`} >{user.username}</Link></h5>
                       </div>
                       <div className="candidate-list-option">
                        

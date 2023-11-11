@@ -157,3 +157,19 @@ export const blockUser = createAsyncThunk(
       }
     }
   );
+
+  export const getUsersInAdmin = createAsyncThunk(
+    'get/allusersforAdmin',
+    async ()=>{
+        try {
+            const response = await axios.get(`http://127.0.0.1:4001/admin/users`)
+            return response
+        } catch (error) {
+            throw Error(error)
+        }
+    }
+)
+
+  
+
+

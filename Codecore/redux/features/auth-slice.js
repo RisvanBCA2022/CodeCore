@@ -3,48 +3,6 @@ import axios from 'axios'
 import { deleteCookie } from 'cookies-next'
 import { deleteanswer, deletequestion, getQuestions, getUser, getanswers, postAnswer } from '../axios'
 
-const initialState = {
-    value: {
-        isAuth: false,
-        userdetails: {}
-    },
-}
-
-
-export const auth = createSlice({
-    name: "auth",
-    initialState,
-    reducers: {
-        logOut: () => {
-            localStorage.removeItem("user");
-            deleteCookie('jwt')
-            return {
-                value: {
-                    isAuth: false,
-                    currentuser: null
-                },
-            }
-
-        },
-        logIn: (state, action) => {
-            if (action.payload.auth == true) {
-
-                return {
-                    value: {
-                        isAuth: true,
-                        status: action.payload,
-                        currentuser: action.payload.data,
-
-                    }
-
-                }
-
-            }
-            return initialState
-        }
-    }
-})
-
 const slice = createSlice({
     name: "fetch",
     initialState: {
@@ -135,6 +93,6 @@ const slice = createSlice({
 
 
 
-export const { logIn, logOut } = auth.actions
-export default auth.reducer;
+// export const { logIn, logOut } = auth.actions
+// export default auth.reducer;
 export const questionslice = slice.reducer

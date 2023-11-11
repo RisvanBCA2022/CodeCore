@@ -28,5 +28,29 @@ module.exports={
           } catch (error) {
             return res.status(500).json({ message: 'Internal server error' });
           }
-    }
+    },
+    adminGetuserById:async (req,res)=>{
+      const {userId}=req.params
+      const user=UserSchema.findById(userId)
+      if(!user){
+        res.json('User not found')
+      }
+      else{
+        res.json({
+          data:user
+        })
+      }
+
+    },
+    fetchAllusers:async (req,res)=>{
+      const allusers = await UserSchema.find()
+      if(allusers){
+          res.status(200).json({
+              message:"success",
+              data:allusers
+          })
+      }else{
+          res.json("No user found")
+      }
+  },
 }

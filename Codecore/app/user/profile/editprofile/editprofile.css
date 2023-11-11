@@ -1,0 +1,54 @@
+/* EditProfile.css */
+.edit-profile-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .edit-profile-title {
+    color: #333;
+  }
+  
+  .edit-profile-title-2 {
+    color: #555;
+    margin-top: 10px;
+  }
+  
+  .edit-profile-form {
+    margin-top: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  input,
+  textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+    box-sizing: border-box;
+  }
+  
+  p {
+    color: #777;
+    margin-top: 4px;
+  }
+  
+  .user-submit-btn,
+  .user-cancel-btn {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .user-cancel-btn {
+    background-color: #ccc;
+    margin-left: 10px;
+  }
+  

@@ -20,7 +20,7 @@ const LeftSideBar = () => {
              <Image src={Globe} alt='Globe' ></Image>
              <p style={{paddingLeft:"10px"}}  >Questions</p>
             </Link>
-            <Link href='/tags' className='side-nav-links'  style={{paddingLeft:"40px"}}>
+            <Link href='/user/tags' className='side-nav-links'  style={{paddingLeft:"40px"}}>
               <p className={ currentRoute === "/user/tags" ? "active" : ''} >Tags</p>
             </Link>
             <Link href='/user/users' className='side-nav-links'  style={{paddingLeft:"40px"}}>

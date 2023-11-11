@@ -39,7 +39,7 @@ const AdminNavbar = () => {
 
 
   const router=useRouter()
-  const auth = useSelector((state)=> state.authReducer.value)
+  // const auth = useSelector((state)=> state.authReducer.value)
   // console.log(auth);
   // const user=null
   //  console.log(user);
@@ -47,7 +47,7 @@ const AdminNavbar = () => {
 
  const logout=()=>{
   deleteCookie('jwt') 
-  dispatch(logOut())
+  // dispatch(logOut())
   router.push('/user/login')
  }
  if (typeof window !== 'undefined') {

@@ -85,16 +85,14 @@ const HandleSubmit= async (e)=>{
 	}else{
 		if(response.data.status=="success"){
 			dispatch(logIn(response.data))
-			// dispatch(getUser())s
 			setCookie('jwt',response.data.token)
 			
-			// router.push('/login')
-			// alert('Successfully login')
 			toast.success('Successfully login')
 
 			if(response.data.message=="admin"){
 				router.push('/admin')
 				localStorage.setItem('admin',JSON.stringify(response.data))
+				
 
 			}else{
 				router.push('/')
@@ -109,8 +107,7 @@ const HandleSubmit= async (e)=>{
 			
 		}
 	}
-		
-		
+
 	} catch (error) {
 		alert(error.message)
 	}}

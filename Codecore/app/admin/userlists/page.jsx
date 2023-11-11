@@ -1,6 +1,6 @@
 'use client'
 import AdminLeftbar from '@/components/AdminHome/AdminLeftbar'
-import { blockUser, fetchAllUser } from '@/redux/axios'
+import { blockUser, fetchAllUser, getUsersInAdmin } from '@/redux/axios'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -19,7 +19,7 @@ const page = () => {
 
     const dispatch=useDispatch()
 useEffect(()=>{
-  dispatch(fetchAllUser())
+  dispatch(getUsersInAdmin())
 },[])
 
     

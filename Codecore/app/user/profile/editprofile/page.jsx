@@ -2,6 +2,7 @@
 import LeftSideBar from '@/components/Home/LeftsideBar/LeftSideBar'
 import { useRouter } from 'next/navigation'
 import React from 'react'
+import './editprofile.css'
 
 
 const page = () => {
@@ -13,13 +14,15 @@ const page = () => {
   return (
     <div className='home-container-1'>
     <LeftSideBar />
-    <div>
+    <div className="main-bar">
+      <div className="main-bar-header">
+    <div className="edit-profile-container">
       <h1 className="edit-profile-title">Edit Your Profile</h1>
-      <h2 className="edit-profile-title-2">Public information</h2>
-      <form className="edit-profile-form">
+      <h2 className="edit-profile-title-2">Public Information</h2>
+      <form className="edit-profile-form" >
         <label htmlFor="name">
           <h3>Display name</h3>
-          <input type="text" />
+          <input type="text" id="name" />
         </label>
         <label htmlFor="about">
           <h3>About me</h3>
@@ -37,8 +40,9 @@ const page = () => {
         </button>
       </form>
     </div>
-
-    </div>
+</div>
+</div>
+</div>
   )
 }
 
