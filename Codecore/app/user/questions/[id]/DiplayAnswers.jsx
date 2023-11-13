@@ -11,7 +11,7 @@ const DisplayAnswer = ({filteredAnswer}) => {
 
     const user=JSON.parse(localStorage.getItem('user'))
 
-    console.log(filteredAnswer);
+    // console.log(filteredAnswer);
     
     useEffect(()=>{
         dispatch(getQuestions())

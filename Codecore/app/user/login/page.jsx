@@ -60,7 +60,7 @@ const HandleSubmit= async (e)=>{
 		
 
 		if(response.data.status=="success"){
-			dispatch(logIn(response.data))
+			// dispatch(logIn(response.data))
 			toast.success('Successfully login')
 			router.push('/user/login')
 		}else{
@@ -92,6 +92,7 @@ const HandleSubmit= async (e)=>{
 			if(response.data.message=="admin"){
 				router.push('/admin')
 				localStorage.setItem('admin',JSON.stringify(response.data))
+				toast.success('Admin Login Successfull')
 				
 
 			}else{
@@ -103,13 +104,13 @@ const HandleSubmit= async (e)=>{
 			
 		}else{
 			// console.log(response.data);
-			alert(response.data.message)
+			toast.warning(response.data.message)
 			
 		}
 	}
 
 	} catch (error) {
-		alert(error.message)
+		toast.error(error.message)
 	}}
 	}
 	

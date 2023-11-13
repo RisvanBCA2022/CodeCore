@@ -79,3 +79,28 @@
     margin-left: 10px;
     cursor: pointer;
   }
+  .stack-overflow-profile {
+  display: flex;
+  justify-content: space-between;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.user-details {
+  margin-left: 20px;
+}
+
+.user-activity-section {
+  margin-top: 20px;
+}
+
+/* Add more styles as needed */

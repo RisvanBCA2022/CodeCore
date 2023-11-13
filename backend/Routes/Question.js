@@ -9,6 +9,8 @@ questionroutes.get('/fetchquestion',controller.questionlist)
 questionroutes.delete('/delete/:id',jwtuser,controller.deletequestion)
 questionroutes.patch('/:questionId/vote',controller.vote)
 // questionroutes.patch('/:questionId/downvote',controller.downVote)
+questionroutes.get('/:id/questionbyid',controller.fetchquestionById)
+questionroutes.patch('/:id/editquestion',controller.editQuestion)
 
 
 module.exports=questionroutes

@@ -6,6 +6,7 @@ import { useDispatch,useSelector } from 'react-redux'
 import axios from 'axios'
 import { fetchUser } from '@/redux/features/question'
 import { getCookie } from 'cookies-next'
+import { toast } from 'react-toastify'
 
 
 const AskQuestion = () => {
@@ -38,8 +39,8 @@ const handleSubmit = async(e)=>{
     }
   }
   )
-  alert('Question Added successfully')
   router.push('/')
+  toast.success('Question Added Successfully')
 
   
   // const postQuestionData={questionTitle,questionBody,questionTags}

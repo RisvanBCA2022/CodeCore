@@ -1,0 +1,71 @@
+/* editprofile.css */
+
+.home-container-1 {
+  display: flex;
+}
+
+.main-bar {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.edit-profile-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.edit-profile-title {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.edit-profile-title-2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.edit-profile-form label {
+  display: block;
+  margin-bottom: 15px;
+}
+
+.edit-profile-form input,
+.edit-profile-form textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.edit-profile-form p {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #777;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.user-submit-btn,
+.user-cancel-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.user-submit-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+}
+
+.user-cancel-btn {
+  background-color: #ddd;
+  color: #333;
+  border: none;
+}
+
+/* Add additional styles as needed */

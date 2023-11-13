@@ -170,6 +170,15 @@ export const blockUser = createAsyncThunk(
     }
 )
 
-  
+export const getQuestionById = createAsyncThunk(
+    'get/getQuestionById',
+    async (id)=>{
+        const jwt=getCookie('jwt')
+        const response= await axios.get(`http://127.0.0.1:4001/questions/${id}/questionbyid`
+        )
+        
+        return response
+    }
+)
 
 

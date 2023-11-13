@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { blockUser, fetchAllUser, fetchuserbyid, vote } from "../axios";
+import { blockUser, fetchAllUser, fetchuserbyid, getQuestionById, vote } from "../axios";
 
 
 const userSlice = createSlice({
@@ -9,7 +9,9 @@ const userSlice = createSlice({
         usersdata:[],
         currentuserdata:[],
         currentuserstatus:'idle',
-        userblockstatus:'idle'
+        userblockstatus:'idle',
+        currentQuestion:[],
+        currentQuestionStatus:"idle"
     },
     extraReducers:(builder)=>{
         builder
@@ -19,6 +21,7 @@ const userSlice = createSlice({
         .addCase(fetchAllUser.fulfilled,(state,action)=>{
             state.status='success'
             state.usersdata=action.payload.data.data
+            // console.log(action.payload.data);
         })
         .addCase(fetchAllUser.rejected,(state,action)=>{
             state.status = 'failed',
@@ -41,6 +44,16 @@ const userSlice = createSlice({
         .addCase(blockUser.fulfilled,(state,action)=>{
             state.userblockstatus='success'
             console.log(action.payload);
+        })
+        .addCase(getQuestionById.pending,(state,action)=>{
+            state.currentQuestionStatus='loading'
+        })
+        .addCase(getQuestionById.fulfilled,(state,action)=>{
+            state.currentQuestionStatus='success'
+            state.currentQuestion=action.payload.data
+        })
+        .addCase(getQuestionById.rejected,(state,action)=>{
+            state.currentQuestionStatus='failure'
         })
     }
 })

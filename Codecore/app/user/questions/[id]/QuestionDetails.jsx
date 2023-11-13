@@ -36,9 +36,9 @@ const QuestionDetails = () => {
 
   const questionList = useSelector((state) => state?.questionslice.allQuestions)
   const allAnswers = useSelector((state) => state.questionslice.allAnswers)
-  console.log(allAnswers);
+  // console.log(allAnswers);
   const userdetails = useSelector((state) => state.questionslice.userdetails)
-  console.log(allAnswers);
+  console.log(userdetails);
 
   // console.log(allAnswers)
   const auth = useSelector((state) => state?.authReducer.value)
@@ -61,7 +61,7 @@ const QuestionDetails = () => {
   const filtered = questionList.filter(question => question._id == id)
   // console.log(filtered);
   const filteredAnswer = allAnswers.filter(answer => answer.questionId == id)
-  console.log(filteredAnswer);
+  // console.log(filteredAnswer);
 
   const handleshare = () => {
     const userId = user.data.ID
@@ -85,6 +85,9 @@ const QuestionDetails = () => {
 
   const downvotehandler = async (e, questionId) => {
     dispatch(vote({ questionId: questionId, userId: user.data.ID, voteType: 'downvote' }))
+  }
+  const handleEdit=(e,questionId)=>{
+    router.push(`/user/editquestion/${questionId}`)
   }
 
   
@@ -128,6 +131,9 @@ const QuestionDetails = () => {
                         <div>
                           <button type="button" onClick={handleshare}>
                             Share
+                          </button>
+                          <button type="button" onClick={(e) => handleEdit(e, question._id) }>
+                            Edit
                           </button>
                           {question.userId===userdetails._id ? (
                             <button type="button" onClick={() => deleteQuestionhandler(question._id)}>

@@ -113,5 +113,47 @@ module.exports={
         //     }
     
         //     }
+        fetchquestionById:async (req,res)=>{
+            const {id}=req.params
+            const QuestionById=await QuestionSchema.findById(id)
+            if(!QuestionById){
+                res.json({
+                    message:"User Not found"
+                })
+            }else{
+                res.json({
+                    message:"success",
+                    data:QuestionById
+                })
+            }
+        },
+        editQuestion:async (req,res)=>{
+            try {
+                const { id } = req.params;
+                const { questionTitle, questionBody, questionTags } = req.body;
+            
+                const updatedQuestion = await QuestionSchema.findByIdAndUpdate(
+                  id,
+                  {
+                    $set: {
+                      questionTitle,
+                      questionBody,
+                      questionTags,
+                    },
+                  },
+                  { new: true } // Set new: true to return the updated document
+                );
+                console.log(updatedQuestion);
+            
+                if (!updatedQuestion) {
+                  return res.status(404).json({ message: 'Question not found' });
+                }
+            
+                res.status(200).json(updatedQuestion);
+              } catch (error) {
+                console.error(error);
+                res.status(500).json({ message: 'Internal Server Error' });
+              }
+        }
     
 }
