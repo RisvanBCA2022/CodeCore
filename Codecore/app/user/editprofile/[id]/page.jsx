@@ -14,30 +14,40 @@ import {
   Avatar,
   IconButton,
 } from "@mui/material";
-import { useRouter } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import LeftSideBar from '@/components/Home/LeftsideBar/LeftSideBar';
+import { toast } from "react-toastify";
+import upload from "@/components/upload_profile";
 // import './editprofile.css';
 
 const page = () => {
   const router = useRouter();
-  
+  const {id}=useParams()
   const navigateToProfile = () => {
     router.push('/user/profile');
-  };
+  }
+  const [data,setData]=useState()
 
-  // const handleSubmit = async(e) => {
-  //   e.preventDefault();
-  //   const bio=e.target.bio.value
-  //   const username=e.target.username.value
-  //   await axios.post('http://localhost:4001/questions/ask/',{
-   
-  // },{
-  //   headers:{
-  //     Authorization:`Bearer ${cookie}`
-  //   }
-  // }
-  // )
-  // };
+
+
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    const profilepicture= await upload(data)
+    const bio=e.target.bio.value
+    const username=e.target.username.value
+    const res=await axios.post(`http://localhost:4001/users/updateprofile/${id}`,{
+      bio,
+      username,
+      profilepicture
+  },{
+    headers:{
+      Authorization:`Bearer ${cookie}`
+    }
+  }
+  )
+  toast.success('Profile Edited successfully')
+  router.push('/user/profile')
+  };
 
   return (
     <div className="home-container-1">
@@ -62,7 +72,7 @@ const page = () => {
               Update Profile
             </Typography>
             {/* {profile?.map((data) => ( */}
-              <form noValidate onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit}>
                 <Avatar
                   // src={data.avatar} // Display user's avatar
                   alt="Profile Picture"
@@ -80,6 +90,7 @@ const page = () => {
                   // defaultValue={data.bio}
                   variant="outlined"
                   sx={{ mb: 2 }}
+                  required
                 />
                 <TextField
                   fullWidth
@@ -89,6 +100,7 @@ const page = () => {
                   // defaultValue={data.username}
                   variant="outlined"
                   sx={{ mb: 2 }}
+                  required
                 />
                 <TextField
                   fullWidth
@@ -106,6 +118,15 @@ const page = () => {
                   variant="outlined"
                   sx={{ mb: 2 }}
                 />
+                <TextField
+                  fullWidth
+                  type="file"
+                  
+                  // defaultValue={data.contact}
+                  variant="outlined"
+                  onChange={(e)=>setData(e.target.files[0])}
+                  sx={{ mb: 2 }}
+                />
 
                 <Button
                   type="submit"
@@ -116,6 +137,7 @@ const page = () => {
                     color: "white",
                     borderRadius: "9px",
                   }}
+
                   sx={{ mt: 3, mb: 2 }}
                 >
                   Save

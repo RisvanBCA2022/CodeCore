@@ -44,8 +44,8 @@ const Navbar = () => {
   return (
    <nav className='main-nav'>
     <div className='navbar'>
-      <Link href='/' className='nav-item nav-btn'>
-      <Image src={Logo} alt='logo' height='50'/>
+      <Link href='/' className=' '>
+      <Image src={Logo} alt='logo' height='60'/>
       </Link>
       <Link href='/' className='nav-item nav-btn'>About</Link>
       <Link href='/' className='nav-item nav-btn'>Products</Link>

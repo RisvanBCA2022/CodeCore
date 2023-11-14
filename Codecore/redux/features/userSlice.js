@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { blockUser, fetchAllUser, fetchuserbyid, getQuestionById, vote } from "../axios";
+import { blockUser, fetchAllUser, fetchByTag, fetchuserbyid, getQuestionById, vote } from "../axios";
 
 
 const userSlice = createSlice({
@@ -11,7 +11,9 @@ const userSlice = createSlice({
         currentuserstatus:'idle',
         userblockstatus:'idle',
         currentQuestion:[],
-        currentQuestionStatus:"idle"
+        currentQuestionStatus:"idle",
+        questionByTag:[],
+        tagstatus:'idle'
     },
     extraReducers:(builder)=>{
         builder
@@ -54,6 +56,16 @@ const userSlice = createSlice({
         })
         .addCase(getQuestionById.rejected,(state,action)=>{
             state.currentQuestionStatus='failure'
+        })
+        .addCase(fetchByTag.pending,(state,action)=>{
+            state.tagstatus='loading'
+        })
+        .addCase(fetchByTag.fulfilled,(state,action)=>{
+            state.tagstatus='success'
+            state.questionByTag=action.payload.data
+        })
+        .addCase(fetchByTag.rejected,(state)=>{
+            state.tagstatus='failure'
         })
     }
 })

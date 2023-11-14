@@ -111,6 +111,23 @@ module.exports={
             res.json("User Not Found")
         }
     },
+    editUserprofile:async (req,res)=>{
+        const {id}=req.params
+        const {username,bio,profilepicture}=req.body
+        console.log(req.body);
+        try {
+            const user = await UserSchema.findByIdAndUpdate(id,{$set:{username,bio,profilepicture}},{ new: true } )
+
+        if(!user){
+            res.json({message:"user not found"})
+        }else{
+            res.json({message:'success',data:user})
+        }
+        } catch (error) {
+            console.log(error);
+        }
+        
+    }
     
 }
 

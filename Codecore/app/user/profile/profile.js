@@ -17,7 +17,7 @@ const Profile = () => {
 
   useEffect(()=>{
     dispatch(fetchAllUser())
-  },[])
+  },[dispatch])
   
   const userdetails=JSON.parse(localStorage.getItem('user'))
   const users=useSelector((state)=>state.userslice.usersdata)
@@ -44,10 +44,10 @@ const Profile = () => {
                 px="40px"
                 py="30px"
               >
-                {userdetails?.data.username?.charAt(0).toUpperCase()}
+                {currentUser?.username?.charAt(0).toUpperCase()}
               </Avatar>
               <div className="user-name">
-                <h1>{userdetails?.data.username}</h1>
+                <h1>{currentUser?.username}</h1>
                 <p>
                   <FontAwesomeIcon icon={faBirthdayCake} /> Joined{" "}
                   {moment(currentUser?.joinedOn).fromNow()}

@@ -11,6 +11,7 @@ questionroutes.patch('/:questionId/vote',controller.vote)
 // questionroutes.patch('/:questionId/downvote',controller.downVote)
 questionroutes.get('/:id/questionbyid',controller.fetchquestionById)
 questionroutes.patch('/:id/editquestion',controller.editQuestion)
+questionroutes.get('/questionbytag/:tags',controller.questionByTags)
 
 
 module.exports=questionroutes

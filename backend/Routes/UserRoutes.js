@@ -8,5 +8,6 @@ userroutes.post('/login',controller.login)
 userroutes.get('/fetchuser',jwtuser,controller.profile)
 userroutes.get('/fetchallusers',controller.fetchAllusers)
 userroutes.get('/fetchuser/:id',controller.fetchuserById)
+userroutes.post('/updateprofile/:id',controller.editUserprofile)
 
 module.exports=userroutes

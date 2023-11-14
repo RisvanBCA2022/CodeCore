@@ -154,6 +154,18 @@ module.exports={
                 console.error(error);
                 res.status(500).json({ message: 'Internal Server Error' });
               }
+        },
+        questionByTags: async (req,res)=>{
+            const tags=req.params.tags
+            // console.log(tags);
+            try {
+                const questionByTags= await QuestionSchema.find({questionTags:{$in:[tags]}}).exec()
+                res.json(questionByTags)
+                
+            } catch (error) {
+                console.error(error);
+                res.status(500).json({ error: 'Internal Server Error' });
+            }
         }
     
 }

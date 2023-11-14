@@ -16,7 +16,7 @@ const LeftSideBar = () => {
         </Link>
         <div className='side-nav-div'>
           <div><p>PUBLIC</p> </div>
-            <Link href='/user/questions' className={currentRoute === '/questions'?'active side-nav-links':'side-nav-links'}  style={{paddingLeft:"40px"}}>
+            <Link href='/user/questionss' className={currentRoute === '/questions'?'active side-nav-links':'side-nav-links'}  style={{paddingLeft:"40px"}}>
              <Image src={Globe} alt='Globe' ></Image>
              <p style={{paddingLeft:"10px"}}  >Questions</p>
             </Link>

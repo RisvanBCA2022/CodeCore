@@ -181,4 +181,13 @@ export const getQuestionById = createAsyncThunk(
     }
 )
 
+export const fetchByTag=createAsyncThunk(
+    'get/Tags',
+    async (tag)=>{
+        const response=await axios.get(`http://127.0.0.1:4001/questions/questionbytag/${tag}`)   
+        return response
+    }
+    
+) 
+
 
