@@ -75,7 +75,7 @@ const slice = createSlice({
             })
             .addCase(getQuestions.fulfilled, (state, action) => {
                 state.status = 'succeeded',
-                    state.allQuestions = action.payload
+                state.allQuestions = action.payload
             })
             .addCase(getQuestions.rejected, (state) => {
                 state.status = 'failed'

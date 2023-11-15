@@ -29,7 +29,7 @@ const Navbar = () => {
       if(user){
       dispatch(fetchuserbyid(user.data.ID))
       }
-    },[usr])
+    },[user])
 
     const userdetails=useSelector(state => state.userslice.currentuserdata.data)
     // console.log(userdetails);

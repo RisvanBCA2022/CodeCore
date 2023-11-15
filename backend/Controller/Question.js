@@ -31,7 +31,7 @@ module.exports={
         if(questions.length !=0){
             res.status(200).json( questions)
         }else{
-            res.json("Can't fetch questions")
+            res.json({message:"failure",response:"Can't fetch questions"})
         }
 
     },

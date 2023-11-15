@@ -54,6 +54,7 @@ const QuestionDetails = () => {
     } else {
       dispatch(postAnswer({ questionId, id, noOfAnswers, answerBody, userId, userAnswered }))
       dispatch(getanswers())
+      
     }
     e.target.reset()
 
@@ -80,11 +81,16 @@ const QuestionDetails = () => {
 
   const upvotehandler = async (e, questionId) => {
     // console.log(questionId);
-    dispatch(vote({ questionId: questionId, userId: user.data.ID, voteType: 'upvote' }))
+    await dispatch(vote({ questionId: questionId, userId: user.data.ID, voteType: 'upvote' }))
+    await dispatch(getQuestions())
+
   }
 
   const downvotehandler = async (e, questionId) => {
-    dispatch(vote({ questionId: questionId, userId: user.data.ID, voteType: 'downvote' }))
+    await dispatch(vote({ questionId: questionId, userId: user.data.ID, voteType: 'downvote' }))
+    await dispatch(getQuestions())
+    
+  
   }
   const handleEdit=(e,questionId)=>{
     router.push(`/user/editquestion/${questionId}`)

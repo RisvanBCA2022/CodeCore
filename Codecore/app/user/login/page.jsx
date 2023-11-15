@@ -62,7 +62,7 @@ const HandleSubmit= async (e)=>{
 		if(response.data.status=="success"){
 			// dispatch(logIn(response.data))
 			toast.success('Successfully login')
-			router.push('/user/login')
+			router.push('/user')
 		}else{
 			alert(response.data.message)
 		}		
