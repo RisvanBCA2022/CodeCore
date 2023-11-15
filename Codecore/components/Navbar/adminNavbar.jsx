@@ -16,6 +16,7 @@ import jwtDecode from 'jwt-decode'
 import { data } from 'autoprefixer'
 import { useState } from 'react'
 import { getUser } from '@/redux/axios'
+import Avatars from '../Avatar/Avatar'
 
 const AdminNavbar = () => {
   const dispatch = useDispatch()
@@ -56,7 +57,7 @@ const AdminNavbar = () => {
   return (
    <nav className='main-nav'>
     <div className='navbar'>
-      <Link href='/' className=' '>
+      <Link href='/admin/userlists' className=' '>
       <Image src={Logo} alt='logo' height='50'/>
       </Link>
       <Link href='/' className='nav-item nav-btn'>Users</Link>
@@ -73,7 +74,7 @@ const AdminNavbar = () => {
 
         {/* } */}
         {admin?.message=='admin'?
-        <> <Avatar backgroundColor='#009dff' px="10px" py="7px" borderRadius="50%" color='white'><Link href='/admin' style={{color:'white',textDecoration:'none'}}>{admin?.message?.charAt(0).toUpperCase()}</Link></Avatar><button className='nav-item nav-links' onClick={logout}>Log out</button></>:
+        <> <Avatars backgroundColor='#009dff' px="10px" py="7px" borderRadius="50%" color='white'><Link href='/admin' style={{color:'white',textDecoration:'none'}}>{admin?.message?.charAt(0).toUpperCase()}</Link></Avatars><button className='nav-item nav-links' onClick={logout}>Log out</button></>:
         <Link href='/user/login' className='nav-item nav-links'>
       Log In
     </Link>

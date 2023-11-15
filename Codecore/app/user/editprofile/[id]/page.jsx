@@ -18,17 +18,25 @@ import { useParams, useRouter } from 'next/navigation'
 import LeftSideBar from '@/components/Home/LeftsideBar/LeftSideBar';
 import { toast } from "react-toastify";
 import upload from "@/components/upload_profile";
+import { fetchAllUser } from "@/redux/axios";
+import { useDispatch, useSelector } from "react-redux";
 // import './editprofile.css';
 
 const page = () => {
   const router = useRouter();
+  const dispatch=useDispatch()
   const {id}=useParams()
   const navigateToProfile = () => {
     router.push('/user/profile');
   }
   const [data,setData]=useState()
+  useEffect(()=>{
+    dispatch(fetchAllUser())
+  },[])
 
-
+  const userdetails=JSON.parse(localStorage.getItem('user'))
+  const users=useSelector((state)=>state.userslice.usersdata)
+  const currentUser=users.find((user)=>user._id===userdetails.data.ID)
 
   const handleSubmit = async(e) => {
     e.preventDefault();
@@ -74,7 +82,7 @@ const page = () => {
             {/* {profile?.map((data) => ( */}
               <form onSubmit={handleSubmit}>
                 <Avatar
-                  // src={data.avatar} // Display user's avatar
+                  src={currentUser?.profilepicture} // Display user's avatar
                   alt="Profile Picture"
                   sx={{
                     width: 100,

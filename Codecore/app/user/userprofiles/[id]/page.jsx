@@ -18,7 +18,6 @@ const Userprofiles = () => {
    
 
     const user = useSelector((state) => state.userslice.currentuserdata)
-    console.log(user)
     
     return (
         <div className="home-container-1">

@@ -14,7 +14,7 @@ const HomeMainBar = () => {
     const pathname=usePathname()
     const dispatch=useDispatch()
     const questionList=useSelector(state => state.questionslice.allQuestions)
-    console.log(questionList)
+    // console.log(questionList)
     const status=useSelector(state=>state.questionslice.status)
     
     const checkAuth=()=>{
@@ -22,7 +22,7 @@ const HomeMainBar = () => {
             alert("login or signup to ask a question")
             router.push('/user/login')
         }else{
-            router.push('user/askquestion')
+            router.push('/user/askquestion')
         }
     }
 useEffect(()=>{

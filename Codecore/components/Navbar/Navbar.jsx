@@ -4,7 +4,7 @@ import Link from 'next/link'
 import React, { useEffect, useReducer } from 'react'
 import search from '../../public/search.svg'
 import Authprofilemenu from './Authprofilemenu'
-import Avatar from '../Avatar/Avatar'
+import { Avatar } from '@mui/material'
 import './Navbar.css'
 import Logo from '../../public/Logo.png'
 import Button from '../Button/Button'
@@ -15,7 +15,8 @@ import { getCookie,deleteCookie } from 'cookies-next'
 import jwtDecode from 'jwt-decode'
 import { data } from 'autoprefixer'
 import { useState } from 'react'
-import { getUser } from '@/redux/axios'
+import { fetchAllUser, fetchuserbyid, getUser } from '@/redux/axios'
+import Avatars from '../Avatar/Avatar'
 
 const Navbar = () => {
   const dispatch = useDispatch()
@@ -24,8 +25,14 @@ const Navbar = () => {
 
     const user=JSON.parse(localStorage.getItem('user'))
 
-  
-  const userdetails=useSelector(state => state.questionslice.userdetails)
+    useEffect(()=>{
+      if(user){
+      dispatch(fetchuserbyid(user.data.ID))
+      }
+    },[usr])
+
+    const userdetails=useSelector(state => state.userslice.currentuserdata.data)
+    // console.log(userdetails);
 
 
 
@@ -55,7 +62,12 @@ const Navbar = () => {
         <Image src={search} alt="search" width='18' className='search-icon'/>
         </form>
         {user?.auth==true?
-          <> <Avatar backgroundColor='#009dff' px="10px" py="7px" borderRadius="50%" color='white'><Link href='/user/profile' style={{color:'white',textDecoration:'none'}}>{user?.data?.username?.charAt(0).toUpperCase()}</Link></Avatar><button className='nav-item nav-links' onClick={logout}>Log out</button></>
+          <> 
+          {!userdetails?.profilepicture?
+            <Avatars  backgroundColor='#009dff' px="10px" py="7px" borderRadius="50%" color='white'><Link href='/user/profile' style={{color:'white',textDecoration:'none'}}>{userdetails?.username?.charAt(0).toUpperCase()}</Link></Avatars>:
+            <Link href='/user/profile'><Avatar alt="Remy Sharp" src={userdetails?.profilepicture} ></Avatar></Link>
+          }
+         <button className='nav-item nav-links' onClick={logout}>Log out</button></>
           :
           <Authprofilemenu />
 

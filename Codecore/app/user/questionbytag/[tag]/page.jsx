@@ -11,7 +11,6 @@ const page = () => {
     const [questionbytag,setQuestionbytag]=useState(null)
     const dispatch=useDispatch()
     const questionByTag=useSelector((state)=>state.userslice.questionByTag)
-    console.log(questionByTag);
     useEffect(()=>{
         dispatch(fetchByTag(tag))
     },[tag])

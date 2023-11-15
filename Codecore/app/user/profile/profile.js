@@ -1,4 +1,3 @@
-import Avatar from '@/components/Avatar/Avatar'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -6,6 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBirthdayCake,faPen } from "@fortawesome/free-solid-svg-icons";
 import moment from 'moment';
 import { fetchAllUser } from '@/redux/axios';
+import Avatars from '@/components/Avatar/Avatar';
+import { Avatar } from '@mui/material';
 
 
 
@@ -31,48 +32,70 @@ const Profile = () => {
   const handleCancelEdit = () => {
     setSwitchEdit(false);
   };
-  // console.log(currentUser);
   return (
     <div>
     <div>
-          <div className="user-details-container">
-            <div className="user-details">
-              <Avatar
+    <div className="user-details-container">
+        <div className="user-details">
+        {currentUser?.profilepicture?
+         <><Avatar alt="Remy Sharp" src={currentUser?.profilepicture} style={{width:"125px",height:"125px"}} variant="rounded" /></>:
+          <Avatars
                 backgroundColor="purple"
                 color="white"
                 fontSize="50px"
                 px="40px"
                 py="30px"
-              >
+            >
                 {currentUser?.username?.charAt(0).toUpperCase()}
-              </Avatar>
-              <div className="user-name">
+            </Avatars>
+            
+        }
+           
+            <div className="user-name">
                 <h1>{currentUser?.username}</h1>
                 <p>
-                  <FontAwesomeIcon icon={faBirthdayCake} /> Joined{" "}
-                  {moment(currentUser?.joinedOn).fromNow()}
+                    <FontAwesomeIcon icon={faBirthdayCake} /> Joined{" "}
+                    {moment(currentUser?.joinedOn).fromNow()}
                 </p>
-              </div>
             </div>
-            
-          </div>
-          
-          <button onClick={handleEditprofile}>
-            <FontAwesomeIcon icon={faPen} />Edit Profile
-          </button>
-          {/* <>
-           {switchEdit ? (
-              <EditProfileForm
-                userdetails={userdetails}
-                onCancel={handleCancelEdit}
-              />
-             ) : (
-              <ProfileBio currentUser={currentUser} />
-            )} 
 
-           
-          </> */}
+            {/* Table Status Section */}
+          
+            
+            <button onClick={handleEditprofile}>
+                <FontAwesomeIcon icon={faPen} />Edit Profile
+            </button>
         </div>
+        
+
+        {/* ... existing code for Edit Profile and Profile Bio ... */}
+    </div>
+    <br></br>
+    <div>
+    <h2> Status</h2>
+    <table className="simple-table">
+      <thead>
+        <tr>
+          <td>reputation</td>
+          <td>reached</td>
+          <td>answers</td>
+          <td>questions</td>
+          
+        </tr>
+        <tr>
+          <td>{currentUser?.reputation}</td>
+          <td></td>
+          <td>{currentUser?.answers.length}</td>
+          <td>{currentUser?.questions.length}</td>
+          
+        </tr>
+      </thead>
+     
+    </table>
+    </div>
+</div>
+
+
         </div>
   )
 }

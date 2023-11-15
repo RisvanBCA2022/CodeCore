@@ -103,4 +103,29 @@
   margin-top: 20px;
 }
 
-/* Add more styles as needed */
+
+.simple-table {
+  border-collapse: collapse;
+  width: 100%; /* Set width to 100% */
+  margin: 20px;
+  border: 1px solid #ddd; /* Add this line for a single outline */
+}
+
+.simple-table th, .simple-table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd; /* Add this line for cell borders */
+}
+
+.simple-table th {
+  background-color: #f2f2f2;
+}
+
+.simple-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.simple-table tbody tr:hover {
+  background-color: #e0e0e0;
+}
+

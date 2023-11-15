@@ -27,8 +27,9 @@ const Questions = ({ question }) => {
         })}
         </div>
         <p className="display-time">
-        asked {question.askedOn} {question.userPosted}
+        asked On {moment(question.askedOn).format("ddd, hA")} By {question.userPosted}
         </p>
+        
       </div>
       </div>
      

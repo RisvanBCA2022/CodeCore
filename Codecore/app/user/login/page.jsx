@@ -90,7 +90,7 @@ const HandleSubmit= async (e)=>{
 			toast.success('Successfully login')
 
 			if(response.data.message=="admin"){
-				router.push('/admin')
+				router.push('/admin/userlists')
 				localStorage.setItem('admin',JSON.stringify(response.data))
 				// toast.success('Admin Login Successfull')
 				

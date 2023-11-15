@@ -12,7 +12,6 @@ import { toast } from 'react-toastify'
 const AskQuestion = () => {
 
   const cookie = getCookie('jwt')
-  console.log(cookie);
   const dispatch=useDispatch()
   const router=useRouter()
 

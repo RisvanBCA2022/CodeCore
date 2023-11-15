@@ -45,7 +45,6 @@ const userSlice = createSlice({
         })
         .addCase(blockUser.fulfilled,(state,action)=>{
             state.userblockstatus='success'
-            console.log(action.payload);
         })
         .addCase(getQuestionById.pending,(state,action)=>{
             state.currentQuestionStatus='loading'

@@ -3,6 +3,7 @@ import Navbar from '@/components/Navbar/Navbar'
 import { Home } from '@/components'
 import { ReduxProvider } from '@/redux/Provider'
 import '../user/askquestion/AskQuestion.css'
+import LeftSideBar from '@/components/Home/LeftsideBar/LeftSideBar'
 // import { Inter } from 'next/font/google'
 // const inter = Inter({ subsets: ['latin'] })
 
@@ -15,9 +16,10 @@ export default function RootLayout({children,}) {
   return (
   
     <>
-      <Navbar />          
-          <main className="my-0 py-16">{children}</main>
+      <Navbar />       
+          <main className="my-0 py-16">{children}</main>     
           </>
+          
           
    
   )

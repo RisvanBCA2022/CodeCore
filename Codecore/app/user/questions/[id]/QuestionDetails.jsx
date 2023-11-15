@@ -207,7 +207,7 @@ const QuestionDetails = () => {
                     ))}{" "}
                     or
                     <Link
-                      href="/AskQuestion"
+                      href="/user/askquestion"
                       style={{ textDecoration: "none", color: "#009dff" }}
                     >
                       {" "}

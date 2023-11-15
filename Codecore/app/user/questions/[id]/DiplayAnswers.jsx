@@ -25,7 +25,6 @@ const DisplayAnswer = ({filteredAnswer}) => {
         const Id=answerId
         const questionId=filteredAnswer[0].questionId
         const data={userId,Id,questionId}
-        console.log(data);
         if(currentuserId===userId){
             dispatch(deleteanswer(data))
             dispatch(getanswers())

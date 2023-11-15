@@ -17,7 +17,6 @@ const voteSlice = createSlice({
         })
         .addCase(vote.fulfilled,(state,action)=>{
             state.status='success'
-            console.log(action.payload);
             state.state=action.payload
         })
         .addCase(vote.rejected,(state,action)=>{
