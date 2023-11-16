@@ -1,83 +1,81 @@
-body{
-    background:#eee;
-}
+/* UserDetailPage.css */
 
-.card{
-    border:none;
-
-    position:relative;
-    overflow:hidden;
-    border-radius:8px;
-    cursor:pointer;
-}
-
-.card:before{
-    
-    content:"";
-    position:absolute;
-    left:0;
-    top:0;
-    width:4px;
-    height:100%;
-    background-color:#c2e7be;
-    transform:scaleY(1);
-    transition:all 0.5s;
-    transform-origin: bottom
-}
-
-.card:after{
-    
-    content:"";
-    position:absolute;
-    left:0;
-    top:0;
-    width:4px;
-    height:100%;
-    background-color:#4eaa24;
-    transform:scaleY(0);
-    transition:all 0.5s;
-    transform-origin: bottom
-}
-
-.card:hover::after{
-    transform:scaleY(1);
-}
-
-
-.fonts{
-    font-size:11px;
-}
-
-.social-list{
-    display:flex;
-    list-style:none;
-    justify-content:center;
-    padding:0;
-}
-
-.social-list li{
-    padding:10px;
-    color:#4eaa24;
-    font-size:19px;
-}
-
-
-.buttons button:nth-child(1){
-       border:1px solid #4eaa24 !important;
-       color:#4eaa24;
-       height:40px;
-}
-
-.buttons button:nth-child(1):hover{
-       border:1px solid #4eaa24 !important;
-       color:#fff;
-       height:40px;
-       background-color:#4eaa24;
-}
-
-.buttons button:nth-child(2){
-       border:1px solid #4eaa24 !important;
-       background-color:#4eaa24;
-       color:#fff;
-        height:40px;
-}
+.card {
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .avatar {
+    text-align: center;
+  }
+  
+  .user-details {
+    text-align: center;
+  }
+  
+  .badge {
+    background-color: #6c757d;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  .username {
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+  
+  .bio {
+    font-size: 0.9rem;
+  }
+  
+  .social-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .social-list li {
+    font-size: 1.5rem;
+    color: #212529;
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  .message-btn {
+    color: #007bff;
+    border: 2px solid #007bff;
+    background-color: #fff;
+  }
+  
+  .message-btn:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .contact-btn {
+    background-color: #007bff;
+    color: #fff;
+    margin-left: 10px;
+  }
+  
+  .contact-btn:hover {
+    background-color: #0056b3;
+  }
+  

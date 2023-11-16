@@ -51,7 +51,7 @@ const Userscollection = ({currentuser}) => {
               <tr className="candidates-list" key={user._id}>
                 <td className="title">
                   <div className="thumb">
-                    <img className="img-fluid" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt=""/>
+                    <img className="img-fluid" src={user?.profilepicture?user.profilepicture:"https://bootdey.com/img/Content/avatar/avatar7.png"} alt=""/>
                   </div>
                   <div className="candidate-list-details">
                     <div className="candidate-list-info">

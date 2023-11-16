@@ -22,8 +22,8 @@ const Userprofiles = () => {
     return (
         <div className="home-container-1">
             <LeftSideBar  />
+            <h1 style={{ fontWeight: "400" }}>User Details</h1>
             <div className="home-container-2" style={{ marginTop: "100px" }}>
-                <h1 style={{ fontWeight: "400" }}>User Details</h1>
                 <UserShowPage user={user} />
             </div>
         </div>

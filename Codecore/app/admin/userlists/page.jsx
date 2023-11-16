@@ -37,9 +37,11 @@ useEffect(()=>{
     <div>
      <div className='home-container-1'>
     <AdminLeftbar />
+
     <div className="main-bar">
+    <h1>All Users</h1>
+
       <div className="main-bar-header">
-       <h1>All Users</h1>
       
        <Userscollection currentuser={currentuser} />
       </div>

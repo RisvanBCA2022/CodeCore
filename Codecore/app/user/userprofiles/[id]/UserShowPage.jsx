@@ -1,60 +1,42 @@
 import React from 'react'
-// import './usershowpage.css'
+import './usershowpage.css'
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 const UserShowPage = ({user}) => {
+    console.log(user);
   return (
     <>
-        <div class="container mt-5">
-    
-    <div class="row d-flex justify-content-center">
-        
-        <div class="col-md-7">
-            
-            <div class="card p-3 py-4">
-                
-                <div class="text-center">
-                    <img src="https://i.imgur.com/bDLhJiP.jpg" width="100" class="rounded-circle"/>
-                </div>
-                
-                <div class="text-center mt-3">
-                    <span class="bg-secondary p-1 px-4 rounded text-white">Pro</span>
-                    <h5 class="mt-2 mb-0">{user?.data?.username}</h5>
-                    <span>UI/UX Designer</span>
-                    
-                    <div class="px-4 mt-1">
-                        <p class="fonts">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-                    
-                    </div>
-                    
-                     <ul class="social-list">
-                        <li><i class="fa fa-facebook"></i></li>
-                        <li><i class="fa fa-dribbble"></i></li>
-                        <li><i class="fa fa-instagram"></i></li>
-                        <li><i class="fa fa-linkedin"></i></li>
-                        <li><i class="fa fa-google"></i></li>
-                    </ul>
-                    
-                    <div class="buttons">
-                        
-                        <button class="btn btn-outline-primary px-4">Message</button>
-                        <button class="btn btn-primary px-4 ms-3">Contact</button>
-                    </div>
-                    
-                    
-                </div>
-                
-               
-                
-                
+         <div className="container mt-5">
+      <div className="row d-flex justify-content-center">
+        <div className="col-md-7">
+          <div className="card">
+            <div className="avatar">
+              <img src={user?.data?.profilepicture?user.data.profilepicture:"https://i.imgur.com/bDLhJiP.jpg"} width="100" className="rounded-circle" alt="User Avatar" />
             </div>
-            
+            <div className="user-details mt-3 text-center">
+              <span className="badge">Pro</span>
+              <h5 className="username">{user?.data?.username}</h5>
+              <span>Web Developer</span>
+              <div className="bio mt-1">
+                <p>{user?.bio}</p>
+              </div>
+              <ul className="social-list">
+                <li><i className="fa fa-facebook"></i></li>
+                <li><i className="fa fa-dribbble"></i></li>
+                <li><i className="fa fa-instagram"></i></li>
+                <li><i className="fa fa-linkedin"></i></li>
+                <li><i className="fa fa-google"></i></li>
+              </ul>
+              <div className="buttons">
+                <button className="btn message-btn">Message</button>
+                <button className="btn contact-btn">Contact</button>
+              </div>
+            </div>
+          </div>
         </div>
-        
+      </div>
     </div>
-    
-</div>
     </>
   )
 }

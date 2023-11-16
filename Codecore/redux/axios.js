@@ -1,9 +1,7 @@
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 import { getCookie } from "cookies-next";
 import { useDispatch } from "react-redux";
-
-const { createAsyncThunk } = require("@reduxjs/toolkit");
-const { default: axios } = require("axios");
-
 
 export const getQuestions = createAsyncThunk(
     'get/getQuestions',

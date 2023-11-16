@@ -93,6 +93,7 @@ const Profile = () => {
      
     </table>
     </div>
+    
 </div>
 
 

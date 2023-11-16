@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useEffect, useReducer } from 'react'
+import React, { use, useEffect, useReducer } from 'react'
 import search from '../../public/search.svg'
 import Authprofilemenu from './Authprofilemenu'
 import { Avatar } from '@mui/material'
@@ -20,16 +20,18 @@ import Avatars from '../Avatar/Avatar'
 
 const Navbar = () => {
   const dispatch = useDispatch()
-
+const [state,setState]=useState(true)
 
 
     const user=JSON.parse(localStorage.getItem('user'))
 
     useEffect(()=>{
-      if(user){
-      dispatch(fetchuserbyid(user.data.ID))
+      if(state && user){
+        dispatch(fetchuserbyid(user.data.ID))
+        setState(false)
       }
-    },[user])
+      
+    })
 
     const userdetails=useSelector(state => state.userslice.currentuserdata.data)
     // console.log(userdetails);
@@ -48,6 +50,14 @@ const Navbar = () => {
  if (typeof window !== 'undefined') {
   const item = localStorage.getItem('user')
 }
+console.log(user);
+const handlesubmit=(e)=>{
+  e.preventDefault()
+  const query=e.target.search.value
+  router.push(`/user/search?query=${query}`)
+
+}
+
   return (
    <nav className='main-nav'>
     <div className='navbar'>
@@ -57,19 +67,18 @@ const Navbar = () => {
       <Link href='/' className='nav-item nav-btn'>About</Link>
       <Link href='/' className='nav-item nav-btn'>Products</Link>
       <Link href='/' className='nav-item nav-btn'>For Teams</Link>
-      <form action="">
-        <input type="text" placeholder='Search...' />
+      <form action="" onSubmit={handlesubmit}>
+        <input type="text" placeholder='Search...' id='search'  />
         <Image src={search} alt="search" width='18' className='search-icon'/>
         </form>
-        {user?.auth==true?
+        {user?
           <> 
-          {!userdetails?.profilepicture?
-            <Avatars  backgroundColor='#009dff' px="10px" py="7px" borderRadius="50%" color='white'><Link href='/user/profile' style={{color:'white',textDecoration:'none'}}>{userdetails?.username?.charAt(0).toUpperCase()}</Link></Avatars>:
-            <Link href='/user/profile'><Avatar alt="Remy Sharp" src={userdetails?.profilepicture} ></Avatar></Link>
-          }
-         <button className='nav-item nav-links' onClick={logout}>Log out</button></>
+            <Avatars  backgroundColor='#009dff' px="10px" py="7px" borderRadius="50%" color='white'><Link href='/user/profile' style={{color:'white',textDecoration:'none'}}>{user?.data?.username.charAt(0).toUpperCase()}</Link></Avatars>
+            {/* <Link href='/user/profile'><Avatar alt="Remy Sharp" src={userdetails?.profilepicture} ></Avatar></Link> */}         <button className='nav-item nav-links' onClick={logout}>Log out</button></>
           :
-          <Authprofilemenu />
+          <Link href='/user/login' className='nav-item nav-links'>
+      Log In
+    </Link>
 
         }
       

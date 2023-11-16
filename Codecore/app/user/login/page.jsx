@@ -36,6 +36,12 @@ const Page = () => {
 		// console.log(isSignup);
 
 	}
+	useEffect(()=>{
+		if(!window.location.hash){
+			window.location=window.location+'#success';
+			location.reload(false)
+		}
+	},[])
 	
 
 const HandleSubmit= async (e)=>{
