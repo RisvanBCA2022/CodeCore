@@ -2,14 +2,12 @@ const QuestionSchema=require('../Model/QuestionSchema')
 const userSchema=require('../Model/UserSchema')
 var jwt=require('jsonwebtoken')
 var bcrypt=require('bcrypt')
+const UserSchema = require('../Model/UserSchema')
 
 
 module.exports={
     askquestion:async (req,res)=>{
         const {questionTitle,questionBody,questionTags,userPosted} = req.body
-        // const {authorization}=req.headers
-        // console.log(req.body);
-
         const postQuestionsData={questionTitle,questionBody,questionTags,userPosted}
         const postQuestion = new QuestionSchema({...postQuestionsData,userId:res.token.id})
         try {
@@ -37,9 +35,11 @@ module.exports={
     },
     deletequestion:async (req,res)=>{
         const {id:_id}=req.params
-        // console.log(req.params);
+        const {userId}=req.body
         try {
+            console.log();
             await QuestionSchema.findByIdAndDelete(_id)
+           const user = await UserSchema.findByIdAndUpdate(userId,{$pull:{questions:_id}},{new:true})
            const question = await QuestionSchema.find()
             res.status(200).json({message:"successfully deleted..",questions:question})
             
@@ -166,6 +166,6 @@ module.exports={
                 console.error(error);
                 res.status(500).json({ error: 'Internal Server Error' });
             }
-        }
+        },
     
 }

@@ -32,8 +32,16 @@ const [state,setState]=useState(true)
       }
       
     })
+    useEffect(()=>{
+      dispatch(fetchAllUser())
+    },[dispatch])
+    
+    const userdetails=JSON.parse(localStorage?.getItem('user'))
+    const users=useSelector((state)=>state.userslice.usersdata)
+    const currentUser=users.find((user)=>user?._id===userdetails?.data.ID)
+    // console.log(currentUser?.profilepicture);
 
-    const userdetails=useSelector(state => state.userslice.currentuserdata.data)
+    // const userdetails=useSelector(state => state.userslice.currentuserdata.data)
     // console.log(userdetails);
 
 
@@ -50,7 +58,7 @@ const [state,setState]=useState(true)
  if (typeof window !== 'undefined') {
   const item = localStorage.getItem('user')
 }
-console.log(user);
+// console.log(user);
 const handlesubmit=(e)=>{
   e.preventDefault()
   const query=e.target.search.value
@@ -73,8 +81,13 @@ const handlesubmit=(e)=>{
         </form>
         {user?
           <> 
-            <Avatars  backgroundColor='#009dff' px="10px" py="7px" borderRadius="50%" color='white'><Link href='/user/profile' style={{color:'white',textDecoration:'none'}}>{user?.data?.username.charAt(0).toUpperCase()}</Link></Avatars>
-            {/* <Link href='/user/profile'><Avatar alt="Remy Sharp" src={userdetails?.profilepicture} ></Avatar></Link> */}         <button className='nav-item nav-links' onClick={logout}>Log out</button></>
+          {
+            currentUser?.profilepicture?
+            <Link href='/user/profile'><Avatar alt="Remy Sharp" src={currentUser?.profilepicture} ></Avatar></Link>:
+            <Avatars  backgroundColor='#009dff' px="10px" py="7px" borderRadius="50%" color='white'><Link href='/user/profile' style={{color:'white',textDecoration:'none'}}>{currentUser?.username.charAt(0).toUpperCase()}</Link></Avatars>
+          }
+          <button className='nav-item nav-links' onClick={logout}>Log out</button>
+            </>
           :
           <Link href='/user/login' className='nav-item nav-links'>
       Log In

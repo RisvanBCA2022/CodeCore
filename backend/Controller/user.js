@@ -148,7 +148,38 @@ module.exports={
             console.log(error);
         }
         
+    },
+    showuserquestions:async (req,res)=>{
+        try {
+            const  {userId} =req.body
+        const user=await UserSchema.findById(userId).populate('questions')
+        console.log(user);
+        res.json(user)
+
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({error:"Internal Server Error"})
+        }
+        
+    
+    },
+    deleteprofile:async (req,res)=>{
+        try {
+            const {userId}=req.body
+            const user= await UserSchema.findById(userId)
+            if(user){
+                const user=await UserSchema.findByIdAndDelete(userId)
+                res.json('user profile Deleted')
+            }else{
+                res.json('User Not Found')
+            }
+            
+            
+        } catch (error) {
+            
+        }
     }
+    
     
 }
 

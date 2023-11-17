@@ -68,7 +68,7 @@ const HandleSubmit= async (e)=>{
 		if(response.data.status=="success"){
 			// dispatch(logIn(response.data))
 			toast.success('Successfully login')
-			router.push('/user')
+			router.push('/user/login')
 		}else{
 			alert(response.data.message)
 		}		
@@ -110,13 +110,13 @@ const HandleSubmit= async (e)=>{
 			
 		}else{
 			// console.log(response.data);
-			toast.warning(response.data.message)
+			toast.warning('password incorrect')
 			
 		}
 	}
 
 	} catch (error) {
-		toast.error(error.message)
+		toast.error('username or password is wrong')
 	}}
 	}
 	

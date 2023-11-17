@@ -59,10 +59,13 @@ export const getUser = createAsyncThunk(
 
 export const deletequestion = createAsyncThunk(
     'delete/question',
-    async (id)=>{
+    async (data)=>{
+        const {id,userId}=data
+        console.log(userId);
         const jwt=getCookie('jwt')
-        
-        const resp = await axios.delete(`http://127.0.0.1:4001/questions/delete/${id}`,{
+        const resp = await axios.patch(`http://127.0.0.1:4001/questions/delete/${id}`,{
+            userId
+        },{
             headers: {
               Authorization: `Bearer ${jwt}`,
             },
@@ -88,7 +91,7 @@ export const deleteanswer = createAsyncThunk(
               Authorization: `Bearer ${jwt}`,
             },
         })
-        console.log(resp)
+        // console.log(resp)
         return resp
 
     }
@@ -187,4 +190,14 @@ export const fetchByTag=createAsyncThunk(
     
 ) 
 
-
+// export const questionByUser=createAsyncThunk(
+//     'get/userQuestions',
+//     async (id)=>{
+//         console.log(id);
+//         const response = await axios.get(`http://127.0.0.1:4001/users/userquestions`,{
+//             userId:id
+//         })
+//         return response
+//     }
+    
+// ) 

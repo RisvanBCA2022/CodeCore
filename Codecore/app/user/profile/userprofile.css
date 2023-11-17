@@ -1,120 +1,46 @@
 .user-details-container {
-    width: 100%;
-    margin-top: 50px;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-  }
-  
-  .user-details {
-    display: flex;
-    align-items: flex-start;
-  }
-  
-  .user-name {
-    padding-left: 20px;
-  }
-  .user-name p {
-    color: #7e7e7e;
-  }
-  .edit-profile-btn {
-    padding: 8px 10px;
-    border: solid 1px #7e7e7e;
-    border-radius: 2px;
-    background-color: white;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  .edit-profile-btn:hover {
-    background-color: #f5f9fc;
-  }
-  .edit-profile-title {
-    padding: 20px 0px;
-    border-bottom: solid 1px #dbd9d9;
-  }
-  .edit-profile-title-2 {
-    color: grey;
-    font-weight: 400;
-  }
-  .edit-profile-form {
-    padding: 20px;
-    border: solid 1px #dbd9d9;
-    border-radius: 5px;
-  }
-  .edit-profile-form label h3 {
-    margin: 0%;
-    padding: 3px 0px;
-  }
-  .edit-profile-form label p {
-    margin: 0%;
-    padding: 3px 0px;
-  }
-  .edit-profile-form label input,
-  .edit-profile-form label textarea {
-    padding: 5px;
-    margin-bottom: 20px;
-    border: solid 1px #dbd9d9;
-    width: 50%;
-  }
-  
-  .user-submit-btn {
-    padding: 14px 10px;
-    background-color: #0a95ff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    transition: 0.2s;
-    cursor: pointer;
-  }
-  
-  .user-submit-btn:hover {
-    background-color: #0074cc;
-  }
-  
-  .user-cancel-btn {
-    padding: 14px 10px;
-    color: #0a95ff;
-    background-color: transparent;
-    border: none;
-    margin-left: 10px;
-    cursor: pointer;
-  }
-  .stack-overflow-profile {
   display: flex;
   justify-content: space-between;
-}
-
-.main-content {
-  flex: 1;
-  padding: 20px;
-}
-
-.profile-header {
-  display: flex;
   align-items: center;
   margin-bottom: 20px;
+  margin-top: 50px;
 }
 
 .user-details {
+  display: flex;
+  align-items: center;
+}
+
+.user-name {
   margin-left: 20px;
 }
 
-.user-activity-section {
-  margin-top: 20px;
+button {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
 }
 
+button:hover {
+  background-color: #2980b9;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
 
 .simple-table {
+  width: 100%;
   border-collapse: collapse;
-  width: 100%; /* Set width to 100% */
-  margin: 20px;
-  border: 1px solid #ddd; /* Add this line for a single outline */
 }
 
 .simple-table th, .simple-table td {
-  padding: 10px;
+  border: 1px solid #ddd;
+  padding: 8px;
   text-align: left;
-  border: 1px solid #ddd; /* Add this line for cell borders */
 }
 
 .simple-table th {
@@ -124,8 +50,3 @@
 .simple-table tbody tr:nth-child(even) {
   background-color: #f9f9f9;
 }
-
-.simple-table tbody tr:hover {
-  background-color: #e0e0e0;
-}
-

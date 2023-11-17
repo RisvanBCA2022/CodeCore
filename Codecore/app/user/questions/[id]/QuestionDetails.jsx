@@ -43,7 +43,7 @@ const QuestionDetails = () => {
   // console.log(allAnswers)
   const auth = useSelector((state) => state?.authReducer.value)
   const token = getCookie('jwt')
-  const add = (e, noOfAnswers, questionId) => {
+  const add = async(e, noOfAnswers, questionId) => {
     // console.log(questionId);
     e.preventDefault()
     const answerBody = e.target.useranswer.value
@@ -52,8 +52,8 @@ const QuestionDetails = () => {
     if (answerBody == '') {
       alert('Enter an answer before submitting')
     } else {
-      dispatch(postAnswer({ questionId, id, noOfAnswers, answerBody, userId, userAnswered }))
-      dispatch(getanswers())
+      await dispatch(postAnswer({ questionId, id, noOfAnswers, answerBody, userId, userAnswered }))
+       await dispatch(getanswers())
       
     }
     e.target.reset()
@@ -72,15 +72,16 @@ const QuestionDetails = () => {
   }
  
 
-  const deleteQuestionhandler = (id) => {
+  const deleteQuestionhandler = async(id,userId) => {
     // console.log(id);
-    dispatch(deletequestion(id))
+    const data={id,userId}
+    await dispatch(deletequestion(data))
 
     router.push('/')
   }
 
   const upvotehandler = async (e, questionId) => {
-    // console.log(questionId);
+    console.log(questionId);
     await dispatch(vote({ questionId: questionId, userId: user.data.ID, voteType: 'upvote' }))
     await dispatch(getQuestions())
 
@@ -142,7 +143,7 @@ const QuestionDetails = () => {
                             Edit
                           </button>
                           {question.userId===userdetails._id ? (
-                            <button type="button" onClick={() => deleteQuestionhandler(question._id)}>
+                            <button type="button" onClick={() => deleteQuestionhandler(question._id,question.userId)}>
                               Delete
                             </button>
                           ) : (
