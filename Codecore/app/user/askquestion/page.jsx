@@ -41,10 +41,9 @@ const handleSubmit = async(e)=>{
   router.push('/')
   toast.success('Question Added Successfully')
 
-  
-  // const postQuestionData={questionTitle,questionBody,questionTags}
-  // axios.post('localhost:4001/questions/ask')
-  // console.log({questionTitle,questionBody,questionTags})
+  setTimeout(() => {
+    toast.dismiss();
+  }, 2000);
 }
   
   

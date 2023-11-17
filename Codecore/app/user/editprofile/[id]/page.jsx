@@ -34,6 +34,8 @@ const page = () => {
     dispatch(fetchAllUser())
   },[])
 
+  const cookie=getCookies('jwt')
+  console.log(cookie);
   const userdetails=JSON.parse(localStorage.getItem('user'))
   const users=useSelector((state)=>state.userslice.usersdata)
   const currentUser=users.find((user)=>user._id===userdetails.data.ID)
@@ -49,11 +51,12 @@ const page = () => {
       profilepicture
   },{
     headers:{
-      Authorization:`Bearer ${cookie}`
+      Authorization:`Bearer ${cookie.jwt}`
     }
   }
   )
   toast.success('Profile Edited successfully')
+
   router.push('/user/profile')
   };
 

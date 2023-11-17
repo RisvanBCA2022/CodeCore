@@ -47,8 +47,7 @@ const AdminNavbar = () => {
   const token = getCookie('jwt')
 
  const logout=()=>{
-  deleteCookie('jwt') 
-  // dispatch(logOut())
+  deleteCookie('jwt_admin') 
   router.push('/user/login')
  }
  if (typeof window !== 'undefined') {

@@ -166,13 +166,14 @@ module.exports={
     deleteprofile:async (req,res)=>{
         try {
             const {userId}=req.body
-            const user= await UserSchema.findById(userId)
-            if(user){
-                const user=await UserSchema.findByIdAndDelete(userId)
-                res.json('user profile Deleted')
-            }else{
-                res.json('User Not Found')
-            }
+            console.log(req.body);
+            // const user= await UserSchema.findById(userId)
+            // if(user){
+            //     const user=await UserSchema.findByIdAndDelete(userId)
+            //     res.json('user profile Deleted')
+            // }else{
+            //     res.json('User Not Found')
+            // }
             
             
         } catch (error) {

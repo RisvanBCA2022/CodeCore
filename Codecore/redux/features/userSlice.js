@@ -68,12 +68,16 @@ const userSlice = createSlice({
         .addCase(fetchByTag.rejected,(state)=>{
             state.tagstatus='failure'
         })
-        // .addCase(questionByUser.fulfilled,(state,action)=>{
-        //     state.questionsByuser=action.payload.data
-        // })
-        // .addCase(questionByUser.rejected,(state)=>{
-        //     state.questionsByuserStatus='failure'
-        // })
+        .addCase(questionByUser.pending,(state,action)=>{
+            state.questionsByuserStatus='loading'
+        })
+        .addCase(questionByUser.fulfilled,(state,action)=>{
+            state.questionsByuser=action.payload.data
+
+        })
+        .addCase(questionByUser.rejected,(state)=>{
+            state.questionsByuserStatus='failure'
+        })
     }
 })
 

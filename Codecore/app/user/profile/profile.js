@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBirthdayCake,faPen } from "@fortawesome/free-solid-svg-icons";
 import moment from 'moment';
-import { fetchAllUser, getQuestionById } from '@/redux/axios';
+import { fetchAllUser, getQuestionById, questionByUser } from '@/redux/axios';
 import Avatars from '@/components/Avatar/Avatar';
 import { Avatar } from '@mui/material';
 import DeleteProfile from './DeleteProfile';
@@ -17,19 +17,20 @@ const Profile = () => {
   const router=useRouter()
 
 
-  useEffect(()=>{
-    dispatch(fetchAllUser())
-  },[dispatch])
+  
   
   const userdetails=JSON.parse(localStorage.getItem('user'))
   const users=useSelector((state)=>state.userslice.usersdata)
   const currentUser=users.find((user)=>user._id===userdetails.data.ID)
-  const userquestions=useSelector((state)=>state.userslice.questionsByuser)
- 
-  // useEffect(()=>{
-  //   dispatch(getQuestionById(currentUser?._id))
-
-  // },[dispatch])
+  const userquestions=useSelector((state)=>state.userslice.questionsByuser?.questions)
+  console.log(userquestions);
+ const id=currentUser?._id
+  useEffect(()=>{
+    if(id){
+    dispatch(questionByUser(id))
+    dispatch(fetchAllUser())
+    }
+  },[dispatch,id])
 
   const handleEditprofile = ()=>{
     setSwitchEdit(true)
@@ -61,7 +62,7 @@ const Profile = () => {
           <h1>{currentUser?.username}</h1>
           <p>
             <FontAwesomeIcon icon={faBirthdayCake} /> Joined{" "}
-            {moment(currentUser?.joinedOn).fromNow()}
+            {moment(currentUser?.joinedOn).format("MMM Do YY")}
           </p>
         </div>
 
@@ -96,6 +97,8 @@ const Profile = () => {
         </tbody>
       </table>
     </div>
+    
+
   </div>
   )
 }

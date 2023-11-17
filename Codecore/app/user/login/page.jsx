@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux'
 import { setCookie } from 'cookies-next'
 import { getUser } from '@/redux/axios'
 import { toast } from 'react-toastify';
+import axiosInstance from '@/redux/axiosInstance'
 // import 'react-toastify/dist/ReactToastify';
 
 
@@ -57,8 +58,8 @@ const HandleSubmit= async (e)=>{
 			alert("Enter a name to continue")
 		}
 		try {
-			const response = await axios
-		.post('http://127.0.0.1:4001/users/register',{
+			const response = await axiosInstance
+		.post('users/register',{
 			"username":username,
 			"email":email,
 			"password":password
@@ -67,7 +68,7 @@ const HandleSubmit= async (e)=>{
 
 		if(response.data.status=="success"){
 			// dispatch(logIn(response.data))
-			toast.success('Successfully login')
+			toast.success('Successfully Registered')
 			router.push('/user/login')
 		}else{
 			alert(response.data.message)
@@ -80,8 +81,8 @@ const HandleSubmit= async (e)=>{
 
 	}else {
 		try {	
-			const response = await axios
-		.post('http://127.0.0.1:4001/users/login',{
+			const response = await axiosInstance
+		.post('users/login',{
 			"email":email,
 			"password":password
 		})
@@ -98,6 +99,8 @@ const HandleSubmit= async (e)=>{
 			if(response.data.message=="admin"){
 				router.push('/admin/userlists')
 				localStorage.setItem('admin',JSON.stringify(response.data))
+				setCookie('jwt_admin',response.data.jwt_token)
+				console.log(response.data);
 				// toast.success('Admin Login Successfull')
 				
 

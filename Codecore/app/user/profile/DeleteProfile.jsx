@@ -37,7 +37,7 @@ export default function DeleteProfile({userId}) {
   return (
     <React.Fragment>
       <Button  onClick={handleClickOpen} style={{background:'red',color:'white'}}>
-        Delete
+        Delete Profile 
       </Button>
       <Dialog
         open={open}

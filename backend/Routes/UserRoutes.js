@@ -10,7 +10,7 @@ userroutes.post('/login',tryCatchMiddleware(controller.login))
 userroutes.get('/fetchuser',jwtuser,tryCatchMiddleware(controller.profile))
 userroutes.get('/fetchallusers',tryCatchMiddleware(controller.fetchAllusers))
 userroutes.get('/fetchuser/:id',tryCatchMiddleware(controller.fetchuserById))
-userroutes.post('/updateprofile/:id',tryCatchMiddleware(controller.editUserprofile))
+userroutes.post('/updateprofile/:id',jwtuser,tryCatchMiddleware(controller.editUserprofile))
 userroutes.post('/userquestions',tryCatchMiddleware(controller.showuserquestions))
 userroutes.post('/deleteuser',tryCatchMiddleware(controller.deleteprofile))
 

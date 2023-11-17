@@ -2,11 +2,12 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { getCookie } from "cookies-next";
 import { useDispatch } from "react-redux";
+import axiosInstance from "./axiosInstance";
 
 export const getQuestions = createAsyncThunk(
     'get/getQuestions',
     async ()=>{
-        const res = await axios.get("http://127.0.0.1:4001/questions/fetchquestion")
+        const res = await axiosInstance.get("questions/fetchquestion")
         return res.data
     }
 )
@@ -18,7 +19,7 @@ export const postAnswer = createAsyncThunk(
         const jwt=getCookie('jwt')
         
         // console.log({id,answerBody,userId,userAnswered});
-        const response= await axios.post(`http://127.0.0.1:4001/answer/postanswer/${id}`,{id,noOfAnswers,answerBody,userId,userAnswered},
+        const response= await axiosInstance.post(`answer/postanswer/${id}`,{id,noOfAnswers,answerBody,userId,userAnswered},
         {
             headers: {
                 Authorization: `Bearer ${jwt}`,
@@ -35,7 +36,7 @@ export const getanswers = createAsyncThunk(
     'get/getanswers',
     async ()=>{
         const jwt=getCookie('jwt')
-        const response= await axios.get(`http://127.0.0.1:4001/answer/fetchanswers`
+        const response= await axiosInstance.get(`answer/fetchanswers`
         )
         // console.log(response);
         return response
@@ -47,7 +48,7 @@ export const getUser = createAsyncThunk(
     'get/userdetails',
     async ()=>{
         const jwt=getCookie('jwt')
-        const resp= await axios.get('http://127.0.0.1:4001/users/fetchuser',{
+        const resp= await axiosInstance.get('users/fetchuser',{
             headers: {
               Authorization: `Bearer ${jwt}`,
             },
@@ -63,7 +64,7 @@ export const deletequestion = createAsyncThunk(
         const {id,userId}=data
         console.log(userId);
         const jwt=getCookie('jwt')
-        const resp = await axios.patch(`http://127.0.0.1:4001/questions/delete/${id}`,{
+        const resp = await axiosInstance.patch(`questions/delete/${id}`,{
             userId
         },{
             headers: {
@@ -79,8 +80,7 @@ export const deleteanswer = createAsyncThunk(
     async (data)=>{
         const {userId,Id,questionId}=data
         const jwt=getCookie('jwt')
-        console.log(userId,Id,questionId);
-        const resp = await axios.patch(`http://127.0.0.1:4001/answer/deleteanswer/${questionId}`,
+        const resp = await axiosInstance.patch(`answer/deleteanswer/${questionId}`,
         {
             userId:userId,
             Id:Id,
@@ -91,7 +91,6 @@ export const deleteanswer = createAsyncThunk(
               Authorization: `Bearer ${jwt}`,
             },
         })
-        // console.log(resp)
         return resp
 
     }
@@ -100,14 +99,12 @@ export const deleteanswer = createAsyncThunk(
 export const vote = createAsyncThunk(
     'patch/vote',
     async ({questionId,userId,voteType})=>{
-        // console.log(questionId,userId,voteType);
         try {
-            const response = await axios.patch(`http://127.0.0.1:4001/questions/${questionId}/vote`,
+            const response = await axiosInstance.patch(`questions/${questionId}/vote`,
             {
                 userId:userId,
                 voteType:voteType
             })
-            // console.log(response);
             return response.data
             
 
@@ -121,7 +118,7 @@ export const fetchAllUser = createAsyncThunk(
     'get/allusers',
     async ()=>{
         try {
-            const response = await axios.get(`http://127.0.0.1:4001/users/fetchallusers`)
+            const response = await axiosInstance.get(`users/fetchallusers`)
             return response
         } catch (error) {
             throw Error(error)
@@ -133,7 +130,7 @@ export const fetchuserbyid = createAsyncThunk(
     'get/userById',
     async(id)=>{
         try {
-            const response = await axios.get(`http://127.0.0.1:4001/users/fetchuser/${id}`)
+            const response = await axiosInstance.get(`users/fetchuser/${id}`)
         return response
 
         } catch (error) {
@@ -148,7 +145,7 @@ export const blockUser = createAsyncThunk(
     async (data) => {
       try {
         const {type,id}=data
-        const response = await axios.put(`http://127.0.0.1:4001/admin/${id}/block`,{
+        const response = await axiosInstance.put(`admin/${id}/block`,{
             type:type
         });
         return response.data;
@@ -162,7 +159,7 @@ export const blockUser = createAsyncThunk(
     'get/allusersforAdmin',
     async ()=>{
         try {
-            const response = await axios.get(`http://127.0.0.1:4001/admin/users`)
+            const response = await axiosInstance.get(`admin/users`)
             return response
         } catch (error) {
             throw Error(error)
@@ -174,7 +171,7 @@ export const getQuestionById = createAsyncThunk(
     'get/getQuestionById',
     async (id)=>{
         const jwt=getCookie('jwt')
-        const response= await axios.get(`http://127.0.0.1:4001/questions/${id}/questionbyid`
+        const response= await axiosInstance.get(`questions/${id}/questionbyid`
         )
         
         return response
@@ -184,20 +181,20 @@ export const getQuestionById = createAsyncThunk(
 export const fetchByTag=createAsyncThunk(
     'get/Tags',
     async (tag)=>{
-        const response=await axios.get(`http://127.0.0.1:4001/questions/questionbytag/${tag}`)   
+        const response=await axiosInstance.get(`questions/questionbytag/${tag}`)   
         return response
     }
     
 ) 
 
-// export const questionByUser=createAsyncThunk(
-//     'get/userQuestions',
-//     async (id)=>{
-//         console.log(id);
-//         const response = await axios.get(`http://127.0.0.1:4001/users/userquestions`,{
-//             userId:id
-//         })
-//         return response
-//     }
+export const questionByUser=createAsyncThunk(
+    'get/userQuestions',
+    async (id)=>{
+        console.log(id);
+        const response = await axiosInstance.post(`users/userquestions`,{
+            userId:id
+        })
+        return response
+    }
     
-// ) 
+) 
