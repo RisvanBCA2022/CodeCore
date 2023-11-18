@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { getQuestions } from "@/redux/axios";
 
 const Questions = ({ question }) => {
+  console.log(question);
 
   return (
     <div className="display-question-container">
@@ -27,7 +28,7 @@ const Questions = ({ question }) => {
         })}
         </div>
         <p className="display-time">
-        asked On {moment(question.askedOn).format("ddd, hA")} By {question.userPosted}
+        asked On {moment(question.postedOn).fromNow()} By {question.userPosted}
         </p>
         
       </div>

@@ -16,6 +16,7 @@ import copy from 'copy-to-clipboard';
 import { getCookie } from 'cookies-next';
 import { deletequestion } from '@/redux/axios';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const QuestionDetails = () => {
 
@@ -46,6 +47,10 @@ const QuestionDetails = () => {
   const add = async(e, noOfAnswers, questionId) => {
     // console.log(questionId);
     e.preventDefault()
+  if(!user){
+    toast.warning('Please Login')
+    router.push('/user/login/#success')
+  }else{
     const answerBody = e.target.useranswer.value
     const userId = userdetails._id
     const userAnswered = user.data.username
@@ -56,6 +61,7 @@ const QuestionDetails = () => {
        await dispatch(getanswers())
       
     }
+  }
     e.target.reset()
 
   }
@@ -81,20 +87,37 @@ const QuestionDetails = () => {
   }
 
   const upvotehandler = async (e, questionId) => {
-    console.log(questionId);
-    await dispatch(vote({ questionId: questionId, userId: user.data.ID, voteType: 'upvote' }))
-    await dispatch(getQuestions())
+    if(!user){
+      toast.warning('Please Login')
+      router.push('/user/login/#success')
+    }else{
+      await dispatch(vote({ questionId: questionId, userId: user.data.ID, voteType: 'upvote' }))
+      await dispatch(getQuestions())
+    }
+  
 
   }
 
   const downvotehandler = async (e, questionId) => {
-    await dispatch(vote({ questionId: questionId, userId: user.data.ID, voteType: 'downvote' }))
+    if(!user){
+      toast.warning('Please Login')
+      router.push('/user/login/#success')
+    }else{
+      await dispatch(vote({ questionId: questionId, userId: user.data.ID, voteType: 'downvote' }))
     await dispatch(getQuestions())
+    
+    }
     
   
   }
   const handleEdit=(e,questionId)=>{
-    router.push(`/user/editquestion/${questionId}`)
+    if(!user){
+      toast.warning('Please Login')
+      router.push('/user/login/#success')
+    }else{
+      router.push(`/user/editquestion/${questionId}`)
+
+    }
   }
 
   

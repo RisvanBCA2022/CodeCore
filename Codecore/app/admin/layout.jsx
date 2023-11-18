@@ -4,6 +4,7 @@ import AdminNavbar from '@/components/Navbar/adminNavbar'
 import { ReduxProvider } from '@/redux/Provider'
 import LeftSideBar from '@/components/AdminHome/AdminLeftbar'
 import AdminLeftbar from '@/components/AdminHome/AdminLeftbar'
+import { getCookie } from 'cookies-next'
 // import { Inter } from 'next/font/google'
 // const inter = Inter({ subsets: ['latin'] })
 

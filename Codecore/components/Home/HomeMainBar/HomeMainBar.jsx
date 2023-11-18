@@ -7,6 +7,7 @@ import QuestionList from './QuestionList';
 import { useDispatch, useSelector } from 'react-redux';
 import { getQuestions, getUser, getanswers } from '@/redux/axios';
 import { usePathname } from 'next/navigation';
+import { toast } from 'react-toastify';
 // ... other imports
 
 const HomeMainBar = () => {
@@ -21,7 +22,7 @@ const HomeMainBar = () => {
 
   const checkAuth = () => {
       if (user === null) {
-          alert("login or signup to ask a question");
+        toast.warning('please signup or login to continue')
           router.push('/user/login');
       } else {
           router.push('/user/askquestion');

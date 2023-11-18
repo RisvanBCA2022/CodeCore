@@ -6,6 +6,7 @@ import Image from 'next/image'
 
 import Navbar from '@/components/Navbar/Navbar'
 import AdminLeftbar from '@/components/AdminHome/AdminLeftbar'
+import middleware from './middleware'
 // import { useSelector } from 'react-redux'
 
 const page = () => {
@@ -21,6 +22,7 @@ const page = () => {
 
 
   // const username =useSelector((state)=>state.authReducer.value.username)
+  // middleware()
   return (
     <main className='overflow-hidden'>
     <div className='home-container-1'>

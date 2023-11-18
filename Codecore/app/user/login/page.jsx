@@ -88,8 +88,8 @@ const HandleSubmit= async (e)=>{
 		})
 		console.log(response.data.data.blocked);
 	if(response.data.data.blocked === true){
-		alert('You Have been banned  by Admin')
-	}else{
+		toast.error('You Have Been BlockedBy Admin')
+		}else{
 		if(response.data.status=="success"){
 			dispatch(logIn(response.data))
 			setCookie('jwt',response.data.token)
