@@ -9,6 +9,7 @@ import { getCookie } from 'cookies-next'
 import { toast } from 'react-toastify'
 
 
+
 const AskQuestion = () => {
 
   const cookie = getCookie('jwt')
@@ -31,7 +32,6 @@ const handleSubmit = async(e)=>{
     questionTitle:questionTitle,
     questionBody:questionBody,
     questionTags:questionTags,
-    userPosted:userposted,
   },{
     headers:{
       Authorization:`Bearer ${cookie}`

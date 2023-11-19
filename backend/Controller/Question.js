@@ -7,8 +7,8 @@ const UserSchema = require('../Model/UserSchema')
 
 module.exports={
     askquestion:async (req,res)=>{
-        const {questionTitle,questionBody,questionTags,userPosted} = req.body
-        const postQuestionsData={questionTitle,questionBody,questionTags,userPosted}
+        const {questionTitle,questionBody,questionTags} = req.body
+        const postQuestionsData={questionTitle,questionBody,questionTags}
         const postQuestion = new QuestionSchema({...postQuestionsData,userId:res.token.id})
         try {
 
@@ -26,6 +26,7 @@ module.exports={
     },
     questionlist:async (req,res)=>{
         const questions = await QuestionSchema.find()
+        
         if(questions.length !=0){
             res.status(200).json( questions)
         }else{
@@ -37,7 +38,7 @@ module.exports={
         const {id:_id}=req.params
         const {userId}=req.body
         try {
-            console.log();
+            
             await QuestionSchema.findByIdAndDelete(_id)
            const user = await UserSchema.findByIdAndUpdate(userId,{$pull:{questions:_id}},{new:true})
            const question = await QuestionSchema.find()

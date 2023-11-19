@@ -8,6 +8,7 @@ export const getQuestions = createAsyncThunk(
     'get/getQuestions',
     async ()=>{
         const res = await axiosInstance.get("questions/fetchquestion")
+        console.log(res.data);
         return res.data
     }
 )

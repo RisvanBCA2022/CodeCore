@@ -9,7 +9,7 @@ import Link from 'next/link';
 import Avatar from '@/components/Avatar/Avatar';
 import DisplayAnswer from './DiplayAnswers';
 import { useDispatch, useSelector } from 'react-redux';
-import { getQuestions, getUser, getanswers, postAnswer, vote } from '@/redux/axios';
+import { fetchAllUser, getQuestions, getUser, getanswers, postAnswer, vote } from '@/redux/axios';
 import { useRouter } from 'next/navigation';
 import moment from 'moment';
 import copy from 'copy-to-clipboard';
@@ -29,7 +29,7 @@ const QuestionDetails = () => {
     dispatch(getQuestions())
     dispatch(getanswers())
     dispatch(getUser())
-    
+    dispatch(fetchAllUser())    
   }, [dispatch])
 
   const user = JSON.parse(localStorage.getItem("user"))
@@ -37,9 +37,9 @@ const QuestionDetails = () => {
 
   const questionList = useSelector((state) => state?.questionslice.allQuestions)
   const allAnswers = useSelector((state) => state.questionslice.allAnswers)
-  // console.log(allAnswers);
   const userdetails = useSelector((state) => state.questionslice.userdetails)
-  console.log(userdetails);
+  const users = useSelector((state) => state.userslice.usersdata);
+
 
   // console.log(allAnswers)
   const auth = useSelector((state) => state?.authReducer.value)
@@ -69,6 +69,8 @@ const QuestionDetails = () => {
   // console.log(filtered);
   const filteredAnswer = allAnswers.filter(answer => answer.questionId == id)
   // console.log(filteredAnswer);
+
+  const questionpostedUser=users.filter((user)=>user._id==filtered[0]?.userId)
 
   const handleshare = () => {
     const userId = user.data.ID
@@ -165,7 +167,7 @@ const QuestionDetails = () => {
                           <button type="button" onClick={(e) => handleEdit(e, question._id) }>
                             Edit
                           </button>
-                          {question.userId===userdetails._id ? (
+                          {question?.userId===userdetails._id ? (
                             <button type="button" onClick={() => deleteQuestionhandler(question._id,question.userId)}>
                               Delete
                             </button>
@@ -192,7 +194,7 @@ const QuestionDetails = () => {
                             >
                               {auth.currenUser?.username.charAt(0).toUpperCase()}
                             </Avatar>
-                            <div>{question.userPosted}</div>
+                            <div>{questionpostedUser[0].username}</div>
                           </Link>
                         </div>
                       </div>
