@@ -4,7 +4,7 @@ import Link from 'next/link'
 import React, { use, useEffect, useReducer } from 'react'
 import search from '../../public/search.svg'
 import Authprofilemenu from './Authprofilemenu'
-import { Avatar } from '@mui/material'
+import { Avatar, IconButton } from '@mui/material'
 import './Navbar.css'
 import Logo from '../../public/Logo.png'
 import Button from '../Button/Button'
@@ -72,9 +72,18 @@ const handlesubmit=(e)=>{
       <Link href='/' className=' '>
       <Image src={Logo} alt='logo' height='60'/>
       </Link>
+      <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+            style={{color:'black'}}
+          ></IconButton>
       <Link href='/' className='nav-item nav-btn'>About</Link>
       <Link href='/' className='nav-item nav-btn'>Products</Link>
       <Link href='/' className='nav-item nav-btn'>For Teams</Link>
+      
       <form action="" onSubmit={handlesubmit}>
         <input type="text" placeholder='Search...' id='search'  />
         <Image src={search} alt="search" width='18' className='search-icon'/>
