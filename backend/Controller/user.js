@@ -135,7 +135,6 @@ module.exports={
     editUserprofile:async (req,res)=>{
         const {id}=req.params
         const {username,bio,profilepicture}=req.body
-        console.log(req.body);
         try {
             const user = await UserSchema.findByIdAndUpdate(id,{$set:{username,bio,profilepicture}},{ new: true } )
 
@@ -153,7 +152,6 @@ module.exports={
         try {
             const  {userId} =req.body
         const user=await UserSchema.findById(userId).populate('questions')
-        console.log(user);
         res.json(user)
 
         } catch (error) {
@@ -166,14 +164,13 @@ module.exports={
     deleteprofile:async (req,res)=>{
         try {
             const {userId}=req.body
-            console.log(req.body);
-            // const user= await UserSchema.findById(userId)
-            // if(user){
-            //     const user=await UserSchema.findByIdAndDelete(userId)
-            //     res.json('user profile Deleted')
-            // }else{
-            //     res.json('User Not Found')
-            // }
+            const user= await UserSchema.findById(userId)
+            if(user){
+                const user=await UserSchema.findByIdAndDelete(userId)
+                res.json('user profile Deleted')
+            }else{
+                res.json('User Not Found')
+            }
             
             
         } catch (error) {

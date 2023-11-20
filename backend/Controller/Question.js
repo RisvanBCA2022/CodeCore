@@ -52,7 +52,6 @@ module.exports={
     vote:async (req,res)=>{
         const questionId=req.params.questionId
         const {userId,voteType}=req.body
-        // console.log(req.body);
 
         try{
             const question = await QuestionSchema.findById(questionId)
@@ -150,7 +149,6 @@ module.exports={
                   },
                   { new: true } // Set new: true to return the updated document
                 );
-                console.log(updatedQuestion);
             
                 if (!updatedQuestion) {
                   return res.status(404).json({ message: 'Question not found' });

@@ -31,7 +31,7 @@ const Profile = () => {
   const useranswered=allAnswers.filter((answer)=>answer.userId==currentUser?._id)
 
  const id=currentUser?._id
- console.log(currentUser);
+//  console.log(currentUser);
   useEffect(()=>{
     if(id){
     dispatch(questionByUser(id))

@@ -104,7 +104,7 @@ const slice = createSlice({
             })
             .addCase(deletequestion.fulfilled, (state,action)=>{
                 state.deleteStatus = 'succeeded'
-                console.log(action.payload.data);
+                // console.log(action.payload.data);
                 // state.userdetails = action.payload.data
             })
             .addCase(deletequestion.rejected, (state)=>{
@@ -115,7 +115,7 @@ const slice = createSlice({
             })
             .addCase(deleteanswer.fulfilled, (state,action)=>{
                 state.answerdeletestatus = 'succeeded'
-                console.log(action.payload);
+                // console.log(action.payload);
             })
             .addCase(deleteanswer.rejected, (state)=>{
                 state.answerdeletestatus = 'failed'

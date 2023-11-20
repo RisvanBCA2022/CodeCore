@@ -7,10 +7,8 @@ module.exports={
     blockuser:async (req,res)=>{
         const {id}=req.params
         const {type}=req.body
-        console.log(type);
         try {
             const user = await UserSchema.findById(id);
-            console.log(user);
             if (!user) {
               return res.json({ message: 'User not found' });
             }

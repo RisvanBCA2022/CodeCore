@@ -8,7 +8,7 @@ export const getQuestions = createAsyncThunk(
     'get/getQuestions',
     async ()=>{
         const res = await axiosInstance.get("questions/fetchquestion")
-        console.log(res.data);
+        // console.log(res.data);
         return res.data
     }
 )
@@ -63,7 +63,7 @@ export const deletequestion = createAsyncThunk(
     'delete/question',
     async (data)=>{
         const {id,userId}=data
-        console.log(userId);
+        // console.log(userId);
         const jwt=getCookie('jwt')
         const resp = await axiosInstance.patch(`questions/delete/${id}`,{
             userId
@@ -191,7 +191,7 @@ export const fetchByTag=createAsyncThunk(
 export const questionByUser=createAsyncThunk(
     'get/userQuestions',
     async (id)=>{
-        console.log(id);
+        // console.log(id);
         const response = await axiosInstance.post(`users/userquestions`,{
             userId:id
         })

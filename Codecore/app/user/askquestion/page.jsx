@@ -19,7 +19,7 @@ const AskQuestion = () => {
 
   const user=JSON.parse(localStorage.getItem('user'))
   const userposted=user.data.username
-  console.log(userposted);
+  // console.log(userposted);
 
 const handleSubmit = async(e)=>{
   e.preventDefault()

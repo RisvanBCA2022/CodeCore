@@ -13,7 +13,7 @@ const AdminQuestionList = () => {
 
     },[dispatch])
     const questionList = useSelector((state) => state.questionslice.allQuestions);
-    console.log(questionList);
+    // console.log(questionList);
     
 
 

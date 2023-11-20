@@ -87,7 +87,7 @@
     font-size: 13px;
   }
   
-  @media screen and (max-width: 1020px) {
+  /* @media screen and (max-width: 1020px) {
     .main-bar {
       width: 100%;
     }
@@ -97,4 +97,4 @@
     .display-question-container .display-votes-ans {
       padding: 10px;
     }
-  }
+  } */

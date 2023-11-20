@@ -1,5 +1,7 @@
 'use client'
 import React, { useEffect } from 'react'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import detectLanguage from 'lang-detector'; 
 import { useParams } from 'next/navigation';
 import upVote from '../../../../public/upvote.svg'
 import downVote from '../../../../public/downvote.svg'
@@ -17,6 +19,8 @@ import { getCookie } from 'cookies-next';
 import { deletequestion } from '@/redux/axios';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import style from 'react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark';
+import { atomOneLight } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 const QuestionDetails = () => {
 
@@ -153,7 +157,11 @@ const QuestionDetails = () => {
                       />
                     </div>
                     <div style={{ width: "100%" }}>
-                      <p className="question-body">{question.questionBody}</p>
+                      <p className="question-body">
+                      <SyntaxHighlighter language={detectLanguage(question.questionBody)} style={atomOneLight} customStyle={{ maxWidth:'600px' }}>
+                      {question.questionBody}
+                      </SyntaxHighlighter>
+                      </p>
                       <div className="question-details-tags">
                         {question.questionTags.map((tag) => (
                           <p key={tag}>{tag}</p>
@@ -194,7 +202,7 @@ const QuestionDetails = () => {
                             >
                               {auth.currenUser?.username.charAt(0).toUpperCase()}
                             </Avatar>
-                            <div>{questionpostedUser[0].username}</div>
+                            <div>{questionpostedUser[0]?.username}</div>
                           </Link>
                         </div>
                       </div>
