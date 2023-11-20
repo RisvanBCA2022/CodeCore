@@ -7,6 +7,7 @@ import axios from 'axios'
 import { fetchUser } from '@/redux/features/question'
 import { getCookie } from 'cookies-next'
 import { toast } from 'react-toastify'
+import axiosInstance from '@/redux/axiosInstance'
 
 
 
@@ -28,7 +29,7 @@ const handleSubmit = async(e)=>{
   
   
 
-  await axios.post('http://localhost:4001/questions/ask/',{
+  await axiosInstance.post('questions/ask/',{
     questionTitle:questionTitle,
     questionBody:questionBody,
     questionTags:questionTags,

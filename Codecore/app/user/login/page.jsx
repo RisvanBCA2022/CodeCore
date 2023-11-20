@@ -13,7 +13,6 @@ import { setCookie } from 'cookies-next'
 import { getUser } from '@/redux/axios'
 import { toast } from 'react-toastify';
 import axiosInstance from '@/redux/axiosInstance'
-// import 'react-toastify/dist/ReactToastify';
 
 
 
@@ -22,10 +21,6 @@ const Page = () => {
 	const [username, setUserName]=useState('')
 	const [email,setEmail]=useState('')
 	const [password,setPassword]=useState('')
-	// const auth = useSelector((state)=> state.authReducer.value)
-	// // console.log(auth);
-	// const loggeduser=useSelector((state)=>state.authReducer.value.userdetails)
-	// console.log(loggeduser);
 	
 	const dispatch=useDispatch()
 
@@ -34,7 +29,6 @@ const Page = () => {
 
 	const handleSwitch = ()=>{
 		setIsSignup(!isSignup)
-		// console.log(isSignup);
 
 	}
 	useEffect(()=>{
@@ -49,9 +43,7 @@ const HandleSubmit= async (e)=>{
 	e.preventDefault()
 		const password=e.target.password.value
 		const email=e.target.email.value
-		
-		// console.log(password);
-	
+			
 	
 	if(isSignup == true){
 		if(!username){
