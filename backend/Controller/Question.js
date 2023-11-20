@@ -56,9 +56,13 @@ module.exports={
 
         try{
             const question = await QuestionSchema.findById(questionId)
+            const user = await userSchema.findById(question.userId)
+            
+            
             if(!question){
                 return res.json({message:"Question not available"})
             }
+            
 
             if(voteType==='upvote'){
                 if(!question.upVote.includes(userId)){
@@ -68,6 +72,8 @@ module.exports={
                     }
                     question.upVote.push(userId)
                     await question.save()
+                    user.reputation += 15;
+                    await user.save();
                 }
             }else if(voteType === 'downvote'){
                 if(!question.downVote.includes(userId)){

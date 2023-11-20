@@ -50,3 +50,102 @@ h2 {
 .simple-table tbody tr:nth-child(even) {
   background-color: #f9f9f9;
 }
+
+/* Assuming this is your main CSS file or a separate stylesheet */
+/* You can include this in your component or link it separately */
+
+.question-list {
+  margin-top: 1.5rem;
+  list-style: none;
+  padding: 0;
+}
+
+.question-list li {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.question-list li:hover {
+  transform: translateY(-4px);
+}
+
+.question-list a {
+  text-decoration: none;
+  color: #3498db;
+}
+
+.question-list a:hover {
+  text-decoration: underline;
+}
+
+.no-questions {
+  color: #888;
+  margin-top: 1rem;
+}
+
+.question-date {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 0.75rem;
+  color: #888;
+}
+.badge {
+  display: inline-block;
+  text-align: center;
+}
+
+.badge img {
+  width: 50px; /* Adjust the width of the badge image */
+  height: 50px; /* Adjust the height of the badge image */
+}
+
+/* Badge.css */
+
+.badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 2px solid #ddd; /* Border color */
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle lift */
+  transition: transform 0.2s ease-in-out; /* Smooth scale transition on hover */
+}
+
+.badge:hover {
+  transform: scale(1.05); /* Scale up on hover */
+}
+
+.badge img {
+  width: 60px; /* Adjust the width of the badge image */
+  height: 60px; /* Adjust the height of the badge image */
+  margin-bottom: 10px;
+}
+
+/* Style for the badge type text */
+.badge p {
+  margin: 0;
+  font-weight: bold;
+}
+
+/* Additional styles for different badge types */
+.bronze {
+  border-color: #cd7f32; /* Bronze border color */
+  color: #cd7f32; /* Bronze text color */
+}
+
+.silver {
+  border-color: #c0c0c0; /* Silver border color */
+  color: #c0c0c0; /* Silver text color */
+}
+
+.gold {
+  border-color: #ffd700; /* Gold border color */
+  color: #ffd700; /* Gold text color */
+}

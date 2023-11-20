@@ -4,10 +4,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBirthdayCake,faPen } from "@fortawesome/free-solid-svg-icons";
 import moment from 'moment';
-import { fetchAllUser, getQuestionById, questionByUser } from '@/redux/axios';
+import { fetchAllUser, getQuestionById, getanswers, questionByUser } from '@/redux/axios';
 import Avatars from '@/components/Avatar/Avatar';
 import { Avatar } from '@mui/material';
 import DeleteProfile from './DeleteProfile';
+import Link from 'next/link';
+import Badge from './Badge';
+
+
 
 
 
@@ -23,12 +27,16 @@ const Profile = () => {
   const users=useSelector((state)=>state.userslice.usersdata)
   const currentUser=users.find((user)=>user._id===userdetails.data.ID)
   const userquestions=useSelector((state)=>state.userslice.questionsByuser?.questions)
-  console.log(userquestions);
+  const allAnswers = useSelector((state) => state.questionslice.allAnswers)
+  const useranswered=allAnswers.filter((answer)=>answer.userId==currentUser?._id)
+
  const id=currentUser?._id
+ console.log(currentUser);
   useEffect(()=>{
     if(id){
     dispatch(questionByUser(id))
     dispatch(fetchAllUser())
+    dispatch(getanswers)
     }
   },[dispatch,id])
 
@@ -36,7 +44,6 @@ const Profile = () => {
     setSwitchEdit(true)
     router.push(`/user/editprofile/${currentUser._id}`)
   }
-
   const handleCancelEdit = () => {
     setSwitchEdit(false);
   };
@@ -75,6 +82,7 @@ const Profile = () => {
           <DeleteProfile userId={currentUser?._id} />
       </div>
     </div>
+   <Badge badgeType={currentUser?.badge} />
     <br />
     <div>
       <h2>Status</h2>
@@ -82,7 +90,6 @@ const Profile = () => {
         <thead>
           <tr>
             <th>Reputation</th>
-            <th>Reached</th>
             <th>Answers</th>
             <th>Questions</th>
           </tr>
@@ -90,13 +97,30 @@ const Profile = () => {
         <tbody>
           <tr>
             <td>{currentUser?.reputation}</td>
-            <td></td>
-            <td>{currentUser?.answers.length}</td>
+            <td>{useranswered?.length}</td>
             <td>{currentUser?.questions.length}</td>
           </tr>
         </tbody>
       </table>
     </div>
+    <div>
+        <h2>Questions Asked</h2>
+        <ul className="question-list mt-6 space-y-4">
+  {userquestions && userquestions.length > 0 ? (
+    userquestions.map((question) => (
+      <li key={question._id} className="border p-4 rounded-md shadow-md relative">
+        <Link href={`/user/questions/${question._id}`} className="text-blue-500 hover:underline">
+          {question.questionTitle}
+        </Link>
+        <span className="question-date">{moment(question.askedOn).format('MMMM D, YYYY')}</span>
+      </li>
+    ))
+  ) : (
+    <li className="text-gray-500">No questions posted yet.</li>
+  )}
+</ul>
+
+      </div>
     
 
   </div>
