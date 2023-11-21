@@ -12,4 +12,17 @@
     width: calc(100% -164px);
     padding: 24px;
     box-sizing: border-box;
+    flex: 1;
+
 }
+
+  @media (max-width: 767px) {
+    .home-container-1 {
+      flex-direction: column;
+    }
+  
+    .home-container-2 {
+      display: none; /* Hide the RightSideBar on smaller screens */
+    }
+  }
+  

@@ -82,6 +82,8 @@ module.exports={
                     }
                     question.downVote.push(userId)
                     await question.save()
+                    user.reputation -= 15;
+                    await user.save();
                 }
             }
             else{
