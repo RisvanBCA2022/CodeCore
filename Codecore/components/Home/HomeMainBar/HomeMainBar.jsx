@@ -45,7 +45,13 @@ const HomeMainBar = () => {
           </div>
           <div>
               {questionList.message=='failure' ? (
+                <div className="main-bar-header">
                   <h1>Loading...</h1>
+                  <button onClick={checkAuth} className="ask-btn">
+                  Ask Question
+              </button>
+                  </div>
+                  
               ) :(
                   <>
                       <p>{questionList.length} questions</p>

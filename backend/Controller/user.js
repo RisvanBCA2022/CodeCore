@@ -40,6 +40,7 @@ module.exports={
     login:async (req,res)=>{
         const {error,value}=await authschema.validate(req.body)
         const {email,password}=value
+        console.log(process.env.ADMIN_EMAIL,process.env.ADMIN_PASSWORD);
         if(error){
             res.status(422).json({
                 status:"error",
@@ -73,7 +74,7 @@ module.exports={
                 }
                 
             }
-            else if(email=="admin@gmail.com" && password=='admin'){
+            else if(email==process.env.ADMIN_EMAIL && password==process.env.ADMIN_PASSWORD){
                 const token = jwt.sign("admin",process.env.ADMIN_TOKEN_SECRET);
                 res.json({
                   status: "success",
@@ -81,7 +82,6 @@ module.exports={
                   jwt_token: token,
                   data:{blocked:false}
                 });
-                process.env.ADMIN_TOKEN_SECRET
               }
     
             else{

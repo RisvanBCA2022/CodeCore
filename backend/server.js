@@ -16,7 +16,7 @@ app.use(cors())
 app.use(express.json({limit:"30mb",extended:true}))
 app.use(express.urlencoded({limit:"30mb",extended:true}))
 
-mongoose.connect('mongodb://127.0.0.1:27017/project')
+mongoose.connect(process.env.DATABASE_URL)
 .then(()=>console.log("connection successfull"))
 .catch((err)=>{
     console.log(err);
