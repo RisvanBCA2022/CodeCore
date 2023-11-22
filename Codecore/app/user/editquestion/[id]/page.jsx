@@ -8,6 +8,7 @@ import LeftSideBar from '@/components/Home/LeftsideBar/LeftSideBar';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
+import axiosInstance from '@/redux/axiosInstance';
 
 
 const page = () => {
@@ -39,7 +40,7 @@ const page = () => {
     
     
   
-    await axios.patch(`http://localhost:4001/questions/${id}/editquestion`,{
+    await axiosInstance.patch(`questions/${id}/editquestion`,{
       questionTitle:questionTitle,
       questionBody:questionBody,
       questionTags:questionTags,

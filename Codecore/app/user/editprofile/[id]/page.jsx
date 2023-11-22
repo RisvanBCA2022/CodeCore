@@ -20,6 +20,7 @@ import { toast } from "react-toastify";
 import upload from "@/components/upload_profile";
 import { fetchAllUser } from "@/redux/axios";
 import { useDispatch, useSelector } from "react-redux";
+import axiosInstance from "@/redux/axiosInstance";
 // import './editprofile.css';
 
 const page = () => {
@@ -45,7 +46,7 @@ const page = () => {
     const profilepicture= await upload(data)
     const bio=e.target.bio.value
     const username=e.target.username.value
-    const res=await axios.post(`http://localhost:4001/users/updateprofile/${id}`,{
+    const res=await axiosInstance.post(`users/updateprofile/${id}`,{
       bio,
       username,
       profilepicture

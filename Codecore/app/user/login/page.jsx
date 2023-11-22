@@ -34,7 +34,6 @@ const Page = () => {
 	useEffect(()=>{
 		if(!window.location.hash){
 			window.location=window.location+'#success';
-			location.reload(false)
 		}
 	},[])
 	

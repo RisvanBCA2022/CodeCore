@@ -17,11 +17,20 @@ import './Navbar.css';
 const Navbar = () => {
   const dispatch = useDispatch();
   const [state, setState] = useState(true);
-  const user = JSON.parse(localStorage.getItem('user'));
+  const [user,setUser]=useState(null)
+
+    useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const storedUser = localStorage.getItem('user');
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
+    }
+  }, []);
 
   useEffect(() => {
     if (state && user) {
-      dispatch(fetchuserbyid(user.data.ID));
+      dispatch(fetchuserbyid(user?.data?.ID));
       setState(false);
     }
   }, [state, user, dispatch]);
@@ -30,10 +39,11 @@ const Navbar = () => {
     dispatch(fetchAllUser());
   }, [dispatch]);
 
-  const userdetails = JSON.parse(localStorage?.getItem('user'));
   const users = useSelector((state) => state.userslice.usersdata);
-  const currentUser = users.find((user) => user?._id === userdetails?.data.ID);
-
+  const currentUser=useSelector((state) => state.userslice.currentuserdata.data);
+  // console.log(userlal);
+  // const currentUser = users.find((user) => user?._id == user?.data?.ID)
+  // console.log(currentUser);
   const router = useRouter();
 
   const logout = () => {

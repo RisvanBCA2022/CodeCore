@@ -4,7 +4,6 @@ import './usershowpage.css'
 
 
 const UserShowPage = ({user}) => {
-    console.log(user);
   return (
     <>
          <div className="container mt-5">
