@@ -7,7 +7,10 @@ const questionroutes=require('./Routes/Question')
 const answerroutes = require('./Routes/AnswerRoutes')
 const { connect } = require('mongoose')
 const adminroutes = require('./Routes/AdminRoutes')
+const morgan = require('morgan')
+
 require('dotenv').config()
+
 
 const PORT=process.env.PORT || 4001
 
@@ -15,6 +18,8 @@ const PORT=process.env.PORT || 4001
 app.use(cors())
 app.use(express.json({limit:"30mb",extended:true}))
 app.use(express.urlencoded({limit:"30mb",extended:true}))
+app.use(morgan('dev'));
+
 
 mongoose.connect(process.env.DATABASE_URL)
 .then(()=>console.log("connection successfull"))
